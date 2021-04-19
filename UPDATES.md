@@ -1,3 +1,7 @@
+### Version 1.2.0
+* Added reaction roles (sqlite3 db)
+* modified help command (more instructions will be added soon)
+
 ### Version 1.0.0
 * Current commands
 - help - lists all the commands
