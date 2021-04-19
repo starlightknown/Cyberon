@@ -124,7 +124,7 @@ class general(commands.Cog, name="general"):
         Get the invite link of the discord server of the bot for some support.
         """
         await context.send("I sent you a private message!")
-        await context.author.send("Join my discord server by clicking here: https://discord.gg/HzJ3Gfr")
+        await context.author.send("Join my discord server by clicking here: https://discord.gg/PfDmQAbAzq")
 
     @commands.command(name="poll")
     async def poll(self, context, *args):

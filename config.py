@@ -1,5 +1,6 @@
 # Can be multiple prefixes, like this: ("!", "?")
-BOT_PREFIX = ("dobby!")
+BOT_PREFIX = ("cyb!")
+APPLICATION_ID = "819568634673889341"
 BLACKLIST = []
 OWNERS = [689697352453455925]
 # Bot colors

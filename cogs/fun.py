@@ -11,10 +11,10 @@ class Fun(commands.Cog, name="fun"):
         self.bot = bot
 
     @commands.command(name="green_squares")
-
-    ''' Check your love for open source '''
     async def green_squares(self, context, member : discord.Member = None):
-        
+        ''' 
+        Check your love for open source 
+        '''
         if not member:
             member = context.author
         length = random.randrange(15)
@@ -24,8 +24,6 @@ class Fun(commands.Cog, name="fun"):
         await context.send(embed=embed)
 
     @commands.command(name="rps")
-
-    '''Play rock paper scissors'''
     async def rock_paper_scissors(self, context):
         choices = {
             0 : "rock",
