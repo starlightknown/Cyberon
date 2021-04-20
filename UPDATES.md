@@ -1,8 +1,12 @@
-### Version 1.2.0
+### Version 0.1.3
+* Minor bug fixes
+* added a feature for all the hackathon websites at one place
+
+### Version 0.1.2
 * Added reaction roles (sqlite3 db)
 * modified help command (more instructions will be added soon)
 
-### Version 1.0.0
+### Version 0.1.0
 * Current commands
 - help - lists all the commands
 * Fun
