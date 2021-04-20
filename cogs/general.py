@@ -131,7 +131,7 @@ class general(commands.Cog, name="general"):
         """
         get all the links of hackathon websites.
         """
-        await context.send("**Cyberon loves hackathons, find good hackathons here!**\nhttps://devpost.com/hackathons\nhttps://www.hackathon.io/events\nhttps://confs.tech/#\nhttps://mlh.io/seasons/2021/events\nhttp://www.hackalist.org/\nhttps://devfolio.co/\nhttps://angelhack.com/")
+        await context.send("**Cyberon loves hackathons, find good hackathons here!**\nhttps://devpost.com/hackathons\nhttps://www.hackathon.io/events\nhttps://confs.tech/#\nhttps://mlh.io/seasons/2021/events\nhttp://www.hackalist.org/\nhttps://devfolio.co/\nhttps://angelhack.com/\nhttps://gitcoin.co/hackathons\nhttps://hackathons.hackclub.com/\nhttps://www.incubateind.com/\nhttps://skillenza.com/")
         
     @commands.command(name="poll")
     async def poll(self, context, *args):
