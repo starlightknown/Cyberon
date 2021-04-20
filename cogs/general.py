@@ -125,7 +125,14 @@ class general(commands.Cog, name="general"):
         """
         await context.send("I sent you a private message!")
         await context.author.send("Join my discord server by clicking here: https://discord.gg/PfDmQAbAzq")
-
+    
+    @commands.command(name="hack-show")
+    async def hack_show(self, context):
+        """
+        get all the links of hackathon websites.
+        """
+        await context.send("**Cyberon loves hackathons, find good hackathons here!**\nhttps://devpost.com/hackathons\nhttps://www.hackathon.io/events\nhttps://confs.tech/#\nhttps://mlh.io/seasons/2021/events\nhttp://www.hackalist.org/\nhttps://devfolio.co/\nhttps://angelhack.com/")
+        
     @commands.command(name="poll")
     async def poll(self, context, *args):
         """

@@ -2,12 +2,11 @@ import discord, asyncio, os, platform, sys
 from discord.ext.commands import Bot
 from discord.ext import commands, tasks
 from core import database, schema
-import datetime, parsedatetime
+import datetime, threading
 import configparser
 import asyncio
 from shutil import copy
 from sys import platform, exit as shutdown
-from extract_reminder import reminderParse
 from dotenv import load_dotenv
 load_dotenv('.env')
 if not os.path.isfile("config.py"):
@@ -23,28 +22,6 @@ bot = Bot(command_prefix=config.BOT_PREFIX, intents=intents)
 db_file = f"{directory}/files/bot.db"
 db = database.Database(db_file)
 
-#for reminders
-digits = {
-    1: '\U00000031\U000020E3',
-    2: "\U00000032\U000020E3",
-    3: "\U00000033\U000020E3",
-    4: "\U00000034\U000020E3",
-    5: "\U00000035\U000020E3",
-    6: "\U00000036\U000020E3",
-    7: "\U00000037\U000020E3",
-    8: "\U00000038\U000020E3",
-    9: "\U00000039\U000020E3"
-}
-digits2 = {v: k for k, v in digits.items()}
-remindersList = []
-runningReminder = ()
-currentReminder = 0
-reminderChannel = 0
-def command_prefix(bot, message):
-    if message.guild is None:
-        return ''
-    else:
-        return ';'
 # The code in this even is executed when the bot is ready
 @bot.event
 async def on_ready():
@@ -218,20 +195,6 @@ async def system_notification(guild_id, text, embed=None):
                 await system_notification(None, text, embed=embed)
             else:
                 await system_notification(None, text)
-
-    elif system_channel:
-        try:
-            target_channel = await getchannel(system_channel)
-            if embed:
-                await target_channel.send(text, embed=embed)
-            else:
-                await target_channel.send(text)
-
-        except discord.NotFound:
-            print("I cannot find the system channel.")
-
-        except discord.Forbidden:
-            print("I cannot send messages to the system channel.")
 
     else:
         print(text)
@@ -540,9 +503,9 @@ async def on_raw_reaction_remove(payload):
 async def new(ctx):
     if isadmin(ctx.message.author, ctx.guild.id):
         sent_initial_message = await ctx.send(
-            "Welcome to the Reaction Light creation program. Please provide the required information once requested. If you would like to abort the creation, do not respond and the program will time out."
+            "Welcome to the cyberon creation program. Please provide the required information once requested. If you would like to abort the creation, do not respond and the program will time out."
         )
-        rl_object = {}
+        bot_object = {}
         cancelled = False
 
         def check(message):
@@ -556,7 +519,7 @@ async def new(ctx):
                 " per message). When you are done type `done`. Example:\n:smile:"
                 " `@Role`"
             )
-            rl_object["reactions"] = {}
+            bot_object["reactions"] = {}
             try:
                 while True:
                     reactions_message = await bot.wait_for(
@@ -578,7 +541,7 @@ async def new(ctx):
                             )
                             continue
 
-                        if reaction in rl_object["reactions"]:
+                        if reaction in bot_object["reactions"]:
                             error_messages.append(
                                 (
                                     await ctx.send(
@@ -590,7 +553,7 @@ async def new(ctx):
                         else:
                             try:
                                 await reactions_message.add_reaction(reaction)
-                                rl_object["reactions"][reaction] = role
+                                bot_object["reactions"][reaction] = role
                             except discord.HTTPException:
                                 error_messages.append(
                                     (
@@ -605,7 +568,7 @@ async def new(ctx):
                         break
             except asyncio.TimeoutError:
                 await ctx.author.send(
-                    "Reaction Light creation failed, you took too long to provide the requested information."
+                    "cyberon creation failed, you took too long to provide the requested information."
                 )
                 cancelled = True
             finally:
@@ -633,12 +596,12 @@ async def new(ctx):
                 )
 
                 if str(limited_message_response_payload.emoji) == "🔒":
-                    rl_object["limit_to_one"] = 1
+                    bot_object["limit_to_one"] = 1
                 else:
-                    rl_object["limit_to_one"] = 0
+                    bot_object["limit_to_one"] = 0
             except asyncio.TimeoutError:
                 await ctx.author.send(
-                    "Reaction Light creation failed, you took too long to provide the requested information."
+                    "cyberon creation failed, you took too long to provide the requested information."
                 )
                 cancelled = True
             finally:
@@ -664,12 +627,12 @@ async def new(ctx):
                 )
 
                 if str(oldmessagequestion_response_payload.emoji) == "🗨️":
-                    rl_object["old_message"] = True
+                    bot_object["old_message"] = True
                 else:
-                    rl_object["old_message"] = False
+                    bot_object["old_message"] = False
             except asyncio.TimeoutError:
                 await ctx.author.send(
-                    "Reaction Light creation failed, you took too long to provide the requested information."
+                    "cyberon creation failed, you took too long to provide the requested information."
                 )
                 cancelled = True
             finally:
@@ -678,7 +641,7 @@ async def new(ctx):
         if not cancelled:
             error_messages = []
             user_messages = []
-            if rl_object["old_message"]:
+            if bot_object["old_message"]:
                 sent_oldmessage_message = await ctx.send(
                     "Which message would you like to use? Please react with a 🔧 on the message you would like to use."
                 )
@@ -721,7 +684,7 @@ async def new(ctx):
                                 raise discord.NotFound
                             if db.exists(message.id):
                                 raise ValueError
-                            rl_object["message"] = dict(
+                            bot_object["message"] = dict(
                                 message_id=message.id,
                                 channel_id=message.channel.id,
                                 guild_id=message.guild.id,
@@ -740,13 +703,13 @@ async def new(ctx):
                             error_messages.append(
                                 (
                                     await ctx.send(
-                                        f"This message already got a reaction light instance attached to it, consider running `{prefix}edit` instead."
+                                        f"This message already got a cyberon instance attached to it, consider running `{prefix}edit` instead."
                                     )
                                 )
                             )
                 except asyncio.TimeoutError:
                     await ctx.author.send(
-                        "Reaction Light creation failed, you took too long to provide the requested information."
+                        "cyberon creation failed, you took too long to provide the requested information."
                     )
                     cancelled = True
                 finally:
@@ -763,7 +726,7 @@ async def new(ctx):
                             "message", timeout=120, check=check
                         )
                         if channel_message.channel_mentions:
-                            rl_object[
+                            bot_object[
                                 "target_channel"
                             ] = channel_message.channel_mentions[0]
                             break
@@ -777,7 +740,7 @@ async def new(ctx):
                             )
                 except asyncio.TimeoutError:
                     await ctx.author.send(
-                        "Reaction Light creation failed, you took too long to provide the requested information."
+                        "cyberon creation failed, you took too long to provide the requested information."
                     )
                     cancelled = True
                 finally:
@@ -785,12 +748,11 @@ async def new(ctx):
                     for message in error_messages:
                         await message.delete()
 
-        if not cancelled and "target_channel" in rl_object:
+        if not cancelled and "target_channel" in bot_object:
             error_messages = []
             selector_embed = discord.Embed(
                 title="Embed_title",
-                description="Embed_content",
-                colour=botcolour,
+                description="Embed_content"
             )
 
             sent_message_message = await message.channel.send(
@@ -815,7 +777,7 @@ async def new(ctx):
                     selector_msg_body = (
                         msg_values[0] if msg_values[0].lower() != "none" else None
                     )
-                    selector_embed = discord.Embed(colour=botcolour)
+                    
 
                     if len(msg_values) > 1:
                         if msg_values[1].lower() != "none":
@@ -831,13 +793,13 @@ async def new(ctx):
                     )
 
                     if selector_msg_body or selector_embed:
-                        target_channel = rl_object["target_channel"]
+                        target_channel = bot_object["target_channel"]
                         sent_final_message = None
                         try:
                             sent_final_message = await target_channel.send(
                                 content=selector_msg_body, embed=selector_embed
                             )
-                            rl_object["message"] = dict(
+                            bot_object["message"] = dict(
                                 message_id=sent_final_message.id,
                                 channel_id=sent_final_message.channel.id,
                                 guild_id=sent_final_message.guild.id,
@@ -855,7 +817,7 @@ async def new(ctx):
                             )
             except asyncio.TimeoutError:
                 await ctx.author.send(
-                    "Reaction Light creation failed, you took too long to provide the requested information."
+                    "Cyberon role creation failed, you took too long to provide the requested information."
                 )
                 cancelled = True
             finally:
@@ -866,10 +828,10 @@ async def new(ctx):
         if not cancelled:
             # Ait we are (almost) all done, now we just need to insert that into the database and add the reactions 💪
             try:
-                r = db.add_reaction_role(rl_object)
+                r = db.add_reaction_role(bot_object)
             except database.DuplicateInstance:
                 await ctx.send(
-                    f"The requested message already got a reaction light instance attached to it, consider running `{prefix}edit` instead."
+                    f"The requested message already got a cyberon instance attached to it, consider running `{prefix}edit` instead."
                 )
                 return
 
@@ -879,7 +841,7 @@ async def new(ctx):
                     f"Database error when creating reaction-light instance:\n```\n{r}\n```",
                 )
                 return
-            for reaction, _ in rl_object["reactions"].items():
+            for reaction, _ in bot_object["reactions"].items():
                 await final_message.add_reaction(reaction)
             await ctx.message.add_reaction("✅")
         await sent_initial_message.delete()
@@ -1171,80 +1133,6 @@ async def edit_reaction(ctx):
     else:
         await ctx.send("You do not have an admin role.")
 
-
-@bot.command(name="systemchannel")
-async def set_systemchannel(ctx):
-    if isadmin(ctx.message.author, ctx.guild.id):
-        global system_channel
-        msg = ctx.message.content.split()
-        mentioned_channels = ctx.message.channel_mentions
-        channel_type = None if len(msg) < 2 else msg[1].lower()
-        if (
-            len(msg) < 3
-            or not mentioned_channels
-            or channel_type not in ["main", "server"]
-        ):
-            server_channel = db.fetch_systemchannel(ctx.guild.id)
-            if isinstance(server_channel, Exception):
-                await system_notification(
-                    None,
-                    "Database error when fetching guild system"
-                    f" channels:\n```\n{server_channel}\n```",
-                )
-                return
-
-            if server_channel:
-                server_channel = server_channel[0][0]
-
-            main_text = (await getchannel(system_channel)).mention if system_channel else 'none'
-            server_text = (await getchannel(server_channel)).mention if server_channel else 'none'
-            await ctx.send(
-                "Define if you are setting up a server or main system channel and"
-                f" mention the target channel.\n```\n{prefix}systemchannel"
-                " <main/server> #channelname\n```\nThe server system channel"
-                " reports errors and notifications related to this server only,"
-                " while the main system channel is used as a fall-back and for"
-                " bot-wide errors and notifications.\n\nThe current channels are:\n"
-                f"**Main:** {main_text}\n"
-                f"**Server:** {server_text}"
-            )
-            return
-
-        target_channel = mentioned_channels[0].id
-        guild_id = ctx.message.guild.id
-
-        server = await getguild(guild_id)
-        bot_user = server.get_member(bot.user.id)
-        bot_permissions = (await getchannel(target_channel)).permissions_for(bot_user)
-        writable = bot_permissions.read_messages
-        readable = bot_permissions.view_channel
-        if not writable or not readable:
-            await ctx.send("I cannot read or send messages in that channel.")
-            return
-
-        if channel_type == "main":
-            system_channel = target_channel
-            config["server"]["system_channel"] = str(system_channel)
-            with open(f"{directory}/config.ini", "w") as configfile:
-                config.write(configfile)
-
-        elif channel_type == "server":
-            add_channel = db.add_systemchannel(guild_id, target_channel)
-
-            if isinstance(add_channel, Exception):
-                await system_notification(
-                    guild_id,
-                    "Database error when adding a new system"
-                    f" channel:\n```\n{add_channel}\n```",
-                )
-                return
-
-        await ctx.send("System channel updated.")
-
-    else:
-        await ctx.send("You do not have an admin role.")
-
-
 @bot.command(name="notify")
 async def toggle_notify(ctx):
     if isadmin(ctx.message.author, ctx.guild.id):
@@ -1264,7 +1152,12 @@ async def toggle_notify(ctx):
 async def hlp(ctx):
     if isadmin(ctx.message.author, ctx.guild.id):
         await ctx.send(
-            "**Reaction Role Messages**\n"
+            "**Cyberon to the rescue**\n"
+            "**Help**\n"
+            f"- `{prefix}lists all the commands.\n"
+
+            "**General**\n"
+
             f"- `{prefix}new` starts the creation process for a new"
             " reaction role message.\n"
             f"- `{prefix}edit` edits the text and embed of an existing reaction"
@@ -1274,14 +1167,19 @@ async def hlp(ctx):
             f"- `{prefix}notify` toggles sending messages to users when they get/lose"
             " a role (default off) for the current server (the command affects only"
             " the server it was used in).\n"
-            f"- `{prefix}colour` changes the colour of the embeds of new and newly"
-            " edited reaction role messages.\n"
-            "**Activities**\n"
-            f"- `{prefix}activity` adds an activity for the bot to loop through and"
-            " show as status.\n"
-            f"- `{prefix}rm-activity` removes an activity from the bot's list.\n"
-            f"- `{prefix}activitylist` lists the current activities used by the"
-            " bot as statuses.\n"
+            f"- `{prefix}info` get information about the bot\n"
+            f"- `{prefix}hack-show` get information and links about hackathons at one place\n"
+            f"- `{prefix}serverinfo` get information about the server\n"
+            f"- `{prefix}ping` scare the bot by pinging\n"
+            f"- `{prefix}invite` invite the bot to your server\n"
+            f"- `{prefix}server` get invite link of the server of the bot for support\n"
+            f"- `{prefix}poll` create a poll where members could vote\n"
+            f"- `{prefix}say` the bot will say anything you want\n"
+            f"- `{prefix}embed` the bot will say anything you want in embeds\n"
+            "**Fun**\n"
+            f"- `{prefix}rps` play rock paper scissors with the bot\n"
+            f"- `{prefix}green-squares` check your love for open source\n"
+
         )
         await ctx.send(
             "**Admins**\n"
@@ -1296,14 +1194,14 @@ async def hlp(ctx):
             " command was run in by mentioning them and the current admins from"
             " other servers by printing out the role IDs. You need to be a server"
             " administrator to use this command.\n"
-            "**System**\n"
-            f"- `{prefix}systemchannel` updates the main or server system channel"
-            " where the bot sends errors and update notifications.\n"
+            f"- `{prefix}blacklist` Lets you add or remove a user from not being able to use the bot.\n"
+            f"- `{prefix}kick` kicks a user out of the server.\n"
+            f"- `{prefix}nick` changes nickname a user in the server.\n"
+            f"- `{prefix}ban` bans a user from the server.\n"
+            f"- `{prefix}warn` warns a user.\n"
+            f"- `{prefix}purge` deletes a number of messages.\n"
             "**Bot Control**\n"
-            f"- `{prefix}kill` shuts down the bot.\n"
-            f"- `{prefix}restart` restarts the bot. Only works on installations"
-            " running on GNU/Linux.\n"
-            
+            f"- `{prefix}shutdown` shuts down the bot.\n"
             
         )
 

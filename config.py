@@ -1,4 +1,5 @@
 # Can be multiple prefixes, like this: ("!", "?")
+system_channel = []
 BOT_PREFIX = ("cyb!")
 APPLICATION_ID = "819568634673889341"
 BLACKLIST = []
