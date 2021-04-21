@@ -163,42 +163,42 @@ class moderation(commands.Cog, name="moderation"):
 
     @commands.command(name="purge")
     async def purge(self, context, number):
-        """
+    	"""
         Delete a number of messages.
         """
-        if context.message.author.guild_permissions.administrator:
-            try:
-                number = int(number)
-            except:
-                embed = discord.Embed(
-                    title="Error!",
-                    description=f"`{number}` is not a valid number.",
-                    color=config.error
-                )
-                await context.send(embed=embed)
-                return
-            if number < 1:
-                embed = discord.Embed(
-                    title="Error!",
-                    description=f"`{number}` is not a valid number.",
-                    color=config.error
-                )
-                await context.send(embed=embed)
-                return
-            purged_messages = await context.message.channel.purge(limit=number)
-            embed = discord.Embed(
-                title="Chat Cleared!",
-                description=f"**{context.message.author}** cleared **{len(purged_messages)}** messages!",
-                color=config.success
-            )
-            await context.send(embed=embed)
-        else:
-            embed = discord.Embed(
-                title="Error!",
-                description="You don't have the permission to use this command.",
-                color=config.error
-            )
-            await context.send(embed=embed)
+    	if context.message.author.guild_permissions.administrator:
+    		try:
+    		    number = int(number)
+    		except:
+    		    embed = discord.Embed(
+    		        title="Error!",
+    		        description=f"`{number}` is not a valid number.",
+    		        color=config.error
+    		    )
+    		    await context.send(embed=embed)
+    		    return
+    		if number < 1:
+    		    embed = discord.Embed(
+    		        title="Error!",
+    		        description=f"`{number}` is not a valid number.",
+    		        color=config.error
+    		    )
+    		    await context.send(embed=embed)
+    		    return
+    		purged_messages = await context.message.channel.purge(limit=number)
+    		embed = discord.Embed(
+    		    title="Chat Cleared!",
+    		    description=f"**{context.message.author}** cleared **{len(purged_messages)}** messages!",
+    		    color=config.success
+    		)
+    	else:
+    		embed = discord.Embed(
+    		    title="Error!",
+    		    description="You don't have the permission to use this command.",
+    		    color=config.error
+    		)
+
+    	await context.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(moderation(bot))

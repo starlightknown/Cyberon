@@ -62,9 +62,7 @@ class SchemaHandler:
         if "guild_id" not in columns:
             cursor.execute("SELECT role_id FROM admins")
             admins = cursor.fetchall()
-            admins2 = []
-            for admin in admins:
-                admins2.append(admin[0])
+            admins2 = [admin[0] for admin in admins]
             admins = admins2
             guilds = {}
             for guild in self.client.guilds:
@@ -76,8 +74,8 @@ class SchemaHandler:
 
             cursor.execute("ALTER TABLE admins ADD COLUMN 'guild_id' INT;")
             conn.commit()
-            for guild in guilds:
-                for admin_id in guilds[guild]:
+            for guild, value in guilds.items():
+                for admin_id in value:
                     cursor.execute(
                         "UPDATE admins SET guild_id = ? WHERE role_id = ?;",
                         (guild, admin_id),
@@ -92,10 +90,10 @@ class SchemaHandler:
         if systemchannels_table:
             cursor.execute("SELECT * FROM systemchannels;")
             entries = cursor.fetchall()
+            notify = 0  # Set default to not notify
             for entry in entries:
                 guild_id = entry[0]
                 channel_id = entry[1]
-                notify = 0  # Set default to not notify
                 cursor.execute(
                     "INSERT INTO guild_settings ('guild_id', 'notify', 'systemchannel') values(?, ?, ?);",
                     (guild_id, notify, channel_id),
