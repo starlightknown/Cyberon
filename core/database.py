@@ -391,11 +391,7 @@ class Database:
 
             # Removes any duplicate guilds from the list
             guilds = list(dict.fromkeys(guilds))
-            guild_ids = []
-            for guild in guilds:
-                if guild[0] is not None:
-                    guild_ids.append(guild[0])
-
+            guild_ids = [guild[0] for guild in guilds if guild[0] is not None]
             cursor.close()
             conn.close()
             return guild_ids
@@ -493,9 +489,7 @@ class Database:
             if guild_ids_only:
                 cursor.execute("SELECT guild_id FROM cleanup_queue_guilds;")
                 guilds = cursor.fetchall()
-                guild_ids = []
-                for guild in guilds:
-                    guild_ids.append(guild[0])
+                guild_ids = [guild[0] for guild in guilds]
                 guilds = guild_ids
             else:
                 cursor.execute("SELECT * FROM cleanup_queue_guilds;")
@@ -527,19 +521,12 @@ class Database:
                 )
             else:
                 notify = results[0][0]
-                if notify:
-                    notify = 0
-                    cursor.execute(
-                        "UPDATE guild_settings SET notify = ? WHERE guild_id = ?",
-                        (notify, guild_id),
-                    )
+                notify = 0 if notify else 1
+                cursor.execute(
+                    "UPDATE guild_settings SET notify = ? WHERE guild_id = ?",
+                    (notify, guild_id),
+                )
 
-                else:
-                    notify = 1
-                    cursor.execute(
-                        "UPDATE guild_settings SET notify = ? WHERE guild_id = ?",
-                        (notify, guild_id),
-                    )
             conn.commit()
             cursor.close()
             conn.close()
