@@ -1139,9 +1139,8 @@ async def toggle_notify(ctx):
                 "Notifications have been set to **OFF** for this server.\n"
                 "Use this command again to turn them on."
             )
-
 @bot.command(name="help")
-async def hlp(ctx):
+async def help(ctx):
     if isadmin(ctx.message.author, ctx.guild.id):
         await ctx.send(
             "**Cyberon to the rescue**\n"
@@ -1199,8 +1198,7 @@ async def hlp(ctx):
 
     else:
         await ctx.send("You do not have an admin role.")
-
-
+        
 @bot.command(pass_context=True, name="admin")
 @commands.has_permissions(administrator=True)
 async def add_admin(ctx, role: discord.Role):
@@ -1269,5 +1267,14 @@ async def list_admin(ctx):
 	else:
 	    await ctx.send("There are no bot admins registered in this server.")
 
+        
+async def react(ctx):
+    if isadmin(ctx.message.author, ctx.guild.id):
+        await ctx.message.add_reaction("✅")
+
+    else:
+        await ctx.send(f"You do not have an admin role. You might want to use `{prefix}admin`"
+            " first."
+        )
 # Run the bot with the token
 bot.run(os.getenv('TOKEN'))
