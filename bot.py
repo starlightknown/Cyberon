@@ -1140,7 +1140,7 @@ async def toggle_notify(ctx):
                 "Use this command again to turn them on."
             )
 @bot.command(name="help")
-async def help(ctx):
+async def hlp(ctx):
     if isadmin(ctx.message.author, ctx.guild.id):
         await ctx.send(
             "**Cyberon to the rescue**\n"
