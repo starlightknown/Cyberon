@@ -10,7 +10,7 @@ class Fun(commands.Cog, name="fun"):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="green_squares")
+    @commands.command(name="green-squares")
     async def green_squares(self, context, member : discord.Member = None):
         ''' 
         Check your love for open source 
