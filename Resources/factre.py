@@ -33,7 +33,8 @@ def get_date_fact(date):
     # fact about particular date
     final_link = "http://numbersapi.com/" + date + "?json"
     response = (requests.get(final_link)).json()
-    return response['text']
+    fact = response['text']
+    return fact
 
 
 def get_animals_fact():
@@ -41,10 +42,12 @@ def get_animals_fact():
     random_fact = random.choice(list_of_option)
     final_link = "https://some-random-api.ml/facts" + random_fact
     response = (requests.get(final_link)).json()
-    return response['fact']
+    fact = response['fact']
+    return fact
 
 
 def animal_fact(data):
     final_link = "https://some-random-api.ml/facts/" + data
     response = (requests.get(final_link)).json()
-    return response['fact']
+    fact = response['fact']
+    return fact
