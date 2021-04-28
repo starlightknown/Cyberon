@@ -76,18 +76,6 @@ async def on_command_completion(ctx):
 	executedCommand = str(split[0])
 	print(f"Executed {executedCommand} command in {ctx.guild.name} (ID: {ctx.message.guild.id}) by {ctx.message.author} (ID: {ctx.message.author.id})")
 
-# The code in this event is executed every time a valid commands catches an error
-@bot.event
-async def on_command_error(context, error):
-	if isinstance(error, commands.CommandOnCooldown):
-		embed = discord.Embed(
-			title="Error!",
-			description="This command is on a %.2fs cool down" % error.retry_after,
-			color=config.error
-		)
-		await context.send(embed=embed)
-	raise error
-
 #database - reaction role
 class Locks:
     def __init__(self):
@@ -1170,6 +1158,7 @@ async def hlp(ctx):
             "**Fun**\n"
             f"- `{prefix}rps` play rock paper scissors with the bot\n"
             f"- `{prefix}green-squares` check your love for open source\n"
+            f"- `{prefix}fact` get facts about number,date,dog,cat,koala,bird\n"
 
         )
         await ctx.send(
@@ -1276,5 +1265,6 @@ async def react(ctx):
         await ctx.send(f"You do not have an admin role. You might want to use `{prefix}admin`"
             " first."
         )
+
 # Run the bot with the token
 bot.run(os.getenv('TOKEN'))
