@@ -94,17 +94,14 @@ class general(commands.Cog, name="general"):
 
     @commands.command(name="ping")
     async def ping(self, context):
-        """
-        Check if the bot is alive.
-        """
         embed = discord.Embed(
-            color=config.success
-        )
-        embed.add_field(
-            name="Stop startling this poor soul, let me code in peace!",
-            value=":man_technologist:",
-            inline=True
-        )
+                    title='Stop startling!',
+                    description='let me code in peace',
+                    colour=0xff0000)
+        gif_list =['https://gfycat.com/frightenedcraftydinosaur']
+
+        embed.set_image(url = random.choice(gif_list))
+                
         embed.set_footer(
             text=f"Pong request by {context.message.author}"
         )

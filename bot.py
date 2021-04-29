@@ -18,7 +18,6 @@ intents = discord.Intents.all()
 directory = os.path.dirname(os.path.realpath(__file__))
 prefix = config.BOT_PREFIX
 bot = Bot(command_prefix=config.BOT_PREFIX, intents=intents)
-
 db_file = f"{directory}/files/bot.db"
 db = database.Database(db_file)
 
@@ -36,11 +35,11 @@ async def status_task():
 	while True:
 		await bot.change_presence(activity=discord.Game("with you!"))
 		await asyncio.sleep(60)
-		await bot.change_presence(activity=discord.Game("with freedom!"))
+		await bot.change_presence(activity=discord.Game("with bugs!"))
 		await asyncio.sleep(60)
 		await bot.change_presence(activity=discord.Game(f"{prefix} help"))
 		await asyncio.sleep(60)
-		await bot.change_presence(activity=discord.Game("with magic!"))
+		await bot.change_presence(activity=discord.Game("with bear in hibernation!"))
 		await asyncio.sleep(60)
 
 # Removes the default help command of discord.py to be able to create our custom help command.

@@ -1,6 +1,8 @@
 # Can be multiple prefixes, like this: ("!", "?")
 system_channel = []
 BOT_PREFIX = ("cyb!")
+discord_bot_avatar = "cyberon.png"
+discord_bot_name = "Cyberon"
 APPLICATION_ID = "819568634673889341"
 BLACKLIST = []
 OWNERS = [689697352453455925]
