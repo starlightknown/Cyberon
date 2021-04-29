@@ -98,7 +98,16 @@ class general(commands.Cog, name="general"):
                     title='Stop startling!',
                     description='let me code in peace',
                     colour=0xff0000)
-        gif_list =['https://gfycat.com/frightenedcraftydinosaur']
+        gif_list =['https://media.giphy.com/media/l0CLVr9NHLoqVtICQ/giphy.gif',
+                   'https://media.giphy.com/media/243VfdEwUhgaPAiDYO/giphy.gif',
+                   'https://media.giphy.com/media/3o7TKM74HYjLo4dd2U/giphy.gif',
+                   'https://media.giphy.com/media/229FtrfAW0NSwlFB97/giphy.gif',
+                   'https://media.giphy.com/media/CG9sLUCIwPt0A/giphy.gif',
+                   'https://media.giphy.com/media/3o7TKrxyzedbafvdQY/giphy.gif',
+                   'https://media.giphy.com/media/2w6l86ZRrEe2Fmv2ms/giphy.gif',
+                   'https://media.giphy.com/media/xUPGcJL12DOdJMvTuU/giphy.gif',
+                   'https://media.giphy.com/media/rQThYThOQrAZMCG1lL/giphy.gif'
+]
 
         embed.set_image(url = random.choice(gif_list))
                 
