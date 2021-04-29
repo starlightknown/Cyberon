@@ -1,7 +1,7 @@
 from random import choice
 import discord, os, sys, platform, aiohttp, json
 from discord.ext import commands
-from Resources import factre as ft
+from core import factre as ft
 import re
 import random
 bot_channel = 'bot-chat'
