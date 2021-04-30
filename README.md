@@ -3,7 +3,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-[cyberon](images/cyb.png)
+<img src="https://raw.githubusercontent.com/starlightknown/Cyberon/master/images/cybb.png">
 
 ## Contributors ✨
 
