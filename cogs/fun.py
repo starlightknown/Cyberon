@@ -75,7 +75,18 @@ class Fun(commands.Cog, name="fun"):
             await choose_message.edit(embed=result_embed)
         except asyncio.exceptions.TimeoutError:
             await choose_message.clear_reactions()
-            timeout_embed = discord.Embed(title="Too late", color=config.error)
+            timeout_embed = discord.Embed(
+                    title='Too Late',
+                    description="It's never too late to play again ;) ",
+                    colour=0xff0000)
+                gif_list =['https://media.giphy.com/media/EyxhFqCvQhVrW/giphy.gif',
+                            'https://media.giphy.com/media/dHCE33RPV2SDz41d53/giphy.gif',
+                            'https://media.giphy.com/media/3o6fJ6GDvs07mfBd4c/giphy.gif',
+                            'https://media.giphy.com/media/I1r5jpUvdGra8/giphy.gif',
+                            'https://media.giphy.com/media/Xa4mzrK6Ny1v24z9sM/giphy.gif',
+                            'https://media.giphy.com/media/LUBPAHhIH5ocoiZ1Oo/giphy.gif']
+
+                embed.set_image(url = random.choice(gif_list))
             timeout_embed.set_author(name=context.author.display_name, icon_url=context.author.avatar_url)
             await choose_message.edit(embed=timeout_embed)
 
