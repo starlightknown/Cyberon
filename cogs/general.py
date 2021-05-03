@@ -121,7 +121,20 @@ class general(commands.Cog, name="general"):
         """
         Get the invite link of the bot to be able to invite it.
         """
-        await context.send("I sent you a private message!")
+        embed = discord.Embed(
+                    title='Add me',
+                    description='I have sent you a message',
+                    colour=0xFFFF00)
+        gif_list =['https://media.giphy.com/media/dTzYQVzikhRCvMCaPn/giphy.gif',
+                   'https://media.giphy.com/media/l41m5YJ56zcextOSY/giphy.gif',
+                   'https://media.giphy.com/media/cZb1b7JFNEKbW9Ht51/giphy.gif',
+                   'https://media.giphy.com/media/THg3sfQzDJ94e1d86Q/giphy.gif',
+                   'https://media.giphy.com/media/ZacWu5ytExW0f2WQBZ/giphy.gif',
+                   'https://media.giphy.com/media/26tk1rgqovAO68dmo/giphy.gif']
+
+        embed.set_image(url = random.choice(gif_list))
+                
+        await context.send(embed=embed)
         await context.author.send(f"Invite me by clicking here: https://discordapp.com/oauth2/authorize?&client_id={config.APPLICATION_ID}&scope=bot&permissions=8")
 
     @commands.command(name="server")
