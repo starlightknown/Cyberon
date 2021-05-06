@@ -1158,6 +1158,9 @@ async def hlp(ctx):
             f"- `{prefix}rps` play rock paper scissors with the bot\n"
             f"- `{prefix}green-squares` check your love for open source\n"
             f"- `{prefix}fact` get facts about number,date,dog,cat,koala,bird\n"
+	    f"- `{prefix}boop` to get booped\n"
+	    f"- `{prefix}8ball` get anwers to your questions\n"
+		
 
         )
         await ctx.send(
