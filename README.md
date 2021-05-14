@@ -8,6 +8,9 @@
 
 <img src="https://raw.githubusercontent.com/starlightknown/Cyberon/master/images/cybb.png">
 
+## Project board
+[![See the issues for more upcoming and in progress features]()]
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
