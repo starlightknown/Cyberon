@@ -9,7 +9,7 @@
 <img src="https://raw.githubusercontent.com/starlightknown/Cyberon/master/images/cybb.png">
 
 ## Project board
-[![See the issues for more upcoming and in progress features](https://github.com/starlightknown/Cyberon/projects/1)]
+[![See the issues for more upcoming and in progress features](https://user-images.githubusercontent.com/624760/118307491-ae9c0080-b4e2-11eb-87a2-b03888933c2f.png)](https://github.com/starlightknown/Cyberon/projects/1)
 
 ## Contributors ✨
 
