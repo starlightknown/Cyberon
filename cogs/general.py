@@ -16,7 +16,7 @@ class general(commands.Cog, name="general"):
         Get some useful (or not) information about the bot.
         """
         embed = discord.Embed(
-            description="dobby bot",
+            description="My name is Cyberon, you can call me cyb!",
             color=config.success
         )
         embed.set_author(
