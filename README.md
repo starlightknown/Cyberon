@@ -25,6 +25,8 @@
 - cyb!poll create a poll where members could vote
 - cyb!say the bot will say anything you want
 - cyb!embed the bot will say anything you want in embeds
+- cyb!user gives info about the user roles and joining info
+- cyb!user-messages gives the number of messages sent by a user in a particular channel
 
 **Fun**
 
@@ -32,7 +34,7 @@
 - cyb!green-squares check your love for open source
 - cyb!fact get facts about number,date,dog,cat,koala,bird
 - cyb!boop to get booped
-- cyb!8ball` get anwers to your questions
+- cyb!8ball get anwers to your questions
 
 **Moderation**
 
