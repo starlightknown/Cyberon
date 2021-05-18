@@ -4,6 +4,7 @@ from discord.ext import commands
 from core import factre as ft
 import re
 import random
+import typing
 bot_channel = 'bot-chat'
 
 if not os.path.isfile("config.py"):
