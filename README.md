@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 <a href="https://github.com/Rapptz/discord.py/releases/tag/v1.5.0"><img src="https://img.shields.io/badge/discord.py-v1.6.0-7289da.svg?style=flat-square" alt="discord.py version"></a>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <img src="https://raw.githubusercontent.com/starlightknown/Cyberon/master/images/cybb.png">
@@ -61,6 +61,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/divyanshu887"><img src="https://avatars.githubusercontent.com/u/59568700?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Divyanshu Singh</b></sub></a><br /><a href="#video-divyanshu887" title="Videos">📹</a></td>
+    <td align="center"><a href="https://github.com/Prathamesh-Shanbhag"><img src="https://avatars.githubusercontent.com/u/70568620?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Prathamesh Shanbhag</b></sub></a><br /><a href="https://github.com/starlightknown/Cyberon/issues?q=author%3APrathamesh-Shanbhag" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
