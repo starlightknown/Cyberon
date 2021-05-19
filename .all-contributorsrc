@@ -21,6 +21,33 @@
       "profile": "https://github.com/Prathamesh-Shanbhag",
       "contributions": [
         "bug"
+     ]
+    },
+    {
+      "login": "eddiejaoude",
+      "name": "Eddie Jaoude",
+      "avatar_url": "https://avatars.githubusercontent.com/u/624760?v=4",
+      "profile": "http://eddiejaoude.io",
+      "contributions": [
+        "design"
+       ]
+     },
+     {
+      "login": "Vyvy-vi",
+      "name": "Vyom Jain",
+      "avatar_url": "https://avatars.githubusercontent.com/u/62864373?v=4",
+      "profile": "https://github.com/Vyvy-vi",
+      "contributions": [
+        "bug"
+       ]
+     },
+     {
+      "login": "vinzvinci",
+      "name": "Vincent Villafuerte",
+      "avatar_url": "https://avatars.githubusercontent.com/u/73097560?v=4",
+      "profile": "https://vinzvinci.github.io/",
+      "contributions": [
+        "doc"
       ]
     }
   ],
