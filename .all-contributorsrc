@@ -13,6 +13,15 @@
       "contributions": [
         "video"
       ]
+    },
+    {
+      "login": "Prathamesh-Shanbhag",
+      "name": "Prathamesh Shanbhag",
+      "avatar_url": "https://avatars.githubusercontent.com/u/70568620?v=4",
+      "profile": "https://github.com/Prathamesh-Shanbhag",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
