@@ -61,9 +61,10 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/divyanshu887"><img src="https://avatars.githubusercontent.com/u/59568700?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Divyanshu Singh</b></sub></a><br /><a href="#video-divyanshu887" title="Videos">📹</a></td>
+    <td align="center"><a href="http://eddiejaoude.io"><img src="https://avatars.githubusercontent.com/u/624760?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Eddie Jaoude</b></sub></a><br /><a href="#design-eddiejaoude" title="Design">🎨</a></td>
     <td align="center"><a href="https://github.com/Vyvy-vi"><img src="https://avatars.githubusercontent.com/u/62864373?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vyom Jain</b></sub></a><br /><a href="https://github.com/starlightknown/Cyberon/issues?q=author%3AVyvy-vi" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://vinzvinci.github.io/"><img src="https://avatars.githubusercontent.com/u/73097560?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vincent Villafuerte</b></sub></a><br /><a href="https://github.com/starlightknown/Cyberon/commits?author=vinzvinci" title="Documentation">📖</a></td>
-    main
+      
   </tr>
 </table>
 
