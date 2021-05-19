@@ -13,6 +13,15 @@
       "contributions": [
         "video"
       ]
+    },
+    {
+      "login": "eddiejaoude",
+      "name": "Eddie Jaoude",
+      "avatar_url": "https://avatars.githubusercontent.com/u/624760?v=4",
+      "profile": "http://eddiejaoude.io",
+      "contributions": [
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 7,
