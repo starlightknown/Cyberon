@@ -74,11 +74,8 @@ class welcome(commands.Cog):
             msg = "NONE"
             channel = "NONE"
         else:
-            if not result["msg"]: msg = "NONE"
-            else: msg = result["msg"]
-            if not result["channel_id"]: channel = "NONE"
-            else: channel = result["channel_id"]
-
+            msg = "NONE" if not result["msg"] else result["msg"]
+            channel = "NONE" if not result["channel_id"] else result["channel_id"]
         embed = discord.Embed(colour=discord.Colour.orange())
 
         embed.set_author(name="Command Configuration", icon_url=self.bot.user.avatar_url)
