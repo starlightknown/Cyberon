@@ -15,7 +15,7 @@ class fact(commands.Cog, name="fact"):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="givefact", aliases=['Fact', 'FACT', 'FAct', 'FaCt', 'FACt', 'facT'])
+    @commands.command(name="givefact")
     async def fact(self, message, fact_type="None"):
         channels = ['bot-chat']
         if message.channel.name in channels:  # bot only run command in joke-only channel
