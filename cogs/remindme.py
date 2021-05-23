@@ -23,10 +23,10 @@ class Reminder():
         self.task = None
 
 class ReminderCog(commands.Cog, name='Reminder'):
-    """Reminders for people on Discord"""
+    """Reminders for events on Discord"""
     
     reminders = defaultdict(dict)
-    MAX_REMINDERS = 4
+    MAX_REMINDERS = 5
 
     def __init__(self, bot):
         self.bot = bot
