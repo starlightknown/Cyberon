@@ -77,7 +77,7 @@ class ReminderCog(commands.Cog, name='Reminder'):
                 except discord.HTTPException:
                     return
     
-    @commands.command(aliases=['remind', 'remind-me'])
+    @commands.command(name='remind-me')
     async def reminder(self, context, duration: Duration, channel: typing.Optional[TextChannelMention], *, message: commands.clean_content(fix_channel_mentions=True)=''):
         """
         Creates a reminder.
