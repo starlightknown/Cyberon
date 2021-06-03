@@ -123,7 +123,10 @@ class serverinfo(commands.Cog, name="server"):
         embed.add_field(name="Created Account On:", value=member.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
         embed.add_field(name="Joined Server On:", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
 
-        embed.add_field(name="Roles:", value="".join([role.mention for role in roles[1:]]))
+        embed.add_field(
+            name="Roles:", value="".join(role.mention for role in roles[1:])
+        )
+
         embed.add_field(name="Highest Role:", value=member.top_role.mention)
         await ctx.send(embed=embed)
 
