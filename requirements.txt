@@ -3,3 +3,4 @@ asyncio
 discord.py
 python-dotenv
 requests
+yaml
