@@ -1,16 +1,17 @@
 import asyncio
 import datetime
 import textwrap
-import typing
+import typing, yaml, os, sys
 from collections import defaultdict
 import discord,os,sys
 from discord.ext import commands
-from core.converters import Duration, TextChannelMention
+from utils.converters import Duration, TextChannelMention
 
-if not os.path.isfile("config.py"):
-    sys.exit("'config.py' not found! Please add it and try again.")
+if not os.path.isfile("config.yaml"):
+    sys.exit("'config.yaml' not found! Please add it and try again.")
 else:
-    import config
+    with open("config.yaml") as file:
+        config = yaml.load(file, Loader=yaml.FullLoader)
 
 class Reminder():
     def __init__(self, author_id, channel_id, created, expires, message):
@@ -22,7 +23,7 @@ class Reminder():
         self.message = message
         self.task = None
 
-class ReminderCog(commands.Cog, name='Reminder'):
+class ReminderCog(commands.Cog, name='reminder'):
     """Reminders for events on Discord"""
     
     reminders = defaultdict(dict)

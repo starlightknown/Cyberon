@@ -1,159 +1,56 @@
-import os, sys, discord, platform, random, aiohttp, json
+import json
+import os
+import platform
+import random
+import sys
+
+import aiohttp
+import discord
+import yaml
 from discord.ext import commands
 
-if not os.path.isfile("config.py"):
-    sys.exit("'config.py' not found! Please add it and try again.")
+if not os.path.isfile("config.yaml"):
+    sys.exit("'config.yaml' not found! Please add it and try again.")
 else:
-    import config
+    with open("config.yaml") as file:
+        config = yaml.load(file, Loader=yaml.FullLoader)
+
 
 class general(commands.Cog, name="general"):
     def __init__(self, bot):
         self.bot = bot
+    @commands.command()
+    async def xkcd(self, ctx,  *searchterm: str):
+        ''' XKCD Comic
+        -----------
+        cyb!xkcd random
+        '''
+        apiUrl = 'https://xkcd.com{}info.0.json'
+        async with aiohttp.ClientSession() as cs:
+            async with cs.get(apiUrl.format('/')) as r:
+                js = await r.json()
+                if ''.join(searchterm) == 'random':
+                    randomComic = random.randint(0, js['num'])
+                    async with cs.get(apiUrl.format('/' + str(randomComic) + '/')) as r:
+                        if r.status == 200:
+                            js = await r.json()
+                comicUrl = 'https://xkcd.com/{}/'.format(js['num'])
+                date = '{}.{}.{}'.format(js['day'], js['month'], js['year'])
+                msg = '**{}**\n{}\nAlt Text:```{}```XKCD Link: <{}> ({})'.format(js['safe_title'], js['img'], js['alt'], comicUrl, date)
+                await ctx.send(msg)
 
-    @commands.command(name="info", aliases=["botinfo"])
-    async def info(self, context):
-        """
-        Get some useful (or not) information about the bot.
-        """
-        embed = discord.Embed(
-            description="My name is Cyberon, you can call me cyb!",
-            color=config.success
-        )
-        embed.set_author(
-            name="Bot Information"
-        )
-        embed.add_field(
-            name="Owner:",
-            value="Karuna#8722",
-            inline=True
-        )
-        embed.add_field(
-            name="Python Version:",
-            value=f"{platform.python_version()}",
-            inline=True
-        )
-        embed.add_field(
-            name="Prefix:",
-            value=f"{config.BOT_PREFIX}",
-            inline=False
-        )
-        embed.set_footer(
-            text=f"Requested by {context.message.author}"
-        )
-        await context.send(embed=embed)
+    @commands.command(name="decide")
+    async def _decide(self, ctx: commands.Context, *, to_decide: str):
+        """Decide between a list of comma separated options"""
+        options = [x.strip() for x in to_decide.split(",")]
+        choice = random.choice(options)
 
-    @commands.command(name="serverinfo")
-    async def serverinfo(self, context):
-        """
-        Get some useful (or not) information about the server.
-        """
-        server = context.message.guild
-        roles = [x.name for x in server.roles]
-        role_length = len(roles)
-        if role_length > 50:
-            roles = roles[:50]
-            roles.append(f">>>> Displaying[50/{len(roles)}] Roles")
-        roles = ", ".join(roles)
-        channels = len(server.channels)
-        time = str(server.created_at)
-        time = time.split(" ")
-        time = time[0]
+        await ctx.send(
+            embed=discord.Embed(color=discord.Color.blurple(), description=choice)
+        )
 
-        embed = discord.Embed(
-            title="**Server Name:**",
-            description=f"{server}",
-            color=config.success
-        )
-        embed.set_thumbnail(
-            url=server.icon_url
-        )
-        embed.add_field(
-            name="Owner",
-            value=f"{server.owner}\n{server.owner.id}"
-        )
-        embed.add_field(
-            name="Server ID",
-            value=server.id
-        )
-        embed.add_field(
-            name="Member Count",
-            value=server.member_count
-        )
-        embed.add_field(
-            name="Text/Voice Channels",
-            value=f"{channels}"
-        )
-        embed.add_field(
-            name=f"Roles ({role_length})",
-            value=roles
-        )
-        embed.set_footer(
-            text=f"Created at: {time}"
-        )
-        await context.send(embed=embed)
-
-    @commands.command(name="ping")
-    async def ping(self, context):
-        embed = discord.Embed(
-                    title='Stop startling!',
-                    description='let me code in peace',
-                    colour=0xff0000)
-        gif_list =['https://media.giphy.com/media/l0CLVr9NHLoqVtICQ/giphy.gif',
-                   'https://media.giphy.com/media/243VfdEwUhgaPAiDYO/giphy.gif',
-                   'https://media.giphy.com/media/3o7TKM74HYjLo4dd2U/giphy.gif',
-                   'https://media.giphy.com/media/229FtrfAW0NSwlFB97/giphy.gif',
-                   'https://media.giphy.com/media/CG9sLUCIwPt0A/giphy.gif',
-                   'https://media.giphy.com/media/3o7TKrxyzedbafvdQY/giphy.gif',
-                   'https://media.giphy.com/media/2w6l86ZRrEe2Fmv2ms/giphy.gif',
-                   'https://media.giphy.com/media/xUPGcJL12DOdJMvTuU/giphy.gif',
-                   'https://media.giphy.com/media/rQThYThOQrAZMCG1lL/giphy.gif'
-]
-
-        embed.set_image(url = random.choice(gif_list))
-                
-        embed.set_footer(
-            text=f"Pong request by {context.message.author}"
-        )
-        await context.send(embed=embed)
-
-    @commands.command(name="invite")
-    async def invite(self, context):
-        """
-        Get the invite link of the bot to be able to invite it.
-        """
-        embed = discord.Embed(
-                    title='Add me',
-                    description='I have sent you a message',
-                    colour=0xFFFF00)
-        gif_list =['https://media.giphy.com/media/dTzYQVzikhRCvMCaPn/giphy.gif',
-                   'https://media.giphy.com/media/l41m5YJ56zcextOSY/giphy.gif',
-                   'https://media.giphy.com/media/cZb1b7JFNEKbW9Ht51/giphy.gif',
-                   'https://media.giphy.com/media/THg3sfQzDJ94e1d86Q/giphy.gif',
-                   'https://media.giphy.com/media/ZacWu5ytExW0f2WQBZ/giphy.gif',
-                   'https://media.giphy.com/media/26tk1rgqovAO68dmo/giphy.gif']
-
-        embed.set_image(url = random.choice(gif_list))
-                
-        await context.send(embed=embed)
-        await context.author.send(f"Invite me by clicking here: https://discordapp.com/oauth2/authorize?&client_id={config.APPLICATION_ID}&scope=bot&permissions=8")
-
-    @commands.command(name="server")
-    async def server(self, context):
-        """
-        Get the invite link of the discord server of the bot for some support.
-        """
-        await context.send("I sent you a private message!")
-        await context.author.send("Join my discord server by clicking here: https://discord.gg/PfDmQAbAzq")
-    
-    @commands.command(name="hack-show")
-    async def hack_show(self, context):
-        """
-        get all the links of hackathon websites.
-        """
-        await context.send("**Cyberon loves hackathons, find good hackathons here!**\nhttps://devpost.com/hackathons\nhttps://www.hackathon.io/events\nhttps://confs.tech/#\nhttps://mlh.io/seasons/2021/events\nhttp://www.hackalist.org/\nhttps://devfolio.co/\nhttps://angelhack.com/\nhttps://gitcoin.co/hackathons\nhttps://hackathons.hackclub.com/\nhttps://www.incubateind.com/\nhttps://skillenza.com/")
-        
     @commands.command(name="poll")
-    async def poll(self, context, *args):
+    async def poll(self, ctx, *args):
         """
         Create a poll where members can vote.
         """
@@ -161,18 +58,50 @@ class general(commands.Cog, name="general"):
         embed = discord.Embed(
             title="A new poll has been created!",
             description=f"{poll_title}",
-            color=config.success
+            color=config["success"]
         )
         embed.set_footer(
-            text=f"Poll created by: {context.message.author} • React to vote!"
+            text=f"Poll created by: {ctx.message.author} • React to vote!"
         )
-        embed_message = await context.send(embed=embed)
+        embed_message = await ctx.send(embed=embed)
         await embed_message.add_reaction("👍")
         await embed_message.add_reaction("👎")
         await embed_message.add_reaction("🤷")
 
+    @commands.command(name="lovin")
+    async def love(self, ctx: commands.Context, *, target=None):
+        """ Give someone some lovin' """
+
+        if not target:
+            return await ctx.send(f"{ctx.author.display_name} loves ... nothing")
+
+        await ctx.send(
+            f":heart_decoration: {ctx.author.display_name} gives {target} some good ol' fashioned lovin'. :heart_decoration:"
+        )
+
+    @commands.command(aliases=["at"])
+    async def aesthetify(self, ctx: commands.Context, *, a_text):
+        """ Make your message ａｅｓｔｈｅｔｉｃ，　ｍａｎ """
+        ascii_to_wide = dict((i, chr(i + 0xFEE0)) for i in range(0x21, 0x7F))
+        ascii_to_wide.update({0x20: "\u3000", 0x2D: "\u2212"})
+
+        await ctx.message.delete()
+        await ctx.send(f"{a_text.translate(ascii_to_wide)}")
+
+    @commands.command(name="boop")
+    async def boop(self, ctx: commands.Context, *, target=None):
+        """ boop someone """
+        if target is None:
+            return await ctx.send(
+                f"{ctx.author.name} started running behind to boop."
+            )
+
+        embed = discord.Embed(description = f'**{ctx.author.name} booped {target} finally, how cute!**')
+        embed.set_image(url = 'https://media.giphy.com/media/10MSCF1viNV7zy/giphy.gif')
+        await ctx.send(embed = embed)
+
     @commands.command(name="bitcoin")
-    async def bitcoin(self, context):
+    async def bitcoin(self, ctx):
         """
         Get the current price of bitcoin.
         """
@@ -185,27 +114,9 @@ class general(commands.Cog, name="general"):
             embed = discord.Embed(
                 title=":information_source: Info",
                 description=f"Bitcoin price is: ${response['bpi']['USD']['rate']}",
-                color=config.success
+                color=config["success"]
             )
-            await context.send(embed=embed)
-
-    @commands.command(name="say", aliases=["echo"])
-    async def say(self, context, *, args):
-        """
-        The bot will say anything you want.
-        """
-        await context.send(args)
-
-    @commands.command(name="embed")
-    async def embed(self, context, *, args):
-        """
-        The bot will say anything you want, but within embeds.
-        """
-        embed = discord.Embed(
-                description=args,
-                color=config.success
-            )
-        await context.send(embed=embed)
+            await ctx.send(embed=embed)
 
 
 def setup(bot):
