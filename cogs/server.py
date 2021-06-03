@@ -1,5 +1,6 @@
 import os
 import sys
+from datetime import datetime, timedelta
 import discord
 import yaml
 from discord.ext import commands
@@ -11,7 +12,7 @@ else:
     with open("config.yaml") as file:
         config = yaml.load(file, Loader=yaml.FullLoader)
 
-class ServerInfo(commands.Cog, name="Server"):
+class serverinfo(commands.Cog, name="server"):
     def __init__(self, bot):
         self.bot = bot
 
@@ -65,6 +66,35 @@ class ServerInfo(commands.Cog, name="Server"):
         )
         await ctx.send(embed=embed)
 
+    @commands.command(name="user-messages")
+    async def check(self, context, timeframe=7, channel: discord.TextChannel = None, *, user: discord.Member = None):
+        if timeframe > 1968:
+            await context.channel.send("Sorry. The maximum of days you can check is 1968.")
+        elif timeframe <= 0:
+            await context.channel.send("Sorry. The minimum of days you can check is one.")
+
+        else:
+            if not channel:
+                channel = context.channel
+            if not user:
+                user = context.author
+
+            async with context.channel.typing():
+                msg = await context.channel.send('Calculating...')
+                await msg.add_reaction('🔎')
+
+                counter = 0
+                async for message in channel.history(limit=5000, after=datetime.today() - timedelta(days=timeframe)):
+                    if message.author.id == user.id:
+                        counter += 1
+
+                await msg.remove_reaction('🔎', member=message.author)
+
+                if counter >= 5000:
+                    await msg.edit(content=f'{user} has sent over 5000 messages in the channel "{channel}" within the last {timeframe} days!')
+                else:
+                    await msg.edit(content=f'{user} has sent {str(counter)} messages in the channel "{channel}" within the last {timeframe} days.')
+
     @commands.command(name="ping")
     async def ping(self, ctx):
         """See the bot's latency"""
@@ -78,6 +108,7 @@ class ServerInfo(commands.Cog, name="Server"):
 
     @commands.command(name="user")
     async def whois(self, ctx, member: discord.Member = None):
+        """get info about a user in server"""
         if not member:  # if member is no mentioned
             member = ctx.message.author  # set member as the author
         roles = [role for role in member.roles]
@@ -106,4 +137,4 @@ class ServerInfo(commands.Cog, name="Server"):
         await ctx.author.send("Join my discord server by clicking here: https://discord.gg/HzJ3Gfr")
 
 def setup(bot):
-    bot.add_cog(ServerInfo(bot))
+    bot.add_cog(serverinfo(bot))

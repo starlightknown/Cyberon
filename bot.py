@@ -2,7 +2,8 @@ import os
 import platform
 import random
 import sys
-
+from dotenv import load_dotenv
+load_dotenv('.env')
 import discord
 import yaml
 from discord.ext import commands, tasks
@@ -84,6 +85,5 @@ async def on_command_error(ctx, error):
         await ctx.send(embed=embed)
     raise error
 
-
 # Run the bot with the token
-bot.run(config["token"])
+bot.run(os.getenv('TOKEN'))

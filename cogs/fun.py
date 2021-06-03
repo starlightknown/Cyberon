@@ -15,9 +15,73 @@ else:
         config = yaml.load(file, Loader=yaml.FullLoader)
 
 
-class Fun(commands.Cog, name="fun"):
+class fun(commands.Cog, name="cybgames"):
     def __init__(self, bot):
         self.bot = bot
+
+    @commands.command(aliases=['cat', 'randomcat'])
+    async def randcat(self, ctx):
+        '''gets you a random cat~'''
+        #http://discordpy.readthedocs.io/en/latest/faq.html#what-does-blocking-mean
+        async with aiohttp.ClientSession() as cs:
+            async with cs.get('http://aws.random.cat/meow') as r:
+                res = await r.json()
+                emojis = [':cat2: ', ':cat: ', ':heart_eyes_cat: ']
+                await ctx.send(random.choice(emojis) + res['file'])
+  
+    @commands.command(name="8ball", aliases=["ball"])
+    async def ball(self, ctx: commands.Context, *, query=None):
+        """ Ask the magic 8ball """
+        if query is None:
+            return await ctx.error("The 8Ball's wisdom is not to be wasted.")
+
+        responses = [
+            "It is certain",
+            "It is decidedly so",
+            "Without a doubt",
+            "Yes definitely",
+            "You may rely on it",
+            "As I see it, yes",
+            "Most likely",
+            "Outlook good",
+            "Yes",
+            "Signs point to yes",
+            "Reply hazy try again",
+            "Ask again later",
+            "Better not tell you now",
+            "Cannot predict now",
+            "Concentrate and ask again",
+            "Don't count on it",
+            "My reply is no",
+            "My sources say no",
+            "Outlook not so good",
+            "Very doubtful",
+        ]
+
+        if not query.endswith("?"):
+            query = f"{query}?"
+
+        await ctx.send(
+            embed=discord.Embed(
+                title=f":8ball: {query}",
+                description=random.choice(responses),
+                color=self.blue,
+            )
+        )
+
+    @commands.command()
+    async def same(self, ctx):
+        await ctx.send(":white_check_mark: same\n:green_square: unsame")
+
+    @commands.command()
+    async def unsame(self, ctx):
+        await ctx.send(":green_square: same\n:white_check_mark: unsame")
+
+    @commands.command()
+    async def resame(self, ctx):
+        await ctx.send(
+            ":white_check_mark: same\n:white_check_mark: re:same\n:green_square: unsame"
+        )
 
     @commands.command(name="dailyfact")
     @commands.cooldown(1, 86400, BucketType.user)
@@ -102,4 +166,4 @@ class Fun(commands.Cog, name="fun"):
 
 
 def setup(bot):
-    bot.add_cog(Fun(bot))
+    bot.add_cog(fun(bot))

@@ -14,7 +14,7 @@ else:
 
 
 # Here we name the cog and create a new class for the cog.
-class BotInfo(commands.Cog, name="BotInfo"):
+class botinfo(commands.Cog, name="botinfo"):
     def __init__(self, bot):
         self.bot = bot
 
@@ -57,4 +57,4 @@ class BotInfo(commands.Cog, name="BotInfo"):
 
 # And then we finally add the cog to the bot so that it can load, unload, reload and use it's content.
 def setup(bot):
-    bot.add_cog(BotInfo(bot))
+    bot.add_cog(botinfo(bot))

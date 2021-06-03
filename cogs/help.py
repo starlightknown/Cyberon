@@ -12,7 +12,7 @@ else:
         config = yaml.load(file, Loader=yaml.FullLoader)
 
 
-class Help(commands.Cog, name="help"):
+class help(commands.Cog, name="help"):
     def __init__(self, bot):
         self.bot = bot
 
@@ -36,4 +36,4 @@ class Help(commands.Cog, name="help"):
 
 
 def setup(bot):
-    bot.add_cog(Help(bot))
+    bot.add_cog(help(bot))

@@ -75,4 +75,3 @@ class Duration(commands.Converter):
                 result.append(f'{num} {interval}')
 
         return ' '.join(result[:granularity])
-

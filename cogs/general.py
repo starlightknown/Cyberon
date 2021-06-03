@@ -19,12 +19,36 @@ else:
 class general(commands.Cog, name="general"):
     def __init__(self, bot):
         self.bot = bot
+    @commands.command()
+    async def xkcd(self, ctx,  *searchterm: str):
+        ''' XKCD Comic
+        -----------
+        cyb!xkcd random
+        '''
+        apiUrl = 'https://xkcd.com{}info.0.json'
+        async with aiohttp.ClientSession() as cs:
+            async with cs.get(apiUrl.format('/')) as r:
+                js = await r.json()
+                if ''.join(searchterm) == 'random':
+                    randomComic = random.randint(0, js['num'])
+                    async with cs.get(apiUrl.format('/' + str(randomComic) + '/')) as r:
+                        if r.status == 200:
+                            js = await r.json()
+                comicUrl = 'https://xkcd.com/{}/'.format(js['num'])
+                date = '{}.{}.{}'.format(js['day'], js['month'], js['year'])
+                msg = '**{}**\n{}\nAlt Text:```{}```XKCD Link: <{}> ({})'.format(js['safe_title'], js['img'], js['alt'], comicUrl, date)
+                await ctx.send(msg)
 
-    @commands.command(name="love-ya")
-    async def _love(self, ctx: commands.Context):
-        await ctx.message.add_reaction(":gift_heart:")
-        await ctx.send("You are the best! :heart:")
-    
+    @commands.command(name="decide")
+    async def _decide(self, ctx: commands.Context, *, to_decide: str):
+        """Decide between a list of comma separated options"""
+        options = [x.strip() for x in to_decide.split(",")]
+        choice = random.choice(options)
+
+        await ctx.send(
+            embed=discord.Embed(color=discord.Color.blurple(), description=choice)
+        )
+
     @commands.command(name="poll")
     async def poll(self, ctx, *args):
         """
@@ -44,25 +68,37 @@ class general(commands.Cog, name="general"):
         await embed_message.add_reaction("👎")
         await embed_message.add_reaction("🤷")
 
-    @commands.command(name="8ball")
-    async def eight_ball(self, ctx, *args):
-        """
-        Ask any question to the bot.
-        """
-        answers = ['It is certain.', 'It is decidedly so.', 'You may rely on it.', 'Without a doubt.',
-                   'Yes - definitely.', 'As I see, yes.', 'Most likely.', 'Outlook good.', 'Yes.',
-                   'Signs point to yes.', 'Reply hazy, try again.', 'Ask again later.', 'Better not tell you now.',
-                   'Cannot predict now.', 'Concentrate and ask again later.', 'Don\'t count on it.', 'My reply is no.',
-                   'My sources say no.', 'Outlook not so good.', 'Very doubtful.']
-        embed = discord.Embed(
-            title="**My Answer:**",
-            description=f"{answers[random.randint(0, len(answers))]}",
-            color=config["success"]
+    @commands.command(name="lovin")
+    async def love(self, ctx: commands.Context, *, target=None):
+        """ Give someone some lovin' """
+
+        if not target:
+            return await ctx.send(f"{ctx.author.display_name} loves ... nothing")
+
+        await ctx.send(
+            f":heart_decoration: {ctx.author.display_name} gives {target} some good ol' fashioned lovin'. :heart_decoration:"
         )
-        embed.set_footer(
-            text=f"Question asked by: {ctx.message.author}"
-        )
-        await ctx.send(embed=embed)
+
+    @commands.command(aliases=["at"])
+    async def aesthetify(self, ctx: commands.Context, *, a_text):
+        """ Make your message ａｅｓｔｈｅｔｉｃ，　ｍａｎ """
+        ascii_to_wide = dict((i, chr(i + 0xFEE0)) for i in range(0x21, 0x7F))
+        ascii_to_wide.update({0x20: "\u3000", 0x2D: "\u2212"})
+
+        await ctx.message.delete()
+        await ctx.send(f"{a_text.translate(ascii_to_wide)}")
+
+    @commands.command(name="boop")
+    async def boop(self, ctx: commands.Context, *, target=None):
+        """ boop someone """
+        if target is None:
+            return await ctx.send(
+                f"{ctx.author.name} started running behind to boop."
+            )
+
+        embed = discord.Embed(description = f'**{ctx.author.name} booped {target} finally, how cute!**')
+        embed.set_image(url = 'https://media.giphy.com/media/10MSCF1viNV7zy/giphy.gif')
+        await ctx.send(embed = embed)
 
     @commands.command(name="bitcoin")
     async def bitcoin(self, ctx):
