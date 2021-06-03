@@ -38,7 +38,13 @@ class general(commands.Cog, name="general"):
                 date = '{}.{}.{}'.format(js['day'], js['month'], js['year'])
                 msg = '**{}**\n{}\nAlt Text:```{}```XKCD Link: <{}> ({})'.format(js['safe_title'], js['img'], js['alt'], comicUrl, date)
                 await ctx.send(msg)
-
+                
+    @commands.command(name="hack-show")
+    async def hack_show(self, ctx):
+        """
+        get all the links of hackathon websites.
+        """
+        await ctx.send("**Cyberon loves hackathons, find good hackathons here!**\nhttps://devpost.com/hackathons\nhttps://www.hackathon.io/events\nhttps://confs.tech/#\nhttps://mlh.io/seasons/2021/events\nhttp://www.hackalist.org/\nhttps://devfolio.co/\nhttps://angelhack.com/\nhttps://gitcoin.co/hackathons\nhttps://hackathons.hackclub.com/\nhttps://www.incubateind.com/\nhttps://skillenza.com/")
     @commands.command(name="decide")
     async def _decide(self, ctx: commands.Context, *, to_decide: str):
         """Decide between a list of comma separated options"""
