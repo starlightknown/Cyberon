@@ -88,7 +88,7 @@ class general(commands.Cog, name="general"):
     @commands.command(aliases=["at"])
     async def aesthetify(self, ctx: commands.Context, *, a_text):
         """ Make your message ａｅｓｔｈｅｔｉｃ，　ｍａｎ """
-        ascii_to_wide = dict((i, chr(i + 0xFEE0)) for i in range(0x21, 0x7F))
+        ascii_to_wide = {i: chr(i + 0xFEE0) for i in range(0x21, 0x7F)}
         ascii_to_wide.update({0x20: "\u3000", 0x2D: "\u2212"})
 
         await ctx.message.delete()

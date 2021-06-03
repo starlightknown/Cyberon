@@ -62,14 +62,14 @@ class owner(commands.Cog, name="owner"):
                 description=args,
                 color=config["success"]
             )
-            await ctx.send(embed=embed)
         else:
             embed = discord.Embed(
                 title="Error!",
                 description="You don't have the permission to use this command.",
                 color=config["error"]
             )
-            await ctx.send(embed=embed)
+
+        await ctx.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(owner(bot))
