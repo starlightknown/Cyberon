@@ -6,5 +6,6 @@ requests
 yaml
 os
 platform
+pyyaml
 random
 sys
