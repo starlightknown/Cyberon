@@ -5,8 +5,7 @@
 # Add documentation label-
 awaiting review:
   - ./*
-  - bot/*
-  - bot/cogs/*
+  - cogs/*
   - .github/*/*
 
 documentation: 
@@ -20,5 +19,5 @@ documentation:
 
 
 enhancement:
-  - bot/cogs/*.py
+  - cogs/*.py
 # - all: ['!.github/workflows/*', '!.github/resources/*']
