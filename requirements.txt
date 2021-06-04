@@ -3,7 +3,7 @@ asyncio
 discord.py
 python-dotenv
 requests
-yaml
+pyyaml
 os
 platform
 pyyaml
