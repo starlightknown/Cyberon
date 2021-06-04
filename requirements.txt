@@ -3,7 +3,7 @@ asyncio
 discord.py
 python-dotenv
 requests
-pyyaml
+pyyaml == 5.3.1
 os
 platform
 random
