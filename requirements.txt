@@ -3,3 +3,8 @@ asyncio
 discord.py
 python-dotenv
 requests
+yaml
+os
+platform
+random
+sys
