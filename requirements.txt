@@ -6,6 +6,5 @@ requests
 pyyaml
 os
 platform
-pyyaml
 random
 sys
