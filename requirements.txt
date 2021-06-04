@@ -4,7 +4,4 @@ discord.py
 python-dotenv
 requests
 pyyaml == 5.3.1
-os
-platform
-random
-sys
+
