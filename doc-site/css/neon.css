@@ -1,0 +1,75 @@
+@import url(https://fonts.googleapis.com/css?family=Exo+2:200i);
+
+:root {
+  /* Set neon color */
+  --neon-text-color: #dd1e9d63;
+  --neon-border-color: rgba(0, 136, 255, 0.507);
+}
+
+.neon-texts {
+  font-family: "Exo 2", sans-serif;
+  /* font-size: 13rem !important; */
+  font-weight: bolder;
+  font-style: italic;
+  color: #dd1e9d;
+  text-align: center;
+  padding: 3%;
+  border: 0.4rem solid white;
+  border-radius: 1rem;
+  text-transform: uppercase;
+  /* animation: flicker 300s infinite alternate;      */
+}
+.neon-border {
+  font-family: "Exo 2", sans-serif;
+  /* font-size: 13rem !important; */
+  font-weight: bolder;
+  font-style: italic;
+  color: #dd1e9d;
+  text-align: center;
+  padding: 3%;
+  border: 0.4rem solid #dd1e9d;
+  border-radius: 1rem;
+  text-transform: uppercase;
+  /* animation: flicker 300s infinite alternate;      */
+}
+
+.neon-texts::-moz-selection {
+  background-color: var(--neon-border-color);
+  color: var(--neon-text-color);
+}
+.neon-texts::selection {
+  background-color: var(--neon-border-color);
+  color: var(--neon-text-color);
+}
+
+.neon-texts:focus {
+  outline: none;
+}
+
+/* Animate neon flicker */
+@keyframes flicker {
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+    text-shadow: -0.2rem -0.2rem 1rem rgb(117, 39, 82),
+      0.2rem 0.2rem 1rem rgb(110, 23, 71), 0 0 2rem var(--neon-text-color),
+      0 0 4rem var(--neon-text-color), 0 0 6rem var(--neon-text-color),
+      0 0 8rem var(--neon-text-color), 0 0 10rem var(--neon-text-color);
+
+    box-shadow: 0 0 0.5rem rgb(110, 23, 71), inset 0 0 0.5rem rgb(114, 25, 74),
+      0 0 2rem var(--neon-border-color), inset 0 0 2rem var(--neon-border-color),
+      0 0 4rem var(--neon-border-color), inset 0 0 4rem var(--neon-border-color);
+  }
+
+  20%,
+  24%,
+  55% {
+    text-shadow: none;
+    box-shadow: none;
+  }
+}

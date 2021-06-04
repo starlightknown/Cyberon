@@ -1,0 +1,379 @@
+:root {
+    --white: 47deg, 98%, 95%;
+    --citrus: 47deg, 95%, 52%;
+    --orange: 23deg, 100%, 53%;
+    --sanguine: 347deg, 100%, 61%;
+    --pink: 346deg, 98%, 55%;
+    --electro: 181deg, 79%, 54%;
+    --purple: 261deg, 56%, 15%;
+    --night: 261deg, 89%, 7%;
+    --violet: 284deg, 80%, 20%;
+    
+    --sky-line: 7px;
+    --sun-size: 50vh;
+    --ground-size: 45vh;
+    --ground-line: 23px;
+    --ground-speed: 8s;
+    
+    --ratio-x: 0;
+    --ratio-y: 0;
+  }
+  
+  .player {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    z-index: 1
+  }
+  
+  .synthwave {
+    position: relative;
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100%;
+    
+    overflow: hidden;
+    
+    background-color: hsl(var(--night));
+    background-image:linear-gradient(to bottom, hsla(var(--white), .05) 1px, transparent 1px);
+    background-size: 1px var(--sky-line);
+  }
+  
+  .synthwave::after {
+      content: '';
+      position: absolute;
+      z-index: 1;
+    
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+  
+      background-image: radial-gradient(circle at 50%, transparent calc(var(--sun-size) - 10vw), hsla(var(--sanguine), .3));
+      mix-blend-mode: soft-light;
+    }
+  
+    .sun {
+      height: var(--sun-size);
+      width: var(--sun-size);
+      
+      position: absolute;
+      z-index: 2;
+    
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      
+      transform: translate(
+        calc(var(--ratio-x) * 1vw),
+        calc(var(--ratio-y) * -1vh)
+      );
+      
+    
+    filter:
+      drop-shadow(0 0 5px hsla(var(--sanguine), .1))
+      drop-shadow(0 0 10px hsla(var(--sanguine), .1))
+      drop-shadow(0 0 15px hsla(var(--sanguine), .1))
+      drop-shadow(0 0 20px hsla(var(--sanguine), .05))
+      drop-shadow(0 0 25px hsla(var(--sanguine), .05))
+      drop-shadow(0 0 30px hsla(var(--sanguine), .05))
+      drop-shadow(0 0 35px hsla(var(--sanguine), .05))
+      drop-shadow(0 0 40px hsla(var(--sanguine), .05))
+      drop-shadow(0 0 60px hsla(var(--sanguine), .05))
+      drop-shadow(0 0 80px hsla(var(--sanguine), .05))
+      drop-shadow(0 -2px 5px hsl(var(--sanguine)));
+    
+    overflow: hidden;
+  }
+  
+  .sun::after {
+      content: '';
+      
+      --mask-show: rgba(0, 0, 0, 1);
+      --mask-hide: rgba(0, 0, 0, 0);
+  
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 5;
+      
+      -webkit-backface-visibility: hidden;
+      
+              backface-visibility: hidden;
+      border-radius: 50%;
+  
+      background-image: linear-gradient(to top, hsl(var(--pink)) 40%, hsl(var(--orange)) 60%, hsl(var(--citrus)) 95%);
+  
+      box-shadow:
+        inset 0 -30px 30px -5px hsl(var(--orange)),
+        inset 0 -15px 25px -20px hsl(var(--citrus));
+      
+      -webkit-mask-size: auto, auto 70%;
+      
+              mask-size: auto, auto 70%;
+      -webkit-mask-position: top, bottom;
+              mask-position: top, bottom;
+      -webkit-mask-repeat: no-repeat;
+              mask-repeat: no-repeat;
+      
+      -webkit-mask-image:
+        linear-gradient(
+          var(--mask-show) 30.1%,
+          var(--mask-hide) 30.1%
+        ),
+        linear-gradient(
+          to bottom,
+          var(--mask-show) 0,
+          /* 30 / 3 */
+          var(--mask-show) 20px,
+          var(--mask-hide) 20px,
+          var(--mask-hide) 23px,
+          var(--mask-show) 23px,
+          /* 20 / 5 */
+          var(--mask-show) 43px,
+          var(--mask-hide) 43px,
+          var(--mask-hide) 48px,
+          var(--mask-show) 48px,
+          /* 20 / 8 */
+          var(--mask-show) 68px,
+          var(--mask-hide) 68px,
+          var(--mask-hide) 76px,
+          var(--mask-show) 76px,
+          /* 20 / 13 */
+          var(--mask-show) 96px,
+          var(--mask-hide) 96px,
+          var(--mask-hide) 109px,
+          var(--mask-show) 109px,
+          /* 20 / 21 */
+          var(--mask-show) 129px,
+          var(--mask-hide) 129px,
+          var(--mask-hide) 150px,
+          var(--mask-show) 150px,
+          /* 20 / 26 */
+          var(--mask-show) 170px,
+          var(--mask-hide) 170px,
+          var(--mask-hide) 196px,
+          var(--mask-show) 196px,
+          /* 20 / 34 */
+          var(--mask-show) 216px,
+          var(--mask-hide) 216px,
+          var(--mask-hide) 250px,
+          var(--mask-show) 250px,
+          /* 20 / 34 */
+          var(--mask-show) 270px,
+          var(--mask-hide) 270px,
+          var(--mask-hide) 304px,
+          var(--mask-show) 304px,
+          
+          var(--mask-show) 400px
+        );
+      
+              mask-image:
+        linear-gradient(
+          var(--mask-show) 30.1%,
+          var(--mask-hide) 30.1%
+        ),
+        linear-gradient(
+          to bottom,
+          var(--mask-show) 0,
+          /* 30 / 3 */
+          var(--mask-show) 20px,
+          var(--mask-hide) 20px,
+          var(--mask-hide) 23px,
+          var(--mask-show) 23px,
+          /* 20 / 5 */
+          var(--mask-show) 43px,
+          var(--mask-hide) 43px,
+          var(--mask-hide) 48px,
+          var(--mask-show) 48px,
+          /* 20 / 8 */
+          var(--mask-show) 68px,
+          var(--mask-hide) 68px,
+          var(--mask-hide) 76px,
+          var(--mask-show) 76px,
+          /* 20 / 13 */
+          var(--mask-show) 96px,
+          var(--mask-hide) 96px,
+          var(--mask-hide) 109px,
+          var(--mask-show) 109px,
+          /* 20 / 21 */
+          var(--mask-show) 129px,
+          var(--mask-hide) 129px,
+          var(--mask-hide) 150px,
+          var(--mask-show) 150px,
+          /* 20 / 26 */
+          var(--mask-show) 170px,
+          var(--mask-hide) 170px,
+          var(--mask-hide) 196px,
+          var(--mask-show) 196px,
+          /* 20 / 34 */
+          var(--mask-show) 216px,
+          var(--mask-hide) 216px,
+          var(--mask-hide) 250px,
+          var(--mask-show) 250px,
+          /* 20 / 34 */
+          var(--mask-show) 270px,
+          var(--mask-hide) 270px,
+          var(--mask-hide) 304px,
+          var(--mask-show) 304px,
+          
+          var(--mask-show) 400px
+        );
+    }
+  
+  .ground {
+    height: calc(var(--ground-size) + 1vh);
+    width: 120vw;
+    
+    position: absolute;
+    left: -10vw;
+    bottom: -1vh;
+    z-index: 3;
+    
+    perspective: var(--ground-size);
+    perspective-origin: top center;
+    transform-style: preserve-3d;
+    transform:
+      translate(calc(var(--ratio-x) * 1vw), calc(var(--ratio-y) * 1vh))
+      rotateZ(calc(var(--ratio-x) * -0.5deg));
+    
+    border-top: solid 1px hsla(var(--electro), .3);
+    background-color: hsl(var(--purple));
+    background-image: radial-gradient(100% 60% at bottom, hsla(var(--electro), .1), hsla(var(--purple), 1));
+    box-shadow:
+      0 3px 10px 2px hsla(var(--white), .2),
+      0 2px 20px 2px hsla(var(--electro), .3);
+  }
+  
+  .ground::before {
+      --alpha: .2;
+      content: '';
+      
+      display: block;
+      width: 100%;
+      height: 100vh;
+      
+      position: absolute;
+      top: 0;
+      
+      transform-origin: top center;
+      transform: rotateX(76deg) translate3d(calc(var(--ratio-x) * 1vw), 0, 0);
+      -webkit-backface-visibility: hidden;
+              backface-visibility: hidden;
+  
+      background-image:
+        linear-gradient(to bottom, hsla(var(--electro), var(--alpha)) 1px, transparent 1px),
+        linear-gradient(to right, hsla(var(--electro), var(--alpha)) 1px, transparent 1px);
+      background-size: 1px var(--ground-line), calc(2 * var(--ground-line)) 1px;
+      background-position: 0% 0%, center;
+      mix-blend-mode: color-dodge;
+      
+      -webkit-animation: ground-lines var(--ground-speed) linear infinite;
+      
+              animation: ground-lines var(--ground-speed) linear infinite;
+      
+    }
+  
+  .mountain {
+    --mountain-z: -1px;
+    --mountain-x: 0;
+    --mountain-y: 0;
+    
+    height: calc(var(--mountain-size) * 0.66);
+    width: var(--mountain-size);
+    
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: -0.5vh;
+    
+    transform-origin: bottom center;
+    transform: translate3d(var(--mountain-x), var(--mountain-y), var(--mountain-z));
+    
+    -webkit-backface-visibility: hidden;
+    
+            backface-visibility: hidden;
+  }
+  
+  .mountain::before {
+      content: '';
+      
+      display: block;
+      width: 100%;
+      height: 100%;
+      
+      -webkit-clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+      
+              clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    
+      background-image: linear-gradient(var(--mountain-gradient), hsl(var(--violet)) 50%, hsl(var(--purple)) 50%);
+      background-position-x: var(--mountain-bg-position);
+      background-size: 150% 100%;
+    }
+  
+  .mountain:nth-child(1),
+    .mountain:nth-child(2) {
+      --mountain-gradient: -110deg;
+      --mountain-bg-position: 28%;
+    }
+  
+  .mountain:nth-child(1) {
+      --mountain-size: 24vh;
+      filter: brightness(0.8) drop-shadow(0 0 10px hsla(var(--sanguine), .05));
+      --mountain-x: -145%;
+      --mountain-y: calc(var(--ratio-y) * -1vh);
+    }
+  
+  .mountain:nth-child(2) {
+      --mountain-size: 30vh;
+      filter: drop-shadow(0 0 10px hsla(var(--sanguine), .05));
+      --mountain-x: calc(-85% + var(--ratio-x) * 0.5vw);
+    }
+  
+  .mountain:nth-child(3),
+    .mountain:nth-child(4) {
+      --mountain-gradient: 110deg;
+      --mountain-bg-position: 73%;
+    }
+  
+  .mountain:nth-child(3) {
+      --mountain-size: 38vh;
+      filter: drop-shadow(0 0 10px hsla(var(--sanguine), .05));
+      --mountain-x: 85%;
+      --mountain-y: calc(var(--ratio-y) * -1vh);
+    }
+  
+  .mountain:nth-child(4) {
+      --mountain-size: 28vh;
+      filter: brightness(0.8) drop-shadow(0 0 10px hsla(var(--sanguine), .05));
+      --mountain-x: calc(85% + var(--ratio-x) * 0.5vw);
+    }
+  
+  @-webkit-keyframes ground-lines {
+      0% {
+          background-position: 0% 0%, center;
+      }
+      100% {
+          background-position: 0% 50%, center;
+      }
+  }
+  
+  @keyframes ground-lines {
+      0% {
+          background-position: 0% 0%, center;
+      }
+      100% {
+          background-position: 0% 50%, center;
+      }
+  }
+  
