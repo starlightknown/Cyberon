@@ -171,6 +171,38 @@ class moderation(commands.Cog, name="moderation"):
         )
         await ctx.send(embed=embed)
 
+    @commands.command(name='setrole')
+    @commands.has_permissions(manage_roles = True)
+    @commands.bot_has_permissions(manage_roles = True)
+    async def setrank(self, ctx, member: discord.Member=None, *rankName: str):
+        '''sets role
+        -----------
+        cyb!setrole <@Discord ID> Member
+        '''
+        rank = discord.utils.get(ctx.guild.roles, name=' '.join(rankName))
+        if member is not None:
+            await member.add_roles(rank)
+            await ctx.send(f':white_check_mark: Role **{rank.name}** has been added for **{member.name}**')
+        else:
+            await ctx.send(':no_entry: you must be an admin!')
+
+    @commands.command(pass_context=True, name='rmrole')
+    @commands.has_permissions(manage_roles = True)
+    @commands.bot_has_permissions(manage_roles = True)
+    async def rmrank(self, ctx, member: discord.Member=None, *rankName: str):
+        '''
+        removes role
+        -----------
+        cyb!rmrole <@Discord ID> Member
+        '''
+        rank = discord.utils.get(ctx.guild.roles, name=' '.join(rankName))
+        if member is not None:
+            await member.remove_roles(rank)
+            await ctx.send(f':white_check_mark: Role **{rank.name}** has been removed for **{member.name}**')
+        else:
+            await ctx.send(':no_entry: You must be an admin!')
+
+
 
 def setup(bot):
     bot.add_cog(moderation(bot))

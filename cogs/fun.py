@@ -19,7 +19,7 @@ class fun(commands.Cog, name="cybgames"):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(aliases=['cat', 'randomcat'])
+    @commands.command(name="meow")
     async def randcat(self, ctx):
         '''gets you a random cat~'''
         #http://discordpy.readthedocs.io/en/latest/faq.html#what-does-blocking-mean
@@ -28,7 +28,7 @@ class fun(commands.Cog, name="cybgames"):
                 res = await r.json()
                 emojis = [':cat2: ', ':cat: ', ':heart_eyes_cat: ']
                 await ctx.send(random.choice(emojis) + res['file'])
-  
+
     @commands.command(name="8ball", aliases=["ball"])
     async def ball(self, ctx: commands.Context, *, query=None):
         """ Ask the magic 8ball """
@@ -67,20 +67,6 @@ class fun(commands.Cog, name="cybgames"):
                 description=random.choice(responses),
                 color=self.blue,
             )
-        )
-
-    @commands.command()
-    async def same(self, ctx):
-        await ctx.send(":white_check_mark: same\n:green_square: unsame")
-
-    @commands.command()
-    async def unsame(self, ctx):
-        await ctx.send(":green_square: same\n:white_check_mark: unsame")
-
-    @commands.command()
-    async def resame(self, ctx):
-        await ctx.send(
-            ":white_check_mark: same\n:white_check_mark: re:same\n:green_square: unsame"
         )
 
     @commands.command(name="dailyfact")

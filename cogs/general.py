@@ -106,6 +106,28 @@ class general(commands.Cog, name="general"):
         embed.set_image(url = 'https://media.giphy.com/media/10MSCF1viNV7zy/giphy.gif')
         await ctx.send(embed = embed)
 
+    @commands.command(hidden=True)
+    @commands.guild_only()
+    async def hug(self, ctx, user: discord.Member, intensity: int = 1):
+        """Because everyone likes hugs!
+        Up to 10 intensity levels.
+        """
+        name = (user.display_name)
+        if intensity <= 0:
+            msg = "(っ˘̩╭╮˘̩)っ" + name
+        elif intensity <= 3:
+            msg = "(っ´▽｀)っ" + name
+        elif intensity <= 6:
+            msg = "╰(*´︶`*)╯" + name
+        elif intensity <= 9:
+            msg = "(つ≧▽≦)つ" + name
+        elif intensity >= 10:
+            msg = "(づ￣ ³￣)づ{} ⊂(´・ω・｀⊂)".format(name)
+        else:
+            # For the purposes of "msg might not be defined" linter errors
+            raise RuntimeError
+        await ctx.send(msg)
+
     @commands.command(name="bitcoin")
     async def bitcoin(self, ctx):
         """
@@ -123,7 +145,6 @@ class general(commands.Cog, name="general"):
                 color=config["success"]
             )
             await ctx.send(embed=embed)
-
 
 def setup(bot):
     bot.add_cog(general(bot))
