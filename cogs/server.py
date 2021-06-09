@@ -107,7 +107,7 @@ class serverinfo(commands.Cog, name="server"):
         Get the invite link of the discord server of the bot for some support.
         """
         await ctx.send("I sent you a private message!")
-        await ctx.author.send("Join my discord server by clicking here: https://discord.gg/HzJ3Gfr")
+        await ctx.author.send("Join my discord server by clicking here: https://discord.gg/2DkxQRNdBF")
 
 def setup(bot):
     bot.add_cog(serverinfo(bot))
