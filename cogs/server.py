@@ -1,5 +1,9 @@
+import json
 import os
+import platform
+import random
 import sys
+import aiohttp
 from datetime import datetime, timedelta
 import discord
 import yaml
@@ -16,54 +20,20 @@ class serverinfo(commands.Cog, name="server"):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="serverinfo")
+    @commands.command(pass_context=True, name='serverinfo')
     async def serverinfo(self, ctx):
-        """
-        Get some useful (or not) information about the server.
-        """
-        server = ctx.message.guild
-        roles = [x.name for x in server.roles]
-        role_length = len(roles)
-        if role_length > 50:
-            roles = roles[:50]
-            roles.append(f">>>> Displaying[50/{len(roles)}] Roles")
-        roles = ", ".join(roles)
-        channels = len(server.channels)
-        time = str(server.created_at)
-        time = time.split(" ")
-        time = time[0]
-
-        embed = discord.Embed(
-            title="**Server Name:**",
-            description=f"{server}",
-            color=config["success"]
-        )
-        embed.set_thumbnail(
-            url=server.icon_url
-        )
-        embed.add_field(
-            name="Owner",
-            value=f"{server.owner}\n{server.owner.id}"
-        )
-        embed.add_field(
-            name="Server ID",
-            value=server.id
-        )
-        embed.add_field(
-            name="Member Count",
-            value=server.member_count
-        )
-        embed.add_field(
-            name="Text/Voice Channels",
-            value=f"{channels}"
-        )
-        embed.add_field(
-            name=f"Roles ({role_length})",
-            value=roles
-        )
-        embed.set_footer(
-            text=f"Created at: {time}"
-        )
+        '''Gives some information about server'''
+        embed = discord.Embed(color=config["main_color"])
+        embed.set_thumbnail(url=ctx.guild.icon_url)
+        embed.add_field(name='Name', value=ctx.guild.name, inline=True)
+        embed.add_field(name='ID', value=ctx.guild.id, inline=True)
+        embed.add_field(name='Owner', value=ctx.guild.owner, inline=True)
+        embed.add_field(name='Region', value=ctx.guild.region, inline=True)
+        embed.add_field(name='Members', value=ctx.guild.member_count, inline=True)
+        embed.add_field(name='Created', value=ctx.guild.created_at.strftime('%d.%m.%Y'), inline=True)
+        if ctx.guild.system_channel:
+            embed.add_field(name='Standard Channel', value=f'#{ctx.guild.system_channel}', inline=True)
+        embed.add_field(name='Guild Shared', value=ctx.guild.shard_id, inline=True)
         await ctx.send(embed=embed)
 
     @commands.command(name="user-messages")
