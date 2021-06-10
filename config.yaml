@@ -3,8 +3,15 @@ application_id: 819568634673889341
 owners:
   - Karuna#8722
   - 689697352453455925
+bot_id: 819568634673889341
 main_color: 0xD75BF4
 error: 0xE02B2B
 success: 0x42F56C
 warning: 0xF59E42
 info: 0x4299F5
+warnings_id: "insert ID of channel to send warnings to"
+reports_id: "insert ID of channel to send reports to"
+automod_id: "insert ID of channel to send automoderator actions to"
+modaction_id: "insert ID of channel to send moderator actions to"
+announcements_id: "insert ID of channel to send announcements to"
+welcome_id: "insert ID of channel to send welcomes to"
