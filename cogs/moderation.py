@@ -171,7 +171,7 @@ class moderation(commands.Cog, name="moderation"):
         )
         await ctx.send(embed=embed)
 
-    @commands.command(name='setrole')
+    @commands.command(name='addrole')
     @commands.has_permissions(manage_roles = True)
     @commands.bot_has_permissions(manage_roles = True)
     async def setrank(self, ctx, member: discord.Member=None, *rankName: str):

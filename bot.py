@@ -2,12 +2,13 @@ import os
 import platform
 import random
 import sys
+import logging
 from dotenv import load_dotenv
 load_dotenv('.env')
 import discord
 import yaml
+from discord.ext.commands import CommandNotFound, MissingRequiredArgument, CommandInvokeError, MissingRole, Bot
 from discord.ext import commands, tasks
-from discord.ext.commands import Bot
 
 if not os.path.isfile("config.yaml"):
     sys.exit("'config.yaml' not found! Please add it and try again.")
@@ -17,8 +18,7 @@ else:
 
 intents = discord.Intents.default()
 
-bot = Bot(command_prefix=config["bot_prefix"], intents=intents)
-
+bot = Bot(command_prefix='cyb!', intents=intents, case_insensitive=True)
 
 # The code in this even is executed when the bot is ready
 @bot.event
@@ -30,11 +30,12 @@ async def on_ready():
     print("-------------------")
     status_task.start()
 
+bot.TOKEN = os.getenv("TOKEN")
 
 # Setup the game status task of the bot
 @tasks.loop(minutes=1.0)
 async def status_task():
-    statuses = ["with you!", f"{config['bot_prefix']}help"]
+    statuses = ["with you!", "cyb! help"]
     await bot.change_presence(activity=discord.Game(random.choice(statuses)))
 
 
@@ -85,5 +86,28 @@ async def on_command_error(ctx, error):
         await ctx.send(embed=embed)
     raise error
 
+@bot.event  # Stops Certain errors from being thrown in the console (Don't remove as it'll cause command error messages to not send! - Only remove if adding features and needed for testing (Don't forget to re-add)!)
+async def on_command_error(ctx, error):
+    if isinstance(error, CommandNotFound):
+        logging.error('Command Not Found')
+        return
+    if isinstance(error, MissingRequiredArgument):
+        logging.error('Argument Error - Missing Arguments')
+        return
+    if isinstance(error, CommandInvokeError):
+        logging.error('Command Invoke Error')
+        return
+    if isinstance(error, MissingRole):
+        logging.error('A user has missing roles!')
+        return
+    if isinstance(error, PermissionError):
+        logging.error('A user has missing permissions!')
+    if isinstance(error, KeyError):
+        logging.error('Key Error')
+        return
+    if isinstance(error, TypeError):
+        logging.error('Type Error - Probably caused as server was being registered while anti-spam or double-xp tried triggering')
+
+    raise error
 # Run the bot with the token
-bot.run(os.getenv('TOKEN'))
+bot.run(str(bot.TOKEN))

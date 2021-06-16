@@ -15,3 +15,7 @@ automod_id: "insert ID of channel to send automoderator actions to"
 modaction_id: "insert ID of channel to send moderator actions to"
 announcements_id: "insert ID of channel to send announcements to"
 welcome_id: "insert ID of channel to send welcomes to"
+xp_per_level: 100
+leaderboard_amount: 10
+leaderboard_image: "https://cdn.discordapp.com/attachments/812895798496591882/825363205853151252/ML_1.png"
+

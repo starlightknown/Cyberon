@@ -3,7 +3,6 @@ import os
 import platform
 import random
 import sys
-
 import aiohttp
 import discord
 import yaml
@@ -54,7 +53,7 @@ class general(commands.Cog, name="general"):
         await ctx.send(
             embed=discord.Embed(color=discord.Color.blurple(), description=choice)
         )
-
+    
     @commands.command(name="poll")
     async def poll(self, ctx, *args):
         """
