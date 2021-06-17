@@ -1,89 +1,296 @@
-import os
-import platform
-import random
-import sys
-from dotenv import load_dotenv
-load_dotenv('.env')
+#!/usr/bin/python3
 import discord
-import yaml
-from discord.ext import commands, tasks
-from discord.ext.commands import Bot
+from discord import Intents
+import random
+import time
+import os
+from discord.ext import commands
+from cogs.usefullTools.dbIntegration import *
 
-if not os.path.isfile("config.yaml"):
-    sys.exit("'config.yaml' not found! Please add it and try again.")
-else:
-    with open("config.yaml") as file:
-        config = yaml.load(file, Loader=yaml.FullLoader)
+intents = Intents.default()
+intents.members = True
 
-intents = discord.Intents.default()
-
-bot = Bot(command_prefix=config["bot_prefix"], intents=intents)
+bot = commands.Bot(command_prefix="cyb!", case_insensitive=True, intents=intents)
+bot.remove_command('help')
+working_directory = os.getcwd()
 
 
-# The code in this even is executed when the bot is ready
+
+try:
+	for filename in os.listdir('./cogs'):
+		if filename.endswith('.py'):
+			bot.load_extension(f"cogs.{filename[:-3]}")
+except Exception as e:
+	print("Cogs error: Cannot load cogs")
+	print("\033[5;37;40m\033[1;33;40mWARNING\033[1;33;40m\033[0;37;40m", end=' ')
+	print("Functionality limited!\n")
+	print(f"exception thrown:\n{e}")
+
+
+# Shows command prefix if asked
+
+@bot.event
+async def on_message(message):
+
+	reply_choices = [
+						"Hi",
+						"Hi there",
+						"Hey",
+						"Hey there",
+						"Whatsup",
+						"Waddup",
+						"Whats going on",
+						"Hello",
+						"Hello!",
+						"Sup",
+						"Howdy"
+					]
+
+	message_var = message.content
+
+
+	if message.author.bot:
+		return
+	elif (bot.user in message.mentions) and message_var.lower().find('prefix') != -1:
+		await message.channel.send(f'My command prefix is `cyb!`, **{message.author.display_name}**')
+	elif bot.user in message.mentions:
+		if message_var.lower().find('awesome') != -1 or message_var.lower().find('cool') != -1 or message_var.lower().find('good') != -1 or message_var.lower().find('nice') != -1 :
+			await message.channel.send(f'Thanks bro 😁')
+		elif message_var.lower().find('bad') != -1 or message_var.lower().find('horrible') != -1 or message_var.lower().find('suck') != -1 or message_var.lower().find('terrible') != -1 or message_var.lower().find('waste') != -1 or message_var.lower().find('fk') != -1 or message_var.lower().find('fuck') != -1:
+			await message.channel.send(f'No you\nI do the basic functions okay I aint dyno or mee6\n\nJesus christ.')
+		elif message_var.lower().find('how are you') != -1 :
+			await message.channel.send(f'I am fine, {message.author.display_name}')
+		else:
+			await message.channel.send(f'{random.choice(reply_choices)}, **{message.author.display_name}**!')
+	if str(message.channel.type) == 'private':
+		if len(message.content.split()) > 20:
+			bugs_channel1 = bot.get_channel(769510637486997514)
+			bugs_channel2 = bot.get_channel(769490617771884565)
+			bugs_channel3 = bot.get_channel(782252610874638347)
+			embed = discord.Embed(
+						title='BUG REPORTED',
+						colour = 0x008000
+				)
+			embed.add_field(name='Username', value=message.author)
+			embed.add_field(name='User id', value=message.author.id)
+			embed.add_field(name='Bug: ', value=message.content)
+			if bugs_channel1 is not None:
+				await bugs_channel1.send(embed=embed)
+				await bugs_channel2.send(embed=embed)
+				await bugs_channel3.send(embed=embed)
+			elif bugs_channel2 is not None:
+				await bugs_channel2.send(embed=embed)
+				await bugs_channel3.send(embed=embed)
+			await message.channel.send("Your bug has been reported")
+		else:
+			await message.channel.send("Please enter your bug in more than 20 words, try describing everything")
+
+	await bot.process_commands(message)
+
+
+
+# Basic stuff
+
 @bot.event
 async def on_ready():
-    print(f"Logged in as {bot.user.name}")
-    print(f"Discord.py API version: {discord.__version__}")
-    print(f"Python version: {platform.python_version()}")
-    print(f"Running on: {platform.system()} {platform.release()} ({os.name})")
-    print("-------------------")
-    status_task.start()
+	await bot.change_presence(status=discord.Status.online, activity=discord.Game('with baby shark do do do'))
+	print("+[ONLINE] Cyberon is online")
 
 
-# Setup the game status task of the bot
-@tasks.loop(minutes=1.0)
-async def status_task():
-    statuses = ["with you!", f"{config['bot_prefix']}help"]
-    await bot.change_presence(activity=discord.Game(random.choice(statuses)))
-
-
-# Removes the default help command of discord.py to be able to create our custom help command.
-bot.remove_command("help")
-
-if __name__ == "__main__":
-    for file in os.listdir("./cogs"):
-        if file.endswith(".py"):
-            extension = file[:-3]
-            try:
-                bot.load_extension(f"cogs.{extension}")
-                print(f"Loaded extension '{extension}'")
-            except Exception as e:
-                exception = f"{type(e).__name__}: {e}"
-                print(f"Failed to load extension {extension}\n{exception}")
-
-# The code in this event is executed every time a command has been *successfully* executed
 @bot.event
-async def on_command_completion(ctx):
-    fullCommandName = ctx.command.qualified_name
-    split = fullCommandName.split(" ")
-    executedCommand = str(split[0])
-    print(
-        f"Executed {executedCommand} command in {ctx.guild.name} (ID: {ctx.message.guild.id}) by {ctx.message.author} (ID: {ctx.message.author.id})")
+async def on_member_join(member):
+	try:
+		print(f'+[NEW_MEMBER]    {member} has joined the server: {member.guild.name}')
+		
+		channel = None
+		if fetch_join_log_channel(int(member.guild.id)) is not None:
+			channel = bot.get_channel(fetch_join_log_channel(int(member.guild.id))["channel_id"])
+
+		if channel is not None:
+			embed = discord.Embed(
+					title = 'Member joined the server',
+					description=f'Member **{member.name}** joined the server!',
+					colour=0x008000
+				)
+			members = await member.guild.fetch_members().flatten()
+
+			bot_count = 0
+			for people in members:
+				if people.bot is True:
+					bot_count += 1
+
+			embed.set_thumbnail(url=member.avatar_url)
+			embed.add_field(name='Number of members', value=len(members) - bot_count)
+			embed.add_field(name='Number of bots', value=bot_count)
+			embed.set_footer(text=f'id: {member.id}')
+			await channel.send(embed=embed)
+		else:
+			pass
+	except Exception as e:
+		raise Exception
 
 
-# The code in this event is executed every time a valid commands catches an error
+
+
+@bot.event
+async def on_member_remove(member):
+	try:
+		print(f'+[REMOVE_MEMBER]   {member} has left the server: {member.guild.name}')
+
+		delete_warns(member.guild.id, member.id)
+
+		channel = None
+		if fetch_leave_log_channel(int(member.guild.id)):
+			channel = bot.get_channel(fetch_leave_log_channel(int(member.guild.id))["channel_id"])
+
+
+		if channel is not None:
+			embed = discord.Embed(
+				title = 'Member left the server',
+				description=f'Member **{member.name}** has left the server!',
+				colour=0xFF0000
+			)
+			try:
+				members = await member.guild.fetch_members().flatten()
+
+				bot_count = 0
+				for people in members:
+					if people.bot is True:
+						bot_count += 1
+
+				embed.set_thumbnail(url=member.avatar_url)
+				embed.add_field(name='Number of members', value=len(members) - bot_count)
+				embed.add_field(name='Number of bots', value=bot_count)
+				embed.set_footer(text=f'id: {member.id}')
+				await channel.send(embed=embed)
+			except:
+				pass
+		else:
+			pass
+	except Exception as e:
+		raise Exception
+
+@bot.event
+async def on_guild_channel_delete(channel):
+
+	join_channel = None
+	if fetch_join_log_channel(int(channel.guild.id)) is not None:
+		join_channel = fetch_join_log_channel(int(channel.guild.id))["channel_id"]
+
+		if channel.id == join_channel:
+			delete_join_log_channel(int(channel.guild.id))
+
+	leave_channel = None
+	if fetch_leave_log_channel(int(channel.guild.id)) is not None:
+		leave_channel = fetch_leave_log_channel(int(channel.guild.id))["channel_id"]
+
+		if channel.id == leave_channel:
+			delete_leave_log_channel(int(channel.guild.id))
+
+	log_channel = None
+	if fetch_mod_log_channel(int(channel.guild.id)) is not None:
+		mod_channel = fetch_mod_log_channel(int(channel.guild.id))["channel_id"]
+
+		if channel.id == mod_channel:
+			delete_mod_log_channel(int(channel.guild.id))
+
+@bot.event
+async def on_guild_remove(guild):
+
+	clear_server_data(guild.id)
+
+@bot.event
+async def on_bulk_message_delete(messages):
+
+
+	message_channel = fetch_message_edit_log_channel(int(messages[0].guild.id))
+	if message_channel is not None:
+
+		message_channel = fetch_message_edit_log_channel(int(messages[0].guild.id))["channel_id"]
+		message_channel = bot.get_channel(message_channel)
+
+		embed = discord.Embed(
+				title='Bulk message delete',
+				description=f'{len(messages)} messages deleted in {messages[0].channel.mention}',
+				color=0xff0000
+		)
+
+		if message_channel.id != messages[0].channel.id:
+			await message_channel.send(embed=embed)
+
+@bot.event
+async def on_message_delete(message):
+	
+	message_channel = fetch_message_edit_log_channel(int(message.guild.id))
+	if message_channel is not None:
+
+		message_channel = fetch_message_edit_log_channel(int(message.guild.id))["channel_id"]
+		message_channel = bot.get_channel(message_channel)
+
+		embed = discord.Embed(
+				title='Message deleted',
+				description=f'Message deleted in {message.channel.mention}\nContents:\n```\n{message.content}\n```\n'
+							f'Author of the message:\n{message.author.mention}',
+				color=0xff0000
+		)
+
+		if message_channel.id != message.channel.id:
+			await message_channel.send(embed=embed)
+
+@bot.event
+async def on_message_edit(before, after):
+
+	if not after.author.bot:
+		if before.content != after.content:
+
+			message_channel = fetch_message_edit_log_channel(int(before.guild.id))
+			if message_channel is not None:
+
+				message_channel = fetch_message_edit_log_channel(int(before.guild.id))["channel_id"]
+				message_channel = bot.get_channel(message_channel)
+
+				embed = discord.Embed(
+						title='Message edited',
+						description=f'Message edited in {before.channel.mention}\nbefore:\n```\n{before.content}\n```\n\nAfter:\n```\n{after.content}\n```\n'
+									f'Author of the message:\n{after.author.mention}\n'
+									f'[jump](https://discordapp.com/channels/{after.guild.id}/{after.channel.id}/{after.id}) to the message',
+						color=0xff0000
+				)
+
+				if message_channel.id != before.channel.id:
+					await message_channel.send(embed=embed)
+
+
+# Ping
+
+@bot.command()
+async def ping(ctx):
+	await ctx.send(f'Ping: {round(bot.latency * 1000)}ms')
+
+# If the user enters something bonkers
+
 @bot.event
 async def on_command_error(ctx, error):
-    if isinstance(error, commands.CommandOnCooldown):
-        minutes, seconds = divmod(error.retry_after, 60)
-        hours, minutes = divmod(minutes, 60)
-        hours = hours % 24
-        embed = discord.Embed(
-            title="Hey, please slow down!",
-            description=f"You can use this command again in {f'{round(hours)} hours' if round(hours) > 0 else ''} {f'{round(minutes)} minutes' if round(minutes) > 0 else ''} {f'{round(seconds)} seconds' if round(seconds) > 0 else ''}.",
-            color=config["error"]
-        )
-        await ctx.send(embed=embed)
-    elif isinstance(error, commands.MissingPermissions):
-        embed = discord.Embed(
-            title="Error!",
-            description="You are missing the permission `" + ", ".join(
-                error.missing_perms) + "` to execute this command!",
-            color=config["error"]
-        )
-        await ctx.send(embed=embed)
-    raise error
+	if isinstance(error, commands.CommandNotFound):
 
-# Run the bot with the token
-bot.run(os.getenv('TOKEN'))
+		await ctx.send(f"command not found\nPlease use `cyb!help` to see all commands")
+
+
+TOKEN = os.getenv("BOT_TOKEN")
+try:
+	if TOKEN is None:
+		try:
+			with open('./token.0', 'r', encoding='utf-8') as file_handle:
+				TOKEN = file_handle.read()
+				if TOKEN is not None:
+					print('Using token found in token file..')
+					bot.run(TOKEN)
+				else:
+					print("Token error: Token not found")
+		except FileNotFoundError:
+			print("No token file or environment variable\nQuitting")
+	else:
+		print('Using token found in Environment variable....')
+		bot.run(TOKEN)
+except discord.errors.LoginFailure:
+	print("\033[1;31;40mFATAL ERROR\033[0m 1;31;40m\nToken is malformed; invalid token")
