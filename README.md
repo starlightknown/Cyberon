@@ -9,7 +9,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-<img src="https://raw.githubusercontent.com/starlightknown/Cyberon/master/images/cybb.png">
+<img src="https://raw.githubusercontent.com/starlightknown/Cyberon/main/images/call_me_cyb.gif">
 
 <h4 align="center">Fun, Moderation, Hackathons and Customisable.</h4>
 
