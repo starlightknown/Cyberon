@@ -223,11 +223,11 @@ def help(arg = None):
 		print("fetch [args]:")
 		print("  warns [guild_id] [member_id]:\t\tGets the warnings of the user with provided guild_id and member_id")
 		print("  prefix [guild_id]:\t\t\tGets the prefix of the given guild_id\n")
-		
+
 		print("del/delete [args]:")
 		print("  warns [guild_id] [member_id]:\t\tDeletes the warnings of that member_id and guild_id")
 		print("  prefix [guild_id]:\t\t\tDeletes the prefix of that server")
-		
+
 		print("add [args]")
 		print("  warns [guild_id] [member_id] [mod_id] [warning]:\tAdds a warning")
 		print("  prefix [guild_id] [prefix]:\t\t\t\tAdds the prefix")
@@ -246,20 +246,11 @@ def help(arg = None):
 		print("  warns [guild_id] [member_id] [mod_id] [warning]:\tAdds a warning")
 		print("  prefix [guild_id] [prefix]:\t\t\t\tAdds the prefix")
 
-	elif arg == 'del' or 'delete':
+	else:
 		print("Help command for del/delete\n")
 		print("del/delete [args]")
 		print("  warns [guild_id] [member_id]:\t\tDeletes the warnings of that member_id and guild_id")
 		print("  prefix [guild_id]:\t\t\tDeletes the prefix of that guild_id\n")
-
-	elif arg == 'update':
-		print("Help command for update\n")
-		print("update [args]")
-		print("  prefix [guild_id]:\t\tUpdates the prefix of the guild\n")
-
-
-	else:
-		print(f"No help for {arg}")
 
 
 
@@ -280,8 +271,8 @@ if __name__ == '__main__':
 
 			if len(broken_argument) == 1 or broken_argument[1] == '':
 				print("What to fetch?")
-			
-			elif broken_argument[1].lower() == 'warns' or broken_argument[1].lower() == 'warn':
+
+			elif broken_argument[1].lower() in ['warns', 'warn']:
 				if len(broken_argument) == 4:
 					result = fetch_warns(broken_argument[2], broken_argument[3])
 					if result is not None:
@@ -301,12 +292,12 @@ if __name__ == '__main__':
 				print(f"{broken_argument[1]} does not exist")
 
 
-		elif broken_argument[0].lower() == 'delete' or broken_argument[0].lower() == 'del':
+		elif broken_argument[0].lower() in ['delete', 'del']:
 			
 			if len(broken_argument) == 1 or broken_argument[1] == '':
 				print("What to delete?")
 
-			elif broken_argument[1].lower() == 'warns' or broken_argument[1].lower() == 'warn':
+			elif broken_argument[1].lower() in ['warns', 'warn']:
 				if len(broken_argument) == 4:
 					delete_warns(broken_argument[2], broken_argument[3])
 					print("done")
@@ -322,11 +313,9 @@ if __name__ == '__main__':
 			if len(broken_argument) == 1 or broken_argument[1] == '':
 				print("What to add?")
 
-			elif broken_argument[1].lower() == 'warn' or broken_argument[1].lower() == 'warns':
+			elif broken_argument[1].lower() in ['warn', 'warns']:
 				if len(broken_argument) >= 6:
-					new_list = []
-					for i in range(5, len(broken_argument), 1):
-						new_list.append(broken_argument[i])
+					new_list = [broken_argument[i] for i in range(5, len(broken_argument))]
 					result = insert_warns(broken_argument[2], broken_argument[3], broken_argument[4], f"{' '.join(new_list)}")
 					print("Done")
 				else:
@@ -338,24 +327,18 @@ if __name__ == '__main__':
 			if len(broken_argument) == 1 or broken_argument[1] == '':
 				print("What to update?")
 
-		elif broken_argument[0].lower() == 'exit' or broken_argument[0].lower() == 'quit' or broken_argument[0].lower() == 'q':
+		elif broken_argument[0].lower() in ['exit', 'quit', 'q']:
 			print("bye")
 			exit()
 
-		elif broken_argument[0].lower() == 'clear' or broken_argument[0].lower() == 'cls':
-			if os.name == 'posix':
-				_ = os.system('clear')
-			else:	
-				_ = os.system('cls')
-
+		elif broken_argument[0].lower() in ['clear', 'cls']:
+			_ = os.system('clear') if os.name == 'posix' else os.system('cls')
 		elif broken_argument[0].lower() == 'help':
 			if len(broken_argument) != 1:
 				help(broken_argument[1].lower())
 			else:
 				help()
 
-		elif broken_argument[0] == '':
-			pass
-		else:
+		elif broken_argument[0] != '':
 			print("command not found")
 	
