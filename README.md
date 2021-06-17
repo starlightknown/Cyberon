@@ -58,6 +58,7 @@ and add your tokens as `BOT_TOKEN`, `DATABASE_CLIENT_URL` and `NASA_API_KEY` res
 
 **Bot is constantly updated, If you find any bugs use `cyb!bugs <describe bug in 20 words>` this will send the report to our support channel or raise an issue on this repository with proper description of the problem/issue you found and we will fix it. Read the CONTRIBUTING.md file before contributing to get a clear understanding of the workflow**
 
+**You can join our support channel on discord to test it out [here](https://discord.gg/tgaRPHaVKX)**
 # License
 
 Cybeon is licensed under MIT license
