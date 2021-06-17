@@ -53,6 +53,11 @@ sudo python3 -m pip install -r requirements.txt
 NOTE: Make a .env file and put them in the the same folder as the `bot.py` file, i.e. in the root directory 
 and add your tokens as `BOT_TOKEN`, `DATABASE_CLIENT_URL` and `NASA_API_KEY` respectively.  
 
+**Invite bot to your server**
+[Invite bot to your server](https://discordapp.com/oauth2/authorize?&client_id=819568634673889341&scope=bot&permissions=8)
+
+**Bot is constantly updated, If you find any bugs use `cyb!bugs <describe bug in 20 words>` this will send the report to our support channel or raise an issue on this repository with proper description of the problem/issue you found and we will fix it. Read the CONTRIBUTING.md file before contributing to get a clear understanding of the workflow**
+
 # License
 
 Cybeon is licensed under MIT license
