@@ -18,7 +18,7 @@
   •
   <a href="#installation">Installation</a>
   •
-  <a href="http://red-discordbot.readthedocs.io/en/stable/index.html">Documentation</a>
+  <a href="https://starlightknown.github.io/Cyberon/">Documentation</a>
   •
   <a href="#license">License</a>
 </p>
