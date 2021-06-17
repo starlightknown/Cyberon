@@ -1,48 +1,10 @@
-*.env
-
-# Byte-compiled / optimized / DLL files
-*__pycache__/
-*.py[cod]
-*$py.class
-
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# pyenv
-.python-version
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# mypy
-.mypy_cache/
-
-migrations/
-uploads/*
-!uploads/.keep
+/venv/
+/cogs/__pycache__
+/cogs/test.py
+/.idea/
+/NASA_API_TOKEN.0
+/mongodbclient.0
+/cogs/usefullTools/__pycache__
+*NASA_API_KEY.0
+*mongodbclient.0
+*token.0
