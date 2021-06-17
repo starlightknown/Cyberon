@@ -276,7 +276,7 @@ async def on_command_error(ctx, error):
 		await ctx.send(f"command not found\nPlease use `cyb!help` to see all commands")
 
 
-TOKEN = os.getenv("REXBOT_TOKEN")
+TOKEN = os.getenv("BOT_TOKEN")
 try:
 	if TOKEN is None:
 		try:
