@@ -9,6 +9,8 @@ import wikipedia
 from howdoi import howdoi
 import base64
 import random
+import requests
+from cogs.usefullTools.info import *
 import urllib.parse
 from cogs.usefullTools.dbIntegration import *
 
@@ -116,6 +118,27 @@ class GeneralCog(commands.Cog):
 			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
 			raise error
     
+	@commands.command(name='hackclub')
+	@cooldown(1, 2, BucketType.channel)
+	async def hackathons(self, ctx):
+			url = 'https://hackathons.hackclub.com/api/events/upcoming' 
+			r = requests.get(url)
+			result = r.json()
+			result1 = {}
+			for d in result:
+				result1.update(d)
+				break
+			data = parse_data(result1)
+			await ctx.send(embed = hack_message(data))
+			
+	@hackathons.error
+	async def hackathons_error(self, ctx, error):
+		if isinstance(error, commands.CommandOnCooldown):
+			await ctx.send(error)
+		else:
+			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
+			raise error
+
 	# Userinfo
 
 	@commands.command(aliases=['ui'])
