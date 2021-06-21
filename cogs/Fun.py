@@ -104,7 +104,7 @@ class FunCog(commands.Cog):
 		else:
 			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check the console for traceback')
 			raise error
-
+      
 	# Cat pictures
 
 	@commands.command()
