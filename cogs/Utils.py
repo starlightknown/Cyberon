@@ -115,8 +115,7 @@ class GeneralCog(commands.Cog):
 		else:
 			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
 			raise error
-
-
+    
 	# Userinfo
 
 	@commands.command(aliases=['ui'])
@@ -561,40 +560,7 @@ class GeneralCog(commands.Cog):
 		else:
 			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
 			raise error
-
-
-	# Translator 
-
-	@commands.command(name='translate')
-	@cooldown(1, 5, BucketType.channel)
-	async def translator(self, ctx, source_language: str = 'en', destination_language: str = 'en', *, message):
-
-		translator = Translator()
-
-		translation = translator.translate(
-			message, dest=destination_language, src=source_language
-		)
-		
-		embed = discord.Embed(
-			title="Translation",
-			description=f"Sentence : **{message}**\n\nTranslation : **{translation.text}**\n\nType : **{translation.src} > {translation.dest}**",
-			color=0x008000,
-		)
-		await ctx.send(embed=embed)
-
-
-	# Translator: Error handling
-
-	@translator.error
-	async def translator_error(self, ctx, error):
-		if isinstance(error, commands.CommandOnCooldown):
-			await ctx.send(error)
-		elif isinstance(error, commands.MissingRequiredArgument):
-			await ctx.send("What do you want to translate?")
-		else:
-			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
-			raise error
-			
+	
 	@commands.command(name="hack-show")
 	async def hack_show(self, ctx):
 		await ctx.send("**Cyberon loves hackathons, find good hackathons here!**\nhttps://devpost.com/hackathons\nhttps://www.hackathon.io/events\nhttps://confs.tech/#\nhttps://mlh.io/seasons/2021/events\nhttp://www.hackalist.org/\nhttps://devfolio.co/\nhttps://angelhack.com/\nhttps://gitcoin.co/hackathons\nhttps://hackathons.hackclub.com/\nhttps://www.incubateind.com/\nhttps://skillenza.com/")

@@ -7,8 +7,9 @@ import aiohttp
 import asyncio
 import pyfiglet
 import os
+import requests
 from cogs.usefullTools.dbIntegration import *
-
+from cogs.usefullTools.info import *
 
 def NASA_API_KEY():
 	return os.getenv("NASA_API_KEY")
@@ -103,10 +104,7 @@ class FunCog(commands.Cog):
 		else:
 			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check the console for traceback')
 			raise error
-
-
-	# Dog pictures
-
+      
 	# Cat pictures
 
 	@commands.command()
@@ -369,9 +367,27 @@ class FunCog(commands.Cog):
 		else:
 			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
 			raise error
-
-
-	# Quotes 
+			
+	@commands.command(name='hacks')
+	@cooldown(1, 2, BucketType.channel)
+	async def hackathons(self, ctx):
+			url = 'https://hackathons.hackclub.com/api/events/upcoming' 
+			r = requests.get(url)
+			result = r.json()
+			result1 = {}
+			for d in result:
+				result1.update(d)
+				break
+			data = parse_data(result1)
+			await ctx.send(embed = hack_message(data))
+			
+	@hackathons.error
+	async def hackathons_error(self, ctx, error):
+		if isinstance(error, commands.CommandOnCooldown):
+			await ctx.send(error)
+		else:
+			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
+			raise error
 
 	@commands.command(name='quotes', aliases=['quote'])
 	@cooldown(1, 2, BucketType.channel)
@@ -402,7 +418,7 @@ class FunCog(commands.Cog):
 		else:
 			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
 			raise error
-			
+	
 	@commands.command()
 	@cooldown(1, 2, BucketType.channel)
 	async def xkcd(self, ctx,  *searchterm: str):

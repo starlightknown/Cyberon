@@ -6,7 +6,6 @@ import time
 import os
 from discord.ext import commands
 from cogs.usefullTools.dbIntegration import *
-
 intents = Intents.default()
 intents.members = True
 
@@ -26,69 +25,6 @@ except Exception as e:
 	print("Functionality limited!\n")
 	print(f"exception thrown:\n{e}")
 
-
-# Shows command prefix if asked
-
-@bot.event
-async def on_message(message):
-
-	reply_choices = [
-						"Hi",
-						"Hi there",
-						"Hey",
-						"Hey there",
-						"Whatsup",
-						"Waddup",
-						"Whats going on",
-						"Hello",
-						"Hello!",
-						"Sup",
-						"Howdy"
-					]
-
-	message_var = message.content
-
-
-	if message.author.bot:
-		return
-	elif (bot.user in message.mentions) and message_var.lower().find('prefix') != -1:
-		await message.channel.send(f'My command prefix is `cyb!`, **{message.author.display_name}**')
-	elif bot.user in message.mentions:
-		if message_var.lower().find('awesome') != -1 or message_var.lower().find('cool') != -1 or message_var.lower().find('good') != -1 or message_var.lower().find('nice') != -1 :
-			await message.channel.send(f'Thanks bro 😁')
-		elif message_var.lower().find('bad') != -1 or message_var.lower().find('horrible') != -1 or message_var.lower().find('suck') != -1 or message_var.lower().find('terrible') != -1 or message_var.lower().find('waste') != -1 or message_var.lower().find('fk') != -1 or message_var.lower().find('fuck') != -1:
-			await message.channel.send(f'No you\nI do the basic functions okay I aint dyno or mee6\n\nJesus christ.')
-		elif message_var.lower().find('how are you') != -1 :
-			await message.channel.send(f'I am fine, {message.author.display_name}')
-		else:
-			await message.channel.send(f'{random.choice(reply_choices)}, **{message.author.display_name}**!')
-	if str(message.channel.type) == 'private':
-		if len(message.content.split()) > 20:
-			bugs_channel1 = bot.get_channel(769510637486997514)
-			bugs_channel2 = bot.get_channel(769490617771884565)
-			bugs_channel3 = bot.get_channel(782252610874638347)
-			embed = discord.Embed(
-						title='BUG REPORTED',
-						colour = 0x008000
-				)
-			embed.add_field(name='Username', value=message.author)
-			embed.add_field(name='User id', value=message.author.id)
-			embed.add_field(name='Bug: ', value=message.content)
-			if bugs_channel1 is not None:
-				await bugs_channel1.send(embed=embed)
-				await bugs_channel2.send(embed=embed)
-				await bugs_channel3.send(embed=embed)
-			elif bugs_channel2 is not None:
-				await bugs_channel2.send(embed=embed)
-				await bugs_channel3.send(embed=embed)
-			await message.channel.send("Your bug has been reported")
-		else:
-			await message.channel.send("Please enter your bug in more than 20 words, try describing everything")
-
-	await bot.process_commands(message)
-
-
-
 # Basic stuff
 
 @bot.event
@@ -96,6 +32,13 @@ async def on_ready():
 	await bot.change_presence(status=discord.Status.online, activity=discord.Game('with baby shark do do do'))
 	print("+[ONLINE] Cyberon is online")
 
+@bot.event
+async def on_guild_join(guild):
+        for channel in guild.text_channels:
+            if channel.permissions_for(guild.me).send_messages:
+                await channel.send("```Hello!I'm Cyberon, Thank you for inviting me!\nCommand Prefix: cyb!\nFor help in commands type: cyb! help```")
+                await channel.send("To start configuration of your server use `cyb!help config` command.")
+                break
 
 @bot.event
 async def on_member_join(member):
@@ -128,7 +71,6 @@ async def on_member_join(member):
 			pass
 	except Exception as e:
 		raise Exception
-
 
 
 
