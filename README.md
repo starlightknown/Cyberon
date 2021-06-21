@@ -2,76 +2,65 @@
 <a href="https://www.python.org/"><img src="http://ForTheBadge.com/images/badges/made-with-python.svg" alt="made with Python"></a>
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 <a href="https://github.com/Rapptz/discord.py/releases/tag/v1.5.0"><img src="https://img.shields.io/badge/discord.py-v1.6.0-7289da.svg?style=flat-square" alt="discord.py version"></a>
+<a href="http://makeapullrequest.com">
+    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg">
+  </a>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-<img src="https://raw.githubusercontent.com/starlightknown/Cyberon/master/images/cybb.png">
+<img src="https://raw.githubusercontent.com/starlightknown/Cyberon/main/images/call_me_cyb.gif">
 
-# Commands available :
+<h4 align="center">Fun, Moderation, Hackathons and Customisable.</h4>
 
-**General**
+<p align="center">
+  <a href="#overview">Overview</a>
+  •
+  <a href="#installation">Installation</a>
+  •
+  <a href="https://starlightknown.github.io/Cyberon/">Documentation</a>
+  •
+  <a href="#license">License</a>
+</p>
 
-- cyb!new starts the creation process for a new reaction role message.
-- cyb!edit edits the text and embed of an existing reaction role message.
-- cyb!reaction adds or removes a reaction from an existing reaction role message.
-- cyb!notify toggles sending messages to users when they get/lose a role (default off) for the current server (the command affects only the server it was used in).
-- cyb!info get information about the bot
-- cyb!hack-show get information and links about hackathons at one place
-- cyb!serverinfo get information about the server
-- cyb!ping scare the bot by pinging
-- cyb!invite invite the bot to your server
-- cyb!server get invite link of the server of the bot for support
-- cyb!poll create a poll where members could vote
-- cyb!say the bot will say anything you want
-- cyb!embed the bot will say anything you want in embeds
-- cyb!user gives info about the user roles and joining info
-- cyb!user-messages gives the number of messages sent by a user in a particular channel
+# Overview:
 
-**Fun**
+Cyberon is a customisable, friendly, fun discord bot which you can add to our servers and customise it according to your needs.
+Cyberon is a bot with mission. This bot is for helping people who are new to hackathons and can't find good ones or are overwhelmed with the number of sites 
+they need to search for hackatons. (still in development)
 
-- cyb!rps play rock paper scissors with the bot
-- cyb!green-squares check your love for open source
-- cyb!fact get facts about number,date,dog,cat,koala,bird
-- cyb!boop to get booped
-- cyb!8ball get anwers to your questions
+[Installation](#installation) is easy, and you do **NOT** need to know anything about coding! Aside
+from installing and updating, every part of the bot can be controlled from within Discord.
 
-**Moderation**
+**The default set of modules includes and is not limited to:**
 
-- cyb!admin adds the mentioned role to the list of  admins, allowing them to create and edit reaction-role messages. You need to be a server administrator to use this command.
-- cyb!rm-admin removes the mentioned role from the list of admins, preventing them from creating and editing reaction-role messages. You need to be a server administrator to use this command.
-- cyb!adminlist lists the current admins on the server the command was run in by mentioning them and the current admins from other servers by printing out the role IDs. You need to be a server administrator to use this command.
-- cyb!blacklist Lets you add or remove a user from not being able to use the bot.
-- cyb!kick kicks a user out of the server.
-- cyb!nick changes nickname a user in the server.
-- cyb!ban bans a user from the server.
-- cyb!warn warns a user.
-- cyb!purge deletes a number of messages.
+- Moderation features (kick/ban/softban, mod-log, multiban, warn, role assignment)
+- Fun commands
+- Utility commands
+- Server configs commands and permissions
+- Support commands
 
-## Project board
-[![See the issues for more upcoming and in progress features](https://user-images.githubusercontent.com/624760/118307491-ae9c0080-b4e2-11eb-87a2-b03888933c2f.png)](https://github.com/starlightknown/Cyberon/projects/1)
+# Installation
 
-## Contributors ✨
+```
+git clone https://github.com/starlightknown/cyberon
+sudo pip3 install -r requirements.txt
+```
+or 
+```
+sudo python3 -m pip install -r requirements.txt
+```  
+NOTE: Make a .env file and put them in the the same folder as the `bot.py` file, i.e. in the root directory 
+and add your tokens as `BOT_TOKEN`, `DATABASE_CLIENT_URL` and `NASA_API_KEY` respectively.  
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+**Invite bot to your server**
+[Invite bot to your server](https://discordapp.com/oauth2/authorize?&client_id=819568634673889341&scope=bot&permissions=8)
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tr>
-    <td align="center"><a href="https://github.com/divyanshu887"><img src="https://avatars.githubusercontent.com/u/59568700?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Divyanshu Singh</b></sub></a><br /><a href="#video-divyanshu887" title="Videos">📹</a></td>
-    <td align="center"><a href="https://github.com/Prathamesh-Shanbhag"><img src="https://avatars.githubusercontent.com/u/70568620?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Prathamesh Shanbhag</b></sub></a><br /><a href="https://github.com/starlightknown/Cyberon/issues?q=author%3APrathamesh-Shanbhag" title="Bug reports">🐛</a></td>
-    <td align="center"><a href="http://eddiejaoude.io"><img src="https://avatars.githubusercontent.com/u/624760?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Eddie Jaoude</b></sub></a><br /><a href="#design-eddiejaoude" title="Design">🎨</a></td>
-    <td align="center"><a href="https://github.com/Vyvy-vi"><img src="https://avatars.githubusercontent.com/u/62864373?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vyom Jain</b></sub></a><br /><a href="https://github.com/starlightknown/Cyberon/issues?q=author%3AVyvy-vi" title="Bug reports">🐛</a></td>
-    <td align="center"><a href="https://vinzvinci.github.io/"><img src="https://avatars.githubusercontent.com/u/73097560?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vincent Villafuerte</b></sub></a><br /><a href="https://github.com/starlightknown/Cyberon/commits?author=vinzvinci" title="Documentation">📖</a></td>
-    
-  </tr>
-</table>
+**Bot is constantly updated, If you find any bugs use `cyb!bugs <describe bug in 20 words>` this will send the report to our support channel or raise an issue on this repository with proper description of the problem/issue you found and we will fix it. Read the CONTRIBUTING.md file before contributing to get a clear understanding of the workflow**
 
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
+**You can join our support channel on discord to test it out [here](https://discord.gg/tgaRPHaVKX)**
+# License
 
-<!-- ALL-CONTRIBUTORS-LIST:END -->
+Cybeon is licensed under MIT license
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
