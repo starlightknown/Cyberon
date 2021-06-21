@@ -19,7 +19,7 @@ class HelpCog(commands.Cog):
 		mod_role = discord.utils.get(ctx.author.roles, name='Moderator')
 		admin_role = discord.utils.get(ctx.author.roles, name='Administrator')
 
-		
+
 
 		fun_embed = discord.Embed(
 				title = 'Fun commands for Cyberon',
@@ -35,7 +35,7 @@ class HelpCog(commands.Cog):
 							f'**quotes**\nA random quote\n**Usage:** `cyb!quote`\n\n',
 				colour=0x01a901
 			)
-		
+
 		utils_embed = discord.Embed(
 				title = 'Utility commands for cyberon',
 				description='**avatar** | **av**\nShows the avatar of the user mentioned\n**Usage:** `cyb!avatar <member_name | member_tag | member_id>`\nIf nothing is provided then it shows your avatar\n\n'
@@ -56,7 +56,7 @@ class HelpCog(commands.Cog):
 							'**botstats**\nShows the bot\'s statistics\n**Usage:** `cyb!botstats`\n\n',
 				colour=0x01a901
 			)
-		
+
 		mod_embed = discord.Embed(
 				title = 'Moderation commands for cyberon\nPage 1',
 				description=f'**kick**\nKicks the member out of the server\n**Usage:** `cyb!kick <member_name | member_id | member_tag> <reason>`, reason is not neccessary\n\n'
@@ -130,16 +130,13 @@ class HelpCog(commands.Cog):
 			await ctx.send(embed=initial_help_dialogue)
 		elif argument.lower() == 'fun':
 			await ctx.send(embed=fun_embed)
-		elif argument.lower() == 'moderation' or argument.lower() == 'mod':
+		elif argument.lower() in ['moderation', 'mod']:
 
-			if page == '1' or page is None:
+			if page == '1' or page is None or page != '2':
 				await ctx.send(embed=mod_embed)
-			elif page == '2':
-				await ctx.send(embed=mod_embed_2)
 			else:
-				await ctx.send(embed=mod_embed)
-
-		elif argument.lower() == 'utils' or argument.lower() == 'util':
+				await ctx.send(embed=mod_embed_2)
+		elif argument.lower() in ['utils', 'util']:
 			await ctx.send(embed=utils_embed)
 		elif argument.lower() == 'config':
 			await ctx.send(embed=config_embed)
@@ -147,8 +144,6 @@ class HelpCog(commands.Cog):
 			await ctx.send(embed=support_embed)
 		elif argument.lower() == 'hackathons':
 			await ctx.send(embed=support_embed)
-		else:
-		  pass
 
 
 	# Help console: Error handling
