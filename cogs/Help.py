@@ -104,13 +104,24 @@ class HelpCog(commands.Cog):
 			)
 		support_embed.set_footer(text='Made for hacker community ❤')
 
+		hackathons_embed = discord.Embed(
+				title = 'hackathon commands for cyberon',
+				description=f'**notify | notify**\nnotify Hack a channel for upcoming hackathon notifications.\n**Usage:** `cyb!notify "<channel>"`\n\n'
+							f'**unsub**\nUnsubscribe the channel from notifications! 😁\n**Usage:** `cyb!unsub`\n\n'
+							f'**web**\nWant to know hackathons from MLH/Devpost/Devfolio? I\'ll send them for you 😉\n**Usage:** `cyb!web "<MLH/devpost/devfolio>"`\n\n',
+				colour=0x01a901
+			)
+		hackathons_embed.set_footer(text='Made for hacker community ❤')
+
+
 		initial_help_dialogue = discord.Embed(
 				title = 'Help command',
 				description=f'`cyb!help Fun`\nFun commands\n\n'
+				            f'`cyb!help support`\nSupport commands\n\n'
 							f'`cyb!help Moderation` | `cyb!help mod`\nModeration commands\n\n'
 							f'`cyb!help utils` | `cyb!help util`\nUtility commands\n\n'
 							f'`cyb!help config`\nConfiguration commands\n\n'
-							f'`cyb!help support`\nSupport commands\n\n',
+							f'`cyb!help hackathons`\nHackathons commands\n\n',
 				colour=0x01a901
 			)
 		initial_help_dialogue.set_footer(text='Made for hacker community❤')
@@ -130,10 +141,12 @@ class HelpCog(commands.Cog):
 
 		elif argument.lower() == 'utils' or argument.lower() == 'util':
 			await ctx.send(embed=utils_embed)
-		elif argument.lower() == 'support':
-			await ctx.send(embed=support_embed)
 		elif argument.lower() == 'config':
 			await ctx.send(embed=config_embed)
+		elif argument.lower() == 'support':
+			await ctx.send(embed=support_embed)
+		elif argument.lower() == 'hackathons':
+			await ctx.send(embed=support_embed)
 		else:
 		  pass
 

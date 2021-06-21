@@ -7,8 +7,9 @@ import aiohttp
 import asyncio
 import pyfiglet
 import os
+import requests
 from cogs.usefullTools.dbIntegration import *
-
+from cogs.usefullTools.info import *
 
 def NASA_API_KEY():
 	return os.getenv("NASA_API_KEY")
@@ -103,41 +104,6 @@ class FunCog(commands.Cog):
 		else:
 			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check the console for traceback')
 			raise error
-
-
-	# Dog pictures
-
-	@commands.command(aliases=['doggo','pupper'])
-	@cooldown(1, 1, BucketType.channel)
-	async def dog(self, ctx):
-	  
-		colour_choices= [0x400000,0x997379,0xeb96aa,0x4870a0,0x49a7c3,0x8b3a3a,0x1e747c,0x0000ff]
-
-		dog_url="https://api.thedogapi.com/v1/images/search"
-		async with request("GET", dog_url, headers={}) as response:
-			if response.status == 200:
-				data = await response.json()
-				image_link = data["url"]
-				embed = discord.Embed(
-					colour = random.choice(colour_choices)
-				)
-				embed.set_image(url=image_link)
-				await ctx.send(embed=embed)
-
-			else:
-				await ctx.send(f"The API seems down, says {response.status}")
-
-
-	# Dog pictures: Error handling
-
-	@dog.error
-	async def dog_error(self, ctx, error):
-		if isinstance(error, commands.CommandOnCooldown):
-			await ctx.send(error)
-		else:
-			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check the console for traceback')
-			raise error
-
 
 	# Cat pictures
 
@@ -401,9 +367,27 @@ class FunCog(commands.Cog):
 		else:
 			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
 			raise error
-
-
-	# Quotes 
+			
+	@commands.command(name='hacks')
+	@cooldown(1, 2, BucketType.channel)
+	async def hackathons(self, ctx):
+			url = 'https://hackathons.hackclub.com/api/events/upcoming' 
+			r = requests.get(url)
+			result = r.json()
+			result1 = {}
+			for d in result:
+				result1.update(d)
+				break
+			data = parse_data(result1)
+			await ctx.send(embed = hack_message(data))
+			
+	@hackathons.error
+	async def hackathons_error(self, ctx, error):
+		if isinstance(error, commands.CommandOnCooldown):
+			await ctx.send(error)
+		else:
+			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
+			raise error
 
 	@commands.command(name='quotes', aliases=['quote'])
 	@cooldown(1, 2, BucketType.channel)
@@ -434,7 +418,7 @@ class FunCog(commands.Cog):
 		else:
 			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
 			raise error
-			
+	
 	@commands.command()
 	@cooldown(1, 2, BucketType.channel)
 	async def xkcd(self, ctx,  *searchterm: str):

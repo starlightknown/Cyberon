@@ -22,13 +22,13 @@ else:
 db = cluster["cyberon"]
 collection = db["warnings"]
 warnthresh_collection = db["warnthresh"]
-prefix_collection = db["prefixes"]
-
+guilds = db["guild_channels"]
+hackathons = db["hackathons"]
+assets = db["assets"]
 mod_log_channel_collection = db["mod_log"]
 join_log_channel_collection  = db["join_log"]
 leave_log_channel_collection = db["leave_log"]
 message_log_channel_collection = db["message_log"]
-
 mute_role_collection = db["mute_role"]
 
 print("Database connection has been established\n")
@@ -214,6 +214,7 @@ def clear_server_data(guild_id):
 
 
 
+#--------------------------------------------------hackathons------------------------------------------------------------------------------------
 
 # -----------------------------------------------     shell session code     --------------------------------------------------------------
 
@@ -222,40 +223,33 @@ def help(arg = None):
 		print("Help command:\n")
 		print("fetch [args]:")
 		print("  warns [guild_id] [member_id]:\t\tGets the warnings of the user with provided guild_id and member_id")
-		print("  prefix [guild_id]:\t\t\tGets the prefix of the given guild_id\n")
 		
 		print("del/delete [args]:")
 		print("  warns [guild_id] [member_id]:\t\tDeletes the warnings of that member_id and guild_id")
-		print("  prefix [guild_id]:\t\t\tDeletes the prefix of that server")
 		
 		print("add [args]")
 		print("  warns [guild_id] [member_id] [mod_id] [warning]:\tAdds a warning")
-		print("  prefix [guild_id] [prefix]:\t\t\t\tAdds the prefix")
-
+		
 		print("\nHelp:\tShows this help dialogue\n")
 
 	elif arg == 'fetch':
 		print("Help command for fetch\n")
 		print("fetch [args]")
 		print("  warns [guild_id] [member_id]:\t\tGets the warnings of the user with provided guild_id and member_id")
-		print("  prefix [guild_id]:\t\t\tGets the prefix of the given guild_id\n")
 
 	elif arg == 'add':
 		print("Help command for add\n")
 		print("add [args]")
 		print("  warns [guild_id] [member_id] [mod_id] [warning]:\tAdds a warning")
-		print("  prefix [guild_id] [prefix]:\t\t\t\tAdds the prefix")
 
 	elif arg == 'del' or 'delete':
 		print("Help command for del/delete\n")
 		print("del/delete [args]")
 		print("  warns [guild_id] [member_id]:\t\tDeletes the warnings of that member_id and guild_id")
-		print("  prefix [guild_id]:\t\t\tDeletes the prefix of that guild_id\n")
 
 	elif arg == 'update':
 		print("Help command for update\n")
 		print("update [args]")
-		print("  prefix [guild_id]:\t\tUpdates the prefix of the guild\n")
 
 
 	else:
