@@ -65,15 +65,15 @@ You can use the Discord Developer portal to generate an invitation link, or you 
 You need to configure Cyberon's settings using the cyb!config command. You can see all config commands using `cyb!help config` or `cyb!config` and type out the channels for questions asked by Cyberon.
 
 # Requirements
-discord.py
-PyNaCl==1.3.0
-dnspython
-async-timeout
-pyfiglet
-wikipedia
-howdoi
-pymongo
-psutil
+- discord.py
+- PyNaCl==1.3.0
+- dnspython
+- async-timeout
+- pyfiglet
+- wikipedia
+- howdoi
+- pymongo
+- psutil
 
 **Invite bot to your server**
 [Invite bot to your server](https://discordapp.com/oauth2/authorize?&client_id=819568634673889341&scope=bot&permissions=8)
