@@ -44,7 +44,7 @@ async def on_guild_join(guild):
 async def on_member_join(member):
 	try:
 		print(f'+[NEW_MEMBER]    {member} has joined the server: {member.guild.name}')
-
+		
 		channel = None
 		if fetch_join_log_channel(int(member.guild.id)) is not None:
 			channel = bot.get_channel(fetch_join_log_channel(int(member.guild.id))["channel_id"])
@@ -57,12 +57,18 @@ async def on_member_join(member):
 				)
 			members = await member.guild.fetch_members().flatten()
 
-			bot_count = sum(people.bot is True for people in members)
+			bot_count = 0
+			for people in members:
+				if people.bot is True:
+					bot_count += 1
+
 			embed.set_thumbnail(url=member.avatar_url)
 			embed.add_field(name='Number of members', value=len(members) - bot_count)
 			embed.add_field(name='Number of bots', value=bot_count)
 			embed.set_footer(text=f'id: {member.id}')
 			await channel.send(embed=embed)
+		else:
+			pass
 	except Exception as e:
 		raise Exception
 
@@ -89,7 +95,11 @@ async def on_member_remove(member):
 			try:
 				members = await member.guild.fetch_members().flatten()
 
-				bot_count = sum(people.bot is True for people in members)
+				bot_count = 0
+				for people in members:
+					if people.bot is True:
+						bot_count += 1
+
 				embed.set_thumbnail(url=member.avatar_url)
 				embed.add_field(name='Number of members', value=len(members) - bot_count)
 				embed.add_field(name='Number of bots', value=bot_count)
@@ -97,6 +107,8 @@ async def on_member_remove(member):
 				await channel.send(embed=embed)
 			except:
 				pass
+		else:
+			pass
 	except Exception as e:
 		raise Exception
 
@@ -170,24 +182,25 @@ async def on_message_delete(message):
 @bot.event
 async def on_message_edit(before, after):
 
-	if not after.author.bot and before.content != after.content:
+	if not after.author.bot:
+		if before.content != after.content:
 
-		message_channel = fetch_message_edit_log_channel(int(before.guild.id))
-		if message_channel is not None:
+			message_channel = fetch_message_edit_log_channel(int(before.guild.id))
+			if message_channel is not None:
 
-			message_channel = fetch_message_edit_log_channel(int(before.guild.id))["channel_id"]
-			message_channel = bot.get_channel(message_channel)
+				message_channel = fetch_message_edit_log_channel(int(before.guild.id))["channel_id"]
+				message_channel = bot.get_channel(message_channel)
 
-			embed = discord.Embed(
-					title='Message edited',
-					description=f'Message edited in {before.channel.mention}\nbefore:\n```\n{before.content}\n```\n\nAfter:\n```\n{after.content}\n```\n'
-								f'Author of the message:\n{after.author.mention}\n'
-								f'[jump](https://discordapp.com/channels/{after.guild.id}/{after.channel.id}/{after.id}) to the message',
-					color=0xff0000
-			)
+				embed = discord.Embed(
+						title='Message edited',
+						description=f'Message edited in {before.channel.mention}\nbefore:\n```\n{before.content}\n```\n\nAfter:\n```\n{after.content}\n```\n'
+									f'Author of the message:\n{after.author.mention}\n'
+									f'[jump](https://discordapp.com/channels/{after.guild.id}/{after.channel.id}/{after.id}) to the message',
+						color=0xff0000
+				)
 
-			if message_channel.id != before.channel.id:
-				await message_channel.send(embed=embed)
+				if message_channel.id != before.channel.id:
+					await message_channel.send(embed=embed)
 
 
 # Ping
