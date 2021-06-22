@@ -42,31 +42,21 @@ class GeneralCog(commands.Cog):
 			member = await converter.convert(ctx, member)
 		elif member.isdigit():
 			member = int(member)
-		else:
-			pass
-
 		members = await ctx.guild.fetch_members().flatten()
 		multiple_member_array = []
-			
+
 		if isinstance(member, discord.Member):
 			for members_list in members:
 				if member.name.lower() in members_list.name.lower():
 					multiple_member_array.append(members_list)
-				else:
-					pass
 		elif isinstance(member, int):
 			for member_list in members:
 				if member_list.id == member:
 					multiple_member_array.append(member_list)
-				else:
-					pass
 		else:
 			for members_list in members:
 				if member.lower() in members_list.name.lower():
 					multiple_member_array.append(members_list)
-				else:
-					pass
-
 		if member is discord.Member:
 			if member.isdigit() and member.lower() == 'me' and override == 'override':
 				embed = discord.Embed(colour=0x0000ff)
@@ -78,7 +68,7 @@ class GeneralCog(commands.Cog):
 			if multiple_member_array[0].name == multiple_member_array[0].display_name:
 				embed = discord.Embed(title=f'{multiple_member_array[0]}',colour=0x0000ff)
 
-			elif multiple_member_array[0].name != multiple_member_array[0].display_name:
+			else:
 				embed = discord.Embed(title=f'{multiple_member_array[0]}({multiple_member_array[0].display_name})',colour=0x0000ff)
 
 			embed.set_image(url=f'{multiple_member_array[0].avatar_url}')
@@ -154,35 +144,23 @@ class GeneralCog(commands.Cog):
 
 		members = await ctx.guild.fetch_members().flatten()
 		multiple_member_array = []
-	  
-		
+
+
 		if isinstance(member, discord.Member):
 			for members_list in members:
 				if member.name.lower() in members_list.name.lower():
 					multiple_member_array.append(members_list)
-				else:
-					pass
-
 		elif isinstance(member, int):
 			for member_list in members:
 				if member_list.id == member:
 					multiple_member_array.append(member_list)
-				else:
-					pass
-
 		else:
 			for members_list in members:
 				if member.lower() in members_list.name.lower():
 					multiple_member_array.append(members_list)
-				else:
-					pass
-
 		if len(multiple_member_array) == 1:
 
-			roles = []
-			for role in multiple_member_array[0].roles:
-				roles.append(role)
-
+			roles = [role for role in multiple_member_array[0].roles]
 			embed = discord.Embed(
 				colour = 0x0000ff,
 			)
@@ -200,7 +178,11 @@ class GeneralCog(commands.Cog):
 			if len(roles) == 1:
 				embed.add_field(name=f'Roles ({len(roles) - 1})', value='**NIL**')
 			else:
-				embed.add_field(name=f'Roles ({len(roles) - 1})', value=' '.join([role.mention for role in roles if role.name != '@everyone']))
+				embed.add_field(
+				    name=f'Roles ({len(roles) - 1})',
+				    value=' '.join(
+				        role.mention for role in roles if role.name != '@everyone'),
+				)
 
 			embed.add_field(name='Bot?', value=multiple_member_array[0].bot)
 
@@ -247,16 +229,10 @@ class GeneralCog(commands.Cog):
 	@commands.command(aliases=['si'])
 	@cooldown(1, 4, BucketType.channel)
 	async def serverinfo(self, ctx):
-	
-		count = 0
 
 		members = await ctx.guild.fetch_members().flatten()
 
-		for people in members:
-			if people.bot:
-				count = count + 1
-		else:
-			pass
+		count = sum(1 for people in members if people.bot)
 
 		embed = discord.Embed(
 			title = f'{ctx.guild.name} info',
@@ -290,10 +266,10 @@ class GeneralCog(commands.Cog):
 	async def serverinfo_error(self, ctx, error):
 		if isinstance(error, commands.CommandOnCooldown):
 			await ctx.send(error)
-			raise error
 		else:
 			await ctx.send(f"An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon.")
-			raise error
+
+		raise error
 
 
 	# Servercount
@@ -302,10 +278,7 @@ class GeneralCog(commands.Cog):
 	@cooldown(1, 1, BucketType.channel)
 	async def servercount(self, ctx):
 		
-		member_count = 0
-		for guild in self.bot.guilds:
-			member_count += guild.member_count
-
+		member_count = sum(guild.member_count for guild in self.bot.guilds)
 		await ctx.send(f'Present in `{len(self.bot.guilds)}` servers, moderating `{member_count}` members')
 
 	
@@ -415,13 +388,8 @@ class GeneralCog(commands.Cog):
 					'?':'..--..', '/':'-..-.', '-':'-....-', 
 					'(':'-.--.', ')':'-.--.-'}
 
-		cipher = ''
-
-		for letter in message.upper():
-			if letter != ' ':
-				cipher += MORSE_DICT[letter] + ' '
-			else:
-				cipher += ' '
+		cipher = ''.join(MORSE_DICT[letter] + ' ' if letter != ' ' else ' '
+		                 for letter in message.upper())
 
 		await ctx.send(f'Here is your cyphered text:\n```\n{cipher}\n```')
 
@@ -448,7 +416,7 @@ class GeneralCog(commands.Cog):
 		if iterations <= 20:
 			message_bytecode = message.encode('ascii')
 
-			for i in range(iterations):
+			for _ in range(iterations):
 				message_bytecode = base64.b64encode(message_bytecode)
 				base64_message = message_bytecode.decode('ascii')
 
@@ -506,7 +474,7 @@ class GeneralCog(commands.Cog):
 			await ctx.send('What are the arguments')
 		elif isinstance(error, commands.BadArgument):
 			await ctx.send("Please enter your text to be encode in quotes")
-		elif isinstance(error, base64.binascii.Error) or isinstance(error, binascii.Error):
+		elif isinstance(error, (base64.binascii.Error, binascii.Error)):
 			await ctx.send("Please enter a valid base64 encoded message to decrypt {ctx.author.display_name}")
 		elif isinstance(error, UnicodeDecodeError):
 			await ctx.send("Please enter a valid base64 encoded message to decrypt {ctx.author.display_name}")

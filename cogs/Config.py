@@ -382,16 +382,13 @@ class ConfigCog(commands.Cog):
 
 		# Moderation logs config
 
-		if arg.lower() == 'mod' or arg.lower() == 'moderation' or arg.lower() == 'modlog':
+		if arg.lower() in ['mod', 'moderation', 'modlog']:
 
 			sent1, msg1, done1 = await self.moderation_config(ctx)
 
 			await asyncio.sleep(3)
 
-			if sent1 is None and msg1 is None and done1 is None:
-				return
-
-			else:
+			if sent1 is not None or msg1 is not None or done1 is not None:
 
 				mod_channel = None
 				if fetch_mod_log_channel(int(ctx.guild.id)) is not None:
@@ -406,24 +403,19 @@ class ConfigCog(commands.Cog):
 
 				await ctx.send(embed=embed)
 
-			
+
 				await msg1.delete()
 				await sent1.delete()
 				await done1.delete()
-				return
+			return
 
-		# joins config	
-
-		elif arg.lower() == 'joins' or arg.lower() == 'join' or arg.lower() == 'joinlog':
+		elif arg.lower() in ['joins', 'join', 'joinlog']:
 
 			sent2, msg2, done2 = await self.join_log_config(ctx)
 
 			await asyncio.sleep(3)
 
-			if sent2 is None and msg2 is None and done2 is None:
-				return
-
-			else:
+			if sent2 is not None or msg2 is not None or done2 is not None:
 
 				join_channel = None
 				if fetch_join_log_channel(int(ctx.guild.id)) is not None:
@@ -437,25 +429,20 @@ class ConfigCog(commands.Cog):
 				)
 
 				await ctx.send(embed=embed)
-			
+
 				await msg2.delete()
 				await sent2.delete()
 				await done2.delete()
 
-				return
+			return
 
-		# Leaves config		
-
-		elif arg.lower() == 'leaves' or arg.lower() == 'leave' or arg.lower() == 'leavelog' :
+		elif arg.lower() in ['leaves', 'leave', 'leavelog']:
 
 			sent3, msg3, done3 = await self.leave_log_config(ctx)
 
 			await asyncio.sleep(3)
 
-			if msg3 is None and msg3 is None and done3 is None:
-				return
-
-			else:
+			if msg3 is not None or done3 is not None:
 
 				leave_channel = None
 				if fetch_leave_log_channel(int(ctx.guild.id)) is not None:
@@ -470,24 +457,20 @@ class ConfigCog(commands.Cog):
 
 				await ctx.send(embed=embed)
 
-			
+
 				await msg3.delete()
 				await sent3.delete()
 				await done3.delete()
 
-				return
+			return
 
-		# Message log channel
-
-		elif arg.lower() == 'msg' or arg.lower() == 'message' or arg.lower() == 'messagelog':
+		elif arg.lower() in ['msg', 'message', 'messagelog']:
 
 			sent4, msg4, done4 = await self.message_log_config(ctx)
 
 			await asyncio.sleep(3)
 
-			if sent4 is None and msg4 is None and done4 is None:
-				return
-			else:
+			if sent4 is not None or msg4 is not None or done4 is not None:
 
 				message_channel = None
 				if fetch_message_edit_log_channel(int(ctx.guild.id)) is not None:
@@ -506,20 +489,14 @@ class ConfigCog(commands.Cog):
 				await msg4.delete()
 				await done4.delete()
 
-				return
-
-
-		# Mute role config		
-
-		elif arg.lower() == 'mute_role' or arg.lower() == 'mute' or arg.lower() == 'muterole':
+			return
+		elif arg.lower() in ['mute_role', 'mute', 'muterole']:
 
 			sent5, msg5, done5 = await self.mute_role_config(ctx)
 
 			await asyncio.sleep(3)
 
-			if sent5 is None and msg5 is None and done5 is None:
-				return
-			else:
+			if sent5 is not None or msg5 is not None or done5 is not None:
 
 				mute_role = None
 				if fetch_mute_role(int(ctx.guild.id)) is not None:
@@ -538,8 +515,7 @@ class ConfigCog(commands.Cog):
 				await sent5.delete()
 				await done5.delete()
 
-				return
-
+			return
 		elif arg == 'help':
 
 			embed = discord.Embed(
@@ -569,17 +545,17 @@ class ConfigCog(commands.Cog):
 			await asyncio.sleep(3)
 			if sent2 is None and msg2 is None and done2 is None:
 				return
-				
+
 			sent3, msg3, done3 = await self.leave_log_config(ctx)
 			await asyncio.sleep(3)
 			if sent3 is None and msg3 is None and done3 is None:
 				return
-				
+
 			sent4, msg4, done4 = await self.message_log_config(ctx)
 			await asyncio.sleep(3)
 			if sent4 is None and msg4 is None and done4 is None:
 				return
-				
+
 			sent5, msg5, done5 = await self.mute_role_config(ctx)
 			await asyncio.sleep(3)
 			if sent5 is None and msg5 is None and done5 is None:
