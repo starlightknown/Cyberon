@@ -15,8 +15,6 @@ from cogs.usefullTools.devpost import *
 import urllib.parse
 from cogs.usefullTools.dbIntegration import *
 
-from googletrans import Translator
-
 from platform import python_version
 import psutil
 from psutil import Process, virtual_memory
