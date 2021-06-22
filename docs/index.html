@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css"
+    />
+    <style>
+      :root {
+        --theme-color: #630f51;
+        --mono-hue: 255;
+        --theme-hue: 255;
+        --mono-tint3: #f773ee;
+        --mono-tint2: #eb37c4;
+        --mono-tint1: #e997d7;
+        --base-color: #3f0933;
+        --heading-color: #4d2346;
+        --base-background-color: #e093d3;
+        --sidebar-background: #e6a2dc;
+        --sidebar-nav-link-color: #470a43;
+        --code-inline-background: #4d0742;
+        --table-row-odd-background: #d3a8cc;
+      }
+
+      body::after {
+        background: url(https://raw.githubusercontent.com/starlightknown/Cyberon/main/images/call_me_cyb.gif);
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        opacity: 0.1;
+        pointer-events: none;
+      }
+
+      .sidebar-nav > h1 {
+        font-size: var(--modular-scale-2);
+      }
+    </style>
+    <title>Call me cyb!</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Cyberon's Documentation</h1>
+      <p>Documentation for Cyberon, the Discord bot.</p>
+    </div>
+  </body>
+  <script>
+    window.$docsify = {
+      name: "Cyberon",
+      repo: "https://github.com/starlightknown/Cyberon",
+      loadSidebar: "_navbar.md",
+      homepage: "index.md",
+      auto2top: true,
+      // Plugins
+      "flexible-alerts": {
+        style: "flat",
+      },
+      copyCode: {
+        buttonText: "Copy this snippet",
+        errorText: "Could not copy!",
+        successText: "Copied to clipboard",
+      },
+      maxLevel: 2,
+    };
+  </script>
+  <!-- Docsify v4 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/docsify/4.12.1/docsify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-plugin-flexible-alerts@1"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-typescript.min.js"></script>
+  <script src="https://unpkg.com/docsify-copy-code@2"></script>
+  <script
+    src="https://browser.sentry-cdn.com/6.3.6/bundle.min.js"
+    integrity="sha384-Wh1kaX6+TxjSQdRRE+XUoIsEh5Cj8LgB6Wjbg/1/kTB3aG7q6ORaKSe5VfThKhcj"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://browser.sentry-cdn.com/6.3.6/bundle.tracing.min.js"
+    integrity="sha384-i2Yvbs5RFObbcbRhpGsmI2wLv+I4jxpEET1WzR/KWxLdwZMtP8E1M0PROnrwe2gF"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    Sentry.init({
+      dsn: "https://51b53848668a4ea6b33e5f2116814dac@o557610.ingest.sentry.io/5708608",
+      integrations: [new Sentry.Integrations.BrowserTracing()],
+      tracesSampleRate: 1.0,
+    });
+  </script>
+</html>

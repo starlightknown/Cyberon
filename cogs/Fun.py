@@ -61,8 +61,31 @@ class FunCog(commands.Cog):
 			await ctx.send(error)
 		else:
 			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
+			
+	@commands.command(name="at")
+	async def aesthetify(self, ctx: commands.Context, *, a_text):
+		ascii_to_wide = {i: chr(i + 0xFEE0) for i in range(0x21, 0x7F)}
+		ascii_to_wide.update({0x20: "\u3000", 0x2D: "\u2212"})
+		await ctx.message.delete()
+		await ctx.send(f"{a_text.translate(ascii_to_wide)}")
 
-
+	@commands.command(hidden=True)
+	@commands.guild_only()
+	async def hug(self, ctx, user: discord.Member, intensity: int = 1):
+		name = (user.display_name)
+		if intensity <= 0:
+			msg = "(っ˘̩╭╮˘̩)っ" + name
+		elif intensity <= 3:
+			msg = "(っ´▽｀)っ" + name
+		elif intensity <= 6:
+			msg = "╰(*´︶`*)╯" + name
+		elif intensity <= 9:
+			msg = "(つ≧▽≦)つ" + name
+		elif intensity >= 10:
+			msg = "(づ￣ ³￣)づ{} ⊂(´・ω・｀⊂)".format(name)
+		else:
+			raise RuntimeError
+		await ctx.send(msg)
 	# Memes
 
 	@commands.command()
