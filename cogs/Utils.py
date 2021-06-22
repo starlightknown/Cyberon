@@ -606,5 +606,6 @@ class GeneralCog(commands.Cog):
         )
 		embed.add_field(name="Bug spray of my code", value="`Karuna#8722`")
 		await ctx.send(embed=embed)	
+		
 def setup(bot):
 	bot.add_cog(GeneralCog(bot))
