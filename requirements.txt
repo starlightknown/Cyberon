@@ -6,5 +6,4 @@ pyfiglet
 wikipedia
 howdoi
 pymongo
-googletrans
 psutil

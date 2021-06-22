@@ -11,6 +11,7 @@ import base64
 import random
 import requests
 from cogs.usefullTools.info import *
+from cogs.usefullTools.devpost import *
 import urllib.parse
 from cogs.usefullTools.dbIntegration import *
 
@@ -120,7 +121,7 @@ class GeneralCog(commands.Cog):
     
 	@commands.command(name='hackclub')
 	@cooldown(1, 2, BucketType.channel)
-	async def hackathons(self, ctx):
+	async def hackdclub(self, ctx):
 			url = 'https://hackathons.hackclub.com/api/events/upcoming' 
 			r = requests.get(url)
 			result = r.json()
@@ -131,14 +132,14 @@ class GeneralCog(commands.Cog):
 			data = parse_data(result1)
 			await ctx.send(embed = hack_message(data))
 			
-	@hackathons.error
-	async def hackathons_error(self, ctx, error):
+	@hackdclub.error
+	async def hackdclub_error(self, ctx, error):
 		if isinstance(error, commands.CommandOnCooldown):
 			await ctx.send(error)
 		else:
 			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
 			raise error
-
+			
 	# Userinfo
 
 	@commands.command(aliases=['ui'])
@@ -588,30 +589,6 @@ class GeneralCog(commands.Cog):
 	async def hack_show(self, ctx):
 		await ctx.send("**Cyberon loves hackathons, find good hackathons here!**\nhttps://devpost.com/hackathons\nhttps://www.hackathon.io/events\nhttps://confs.tech/#\nhttps://mlh.io/seasons/2021/events\nhttp://www.hackalist.org/\nhttps://devfolio.co/\nhttps://angelhack.com/\nhttps://gitcoin.co/hackathons\nhttps://hackathons.hackclub.com/\nhttps://www.incubateind.com/\nhttps://skillenza.com/")
 		
-	@commands.command(name="at")
-	async def aesthetify(self, ctx: commands.Context, *, a_text):
-		ascii_to_wide = {i: chr(i + 0xFEE0) for i in range(0x21, 0x7F)}
-		ascii_to_wide.update({0x20: "\u3000", 0x2D: "\u2212"})
-		await ctx.message.delete()
-		await ctx.send(f"{a_text.translate(ascii_to_wide)}")
-
-	@commands.command(hidden=True)
-	@commands.guild_only()
-	async def hug(self, ctx, user: discord.Member, intensity: int = 1):
-		name = (user.display_name)
-		if intensity <= 0:
-			msg = "(っ˘̩╭╮˘̩)っ" + name
-		elif intensity <= 3:
-			msg = "(っ´▽｀)っ" + name
-		elif intensity <= 6:
-			msg = "╰(*´︶`*)╯" + name
-		elif intensity <= 9:
-			msg = "(つ≧▽≦)つ" + name
-		elif intensity >= 10:
-			msg = "(づ￣ ³￣)づ{} ⊂(´・ω・｀⊂)".format(name)
-		else:
-			raise RuntimeError
-		await ctx.send(msg)
 	@commands.command(name="botstats")
 	async def about(self, ctx):
 		embed = discord.Embed(
