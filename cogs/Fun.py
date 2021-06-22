@@ -24,29 +24,29 @@ class FunCog(commands.Cog):
 	@commands.command(name='8ball')
 	@cooldown(1,5,BucketType.channel)
 	async def eight_ball(self, ctx, *, question=None):
-		responses = ["It is certain.",
-					 "It is decidedly so.",
-					 "Without a doubt.",
-					 "Yes - definitely.",
-					 "You may rely on it.",
-					 "As I see it, yes.",
-					 "Most likely.",
-					 "Outlook good.",
-					 "Yes.",
-					 "Signs point to yes.",
-					 "Reply hazy, try again.",
-					 "Ask again later.",
-					 "Better not tell you now.",
-					 "Cannot predict now.",
-					 "Concentrate and ask again.",
-					 "Don't count on it.",
-					 "My reply is no.",
-					 "My sources say no.",
-					 "Outlook not so good.",
-					 "Very doubtful."
-					 ]
-
 		if question is not None:
+			responses = ["It is certain.",
+						 "It is decidedly so.",
+						 "Without a doubt.",
+						 "Yes - definitely.",
+						 "You may rely on it.",
+						 "As I see it, yes.",
+						 "Most likely.",
+						 "Outlook good.",
+						 "Yes.",
+						 "Signs point to yes.",
+						 "Reply hazy, try again.",
+						 "Ask again later.",
+						 "Better not tell you now.",
+						 "Cannot predict now.",
+						 "Concentrate and ask again.",
+						 "Don't count on it.",
+						 "My reply is no.",
+						 "My sources say no.",
+						 "Outlook not so good.",
+						 "Very doubtful."
+						 ]
+
 			embed = discord.Embed(title='*The 8ball*', description=f'**{ctx.message.author}** asked a question.\n\nThe question was: **{question}**\n\n\n{random.choice(responses)}', colour=0x0000ff)
 			await ctx.send(embed=embed)
 		else:
@@ -167,12 +167,10 @@ class FunCog(commands.Cog):
 	@commands.command(name='fact', aliases=['facts'])
 	async def animal_facts(self, ctx, animal:str):
 
-		colour_choices= [0x400000,0x997379,0xeb96aa,0x4870a0,0x49a7c3,0x8b3a3a,0x1e747c,0x0000ff]
-
 		if animal.lower() in {'dog', 'cat', 'bird', 'birb', 'koala', 'panda'}:
 
 			fact_url = f"https://some-random-api.ml/facts/{'bird' if animal == 'birb' else animal}"
-			
+
 			image_url=f"https://some-random-api.ml/img/{'bird' if animal == 'bird' else animal}"
 			async with request("GET", image_url, headers={}) as response:
 				if response.status == 200:
@@ -189,6 +187,8 @@ class FunCog(commands.Cog):
 						description = f'{data["fact"][:2045].strip()}...'
 					else:
 						description = data["fact"]
+
+			colour_choices= [0x400000,0x997379,0xeb96aa,0x4870a0,0x49a7c3,0x8b3a3a,0x1e747c,0x0000ff]
 
 			embed = discord.Embed(
 				title = f'Facts about {animal.lower()}',
@@ -221,23 +221,23 @@ class FunCog(commands.Cog):
 	@commands.command(name='asciify')
 	@cooldown(1, 1, BucketType.channel)
 	async def asciify_message(self, ctx, *, message=None):
-		if message is not None:
-			if len(message) <= 50:
-				if message[0] == '<' and (message[1] == '#'):
-					await ctx.send('im not doing that 😂')
-				elif message[0] == '<' and message[1] == '@':
-					await ctx.send('im not doing that 😂')
-				elif ctx.author.is_on_mobile and len(message) > 8:
-					await ctx.send('The output might look a bit weird on your phone! 😅\n Landscape mode might make it look Better')
-					msg = pyfiglet.figlet_format(message)
-					await ctx.send(f'```\n{msg}\n```')
-				else:
-					msg = pyfiglet.figlet_format(message)
-					await ctx.send(f'```\n{msg}\n```')
-			else:
-				await ctx.send(f"Your character length ({len(message)}) has exceeded a normal of 50.")
-		else:
+		if message is None:
 			await ctx.send('Whats it you want to asciify?')
+
+		elif len(message) <= 50:
+			if message[0] == '<' and (message[1] == '#'):
+				await ctx.send('im not doing that 😂')
+			elif message[0] == '<' and message[1] == '@':
+				await ctx.send('im not doing that 😂')
+			elif ctx.author.is_on_mobile and len(message) > 8:
+				await ctx.send('The output might look a bit weird on your phone! 😅\n Landscape mode might make it look Better')
+				msg = pyfiglet.figlet_format(message)
+				await ctx.send(f'```\n{msg}\n```')
+			else:
+				msg = pyfiglet.figlet_format(message)
+				await ctx.send(f'```\n{msg}\n```')
+		else:
+			await ctx.send(f"Your character length ({len(message)}) has exceeded a normal of 50.")
 
 
 	# ASCIIfy: Error handling
