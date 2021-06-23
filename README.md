@@ -63,6 +63,8 @@ Full docs deployed to https://starlightknown.github.io/Cyberon/#/ and available 
 
 You need to configure Cyberon's settings using the cyb!config command. You can see all config commands using `cyb!help config` or `cyb!config` and type out the channels for questions asked by Cyberon.
 
+<img src="https://raw.githubusercontent.com/starlightknown/Cyberon/main/images/ezgif.com-gif-maker.gif">
+
 # Problem
 
 - too many hackathon websites to seacrh for a beginner
