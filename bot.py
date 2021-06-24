@@ -4,6 +4,8 @@ from discord import Intents
 import random
 import time
 import os
+from scrapper import advscrape
+from scrapper import scrape
 from discord.ext import commands
 from cogs.usefullTools.dbIntegration import *
 intents = Intents.default()
@@ -202,7 +204,22 @@ async def on_message_edit(before, after):
 				if message_channel.id != before.channel.id:
 					await message_channel.send(embed=embed)
 
+@bot.command()
+async def search(ctx, *message):
+    query = (" ").join(message)
+    print(message)
+    URL = "https://www.google.com/search?q=" + query
+    item, link = scrape(URL)
+    await ctx.send(item.text)
+    await ctx.send(link)
 
+@bot.command()
+async def advsearch(ctx, *message):
+    query = (" ").join(message)
+    print(message)
+    URL = "https://www.google.com/search?q=" + query
+    item = advscrape(URL)
+    await ctx.send(item.text)
 # Ping
 
 @bot.command()

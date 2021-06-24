@@ -5,7 +5,6 @@ import random
 color = 0xFF6500
 key_features = {
     'title' : 'Name',
-    'url':'Website',
     'time_left_to_submission': 'Start Time',
     'submisson_period_dates': 'End Time',
     'featured' : 'Featured?',
@@ -33,11 +32,6 @@ def hack_message(data):
     message.add_field(
     name = key_features['title'],
     value= data['title'],
-    inline = False
-    )
-    message.add_field(
-    name = key_features['url'],
-    value= data['url'],
     inline = False
     )
     message.add_field(
