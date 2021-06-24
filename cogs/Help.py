@@ -52,7 +52,10 @@ class HelpCog(commands.Cog):
 							'**at**\nAesthetifies your message\n**Usage:** `cyb!at <text>`\n\n'
 							'**hug**\ngives a hug with intensity 0,6,9,10\n**Usage:** `cyb!hug <member> <intensity>`\n\n'
 							'**botstats**\nShows the bot\'s statistics\n**Usage:** `cyb!botstats`\n\n'
-							'**hackclub**\nShows the hack club\'s upcoming hackathons\n**Usage:** `cyb!hackclub`\n\n',
+							'**hackclub**\nShows the hack club\'s upcoming hackathons\n**Usage:** `cyb!hackclub`\n\n'
+							'**search**\nSearch anythong on google\n**Usage:** `cyb!search <query>`\n\n'
+							'**advsearch**\nDo an advance search\n**Usage:** `cyb!advsearch <query>`\n\n'
+
 				colour=0x01a901
 			)
 
