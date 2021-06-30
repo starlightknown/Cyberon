@@ -220,6 +220,7 @@ async def advsearch(ctx, *message):
     URL = "https://www.google.com/search?q=" + query
     item = advscrape(URL)
     await ctx.send(item.text)
+
 # Ping
 
 @bot.command()

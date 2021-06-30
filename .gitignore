@@ -1,5 +1,6 @@
 /venv/
 /cogs/__pycache__
+/__pycache__
 /cogs/test.py
 /.idea/
 /NASA_API_TOKEN.0
