@@ -6,6 +6,13 @@ import time
 import os
 from scrapper import advscrape
 from scrapper import scrape
+from tzlocal import get_localzone
+import pytz
+from datetime import *
+from datetime import datetime
+import asyncio
+from translate import Translator
+from collections.abc import Sequence
 from discord.ext import commands
 from cogs.usefullTools.dbIntegration import *
 intents = Intents.default()
@@ -220,8 +227,14 @@ async def advsearch(ctx, *message):
     URL = "https://www.google.com/search?q=" + query
     item = advscrape(URL)
     await ctx.send(item.text)
-# Ping
 
+@bot.event
+async def on_message(message):
+   if 'thank you' in message.content:
+      await message.channel.send(f"{message.author.mention} You did something good, may the cyb force be with you in hackathon")
+      emoji = '\N{THUMBS UP SIGN}'
+      await message.add_reaction(emoji)
+# Ping
 @bot.command()
 async def ping(ctx):
 	await ctx.send(f'Ping: {round(bot.latency * 1000)}ms')
@@ -233,7 +246,6 @@ async def on_command_error(ctx, error):
 	if isinstance(error, commands.CommandNotFound):
 
 		await ctx.send(f"command not found\nPlease use `cyb!help` to see all commands")
-
 
 TOKEN = os.getenv("BOT_TOKEN")
 try:

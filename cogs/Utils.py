@@ -11,7 +11,7 @@ import base64
 import random
 import requests
 from cogs.usefullTools.info import *
-from cogs.usefullTools.devpost import *
+from cogs.usefullTools.mlh import *
 import urllib.parse
 from cogs.usefullTools.dbIntegration import *
 
@@ -126,27 +126,6 @@ class GeneralCog(commands.Cog):
 			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
 			raise error
 
-	@commands.command(name='devpost')
-	@cooldown(1, 2, BucketType.channel)
-	async def devposth(self, ctx):
-			url = 'https://devpost.com/api/hackathons' 
-			r = requests.get(url)
-			result = r.json()
-			result1 = {}
-			for d in result:
-				result1.update(d)
-				break
-			data = parse_data(result1)
-			await ctx.send(embed = hack_message(data))
-			
-	@devposth.error
-	async def devposth_error(self, ctx, error):
-		if isinstance(error, commands.CommandOnCooldown):
-			await ctx.send(error)
-		else:
-			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
-			raise error
-			
 	# Userinfo
 
 	@commands.command(aliases=['ui'])
@@ -591,6 +570,86 @@ class GeneralCog(commands.Cog):
         )
 		embed.add_field(name="Bug spray of my code", value="`Karuna#8722`")
 		await ctx.send(embed=embed)	
+    
+	@commands.command(name='calm')
+	async def anxiety(self, ctx):
+		image = random.choice([
+            "Hello there, here's a gif for a breathing exercise.\nhttps://media.giphy.com/media/3oxQNhjjZKLPs26Mve/giphy.gif",
+            "Hello there, here's a gif for a breathing exercise.\nhttps://i.imgur.com/XbH6gP4.gif",
+            "Hello there, here's a gif for a breathing exercise.\nhttps://media.giphy.com/media/8YfwmT1T8PsfC/giphy.gif",
+            "Hello there, here's a gif for a breathing exercise.\nhttp://karlolabs.com/wp-content/uploads/2017/01/breathing.gif",
+            "Hello there, here's a gif for a breathing exercise.\nhttp://i67.tinypic.com/2qant76.gif",
+            "Hello there, here's a gif for a breathing exercise.\nhttps://giphy.com/gifs/monday-destress-3o7WTp5nxyRqh6T21O",
+            "Hello there, here's a gif for a breathing exercise.\nhttps://giphy.com/gifs/monday-destress-l0NhWtOfbVze6KzFm",
+            "Hello there, here's a gif for a breathing exercise.\nhttps://giphy.com/gifs/monday-destress-xThuWwbtRvTFh7fjxu",
+            "Hello there, here's a gif for a breathing exercise.\nhttps://giphy.com/gifs/monday-destress-xThuWqxgKOhbutFyCY",
+            "Hello there, here's a gif for a breathing exercise.\nhttps://giphy.com/gifs/monday-destress-xThuWkfIpGNrUnhu9O",
+            "Hello there, here's a gif for a breathing exercise.\nhttps://giphy.com/gifs/destressmonday-relax-meditation-l1J9MS2Ia617Kky3u",
+            "Hello there, here's a gif for a breathing exercise.\nhttps://giphy.com/gifs/meditation-mAsGwBc4pZGYE",
+            "Hello there, here's a gif for a breathing exercise.\nhttps://giphy.com/gifs/square-ZwuBxuIHhIkXm",
+            "Hello there, here's a gif for a breathing exercise.\nhttps://giphy.com/gifs/yoga-air-relax-3o7aD2T6zL8bKIt2tq",
+            "Hello there, here's a gif for a breathing exercise.\nhttps://giphy.com/gifs/meditation-NwzYTVWay9T6o",
+            "Hello there, here's a gif for a breathing exercise.\nhttps://media.boingboing.net/wp-content/uploads/2016/11/tumblr_og31bxrtOn1qls18ho6_400.gif"
+        ])
+		await ctx.send(image)
+	
+	@commands.command(name='praise')
+	async def compliment(self, ctx):
+		randomcomp = random.choice([
+            "You're so resourceful.", "You're such a strong person.", 'Your light shines so brightly.',
+            'You matter, and a lot.', "You have an incredible talent even if you don't see it.",
+            'You are deserving of a hug right now.', "You're more helpful than you realize.", 'You can inspire people.',
+            'I bet you do the crossword puzzle in ink.',
+            "You're someone's reason to smile, even if you don't realize it.",
+            "It's so great to see you're doing your best.", "Your smile can make someone's day.", 'Your ideas matter.',
+            'Your feelings matter.', 'Your emotions matter.', 'Your opinions matter.', 'Your needs matter.',
+            'Your own vision of the world is unique and interesting.',
+            "Even if you were cloned, you'd still be one of a kind. (And the better one between the two.)",
+            'You are more unique and wonderful than the smell of a new book.',
+            "You're great at being you! No one can replace you - so keep it up.", 'You can get through this.',
+            "If you're going through something, remember: this too shall pass.",
+            'You deserve to get help if you need it.', 'You - yes you - are valid.', 'You are more than enough.',
+            'Your presence is appreciated.', 'You can become whoever you want to be.', 'You deserve to be listened to.',
+            'You deserve to be heard.', 'You deserve to be respected.', "You're an absolute bean.",
+        ])
+		await ctx.send(randomcomp)
 		
+	@commands.command(name ='comfort')
+	async def comfortme(self, ctx):
+		randomcomf = random.choice(
+            ["You've always been able to always figure out how to pick yourself up. You can do it again.",
+             "It's so great to see you're doing your best.",
+             'You can get through this.',
+             "If you're going through something, remember: this too shall pass.",
+             "If today was bad, remember that you won't have to repeat this day ever again.",
+             "Even if you feel like you're getting nowhere you're still one step ahead of yesterday - and that's still progress.",
+             "You're growing so much, and if you can't see it now, you certainly will in a few months.",
+             "You're strong for going on even when it's so hard.",
+             "If you are having really awful thoughts right now or feeling very insecure, remember that what you think does not always reflect the reality of things.",
+             "I know they can be hard to deal with, but even a bot like me knows your emotions are valid and important!",
+             "(source: softangelita)\nhttps://78.media.tumblr.com/757d6f9eceacd22e585f5763aed3b6b7/tumblr_pbs2drA9yX1wzarogo1_1280.gif",
+             "You are going to be okay. Things are going to be okay. You will see.",
+             "(source: princess-of-positivity)\nhttps://78.media.tumblr.com/209ac4a784925d71d3d3c7293b7d75f4/tumblr_o883p7C7e21vwxwino1_1280.jpg",
+             "Sit down, take a breath. There’s still time. Your past isn’t going anywhere, the present is right here and the future will wait.",
+             "It is never too late to make a positive change in your life.",
+             "https://78.media.tumblr.com/14a19b1f5c785c0af5966175c0c87c8f/tumblr_owob0dUAzy1ww31y6o1_500.jpg",
+             "Don't be upset if you aren't always doing your absolute best every waking moment. Flowers cannot always bloom.",
+             "(source: jessabella-hime)\nhttps://78.media.tumblr.com/b1e54721f7520a6f425c112a67170e63/tumblr_ozi5gdM4de1trvty1o1_500.png",
+             "There are good people in this world who do or will help you, care about you, and love you.",
+             "(source: harmony-is-happiness)\nhttps://78.media.tumblr.com/37778dd51384fbdba835349e6f0081d5/tumblr_oz8v11c9CC1wssyrbo1_500.jpg",
+             "https://78.media.tumblr.com/ed8e14743dac29bbc606fc099ab77ec3/tumblr_nphyqvqGvi1qzz08do1_500.jpg",
+             "(source: harmony-is-happiness)\nhttps://78.media.tumblr.com/980109437f848b501d9ac96ed5a9ead0/tumblr_p285yaPKk31wssyrbo2_r2_250.jpg",
+             "(source: harmony-is-happiness)\nhttps://78.media.tumblr.com/63a7933dfe6ed98dd00682533d249efe/tumblr_pc558poobr1wssyrbo1_250.jpg",
+             "(source: harmony-is-happiness)\nhttps://78.media.tumblr.com/5827e477fff5b22c693c00d94eb19b2a/tumblr_p40de4xrrC1wssyrbo1_250.jpg",
+             "It is perfectly okay to rest and take a break from things If you are taking yourself to exhaustion, at that point it isn't your best anymore.",
+             "(source: harmony-is-happiness)\nhttps://78.media.tumblr.com/50f06d2360aae36c815b1757326d878d/tumblr_p40de4xrrC1wssyrbo5_r1_250.jpg",
+             "Sometimes it's okay if the only thing you did today was breathe.",
+             "(source: recovering-and-healing)\nhttps://78.media.tumblr.com/e7b47e53ba372425728f384685748435/tumblr_oc93tmtPBj1ue8qxbo3_r1_250.jpg",
+             "(source: positivedoodles)\nhttps://78.media.tumblr.com/c04f396bfd2501b4876c239a329c035b/tumblr_pcutj6i57Z1rpu8e5o1_1280.png",
+             "(source: harmony-is-happiness)\nhttps://78.media.tumblr.com/6602114029258f4097fffc33a2ae5887/tumblr_otfj86Xgq91wssyrbo1_r4_250.jpg"])
+			
+		await ctx.send(randomcomf)
+
+	
 def setup(bot):
 	bot.add_cog(GeneralCog(bot))
