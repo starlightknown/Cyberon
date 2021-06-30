@@ -54,10 +54,7 @@ class HelpCog(commands.Cog):
 							'**botstats**\nShows the bot\'s statistics\n**Usage:** `cyb!botstats`\n\n'
 							'**hackclub**\nShows the hack club\'s upcoming hackathons\n**Usage:** `cyb!hackclub`\n\n'
 							'**search**\nSearch anythong on google\n**Usage:** `cyb!search <query>`\n\n'
-							'**advsearch**\nDo an advance search\n**Usage:** `cyb!advsearch <query>`\n\n'
-							'**calm**\nHelps you calm down, Take a deep breath\n**Usage:** `cyb!calm`\n\n'
-							'**praise**\nCheer Up, You did good\n**Usage:** `cyb!praise`\n\n'
-							'**comfort**\nRelax, Take a break, You can do it\n**Usage:** `cyb!comfort`\n\n',
+							'**advsearch**\nDo an advance search\n**Usage:** `cyb!advsearch <query>`\n\n',
 
 				colour=0x01a901
 			)
