@@ -11,7 +11,6 @@ import base64
 import random
 import requests
 from cogs.usefullTools.info import *
-from cogs.usefullTools.devpost import *
 import urllib.parse
 from cogs.usefullTools.dbIntegration import *
 
@@ -125,28 +124,7 @@ class GeneralCog(commands.Cog):
 		else:
 			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
 			raise error
-
-	@commands.command(name='devpost')
-	@cooldown(1, 2, BucketType.channel)
-	async def devposth(self, ctx):
-			url = 'https://devpost.com/api/hackathons' 
-			r = requests.get(url)
-			result = r.json()
-			result1 = {}
-			for d in result:
-				result1.update(d)
-				break
-			data = parse_data(result1)
-			await ctx.send(embed = hack_message(data))
-			
-	@devposth.error
-	async def devposth_error(self, ctx, error):
-		if isinstance(error, commands.CommandOnCooldown):
-			await ctx.send(error)
-		else:
-			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
-			raise error
-			
+		
 	# Userinfo
 
 	@commands.command(aliases=['ui'])

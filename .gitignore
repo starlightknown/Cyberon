@@ -1,6 +1,6 @@
 /venv/
 /cogs/__pycache__
-/__pycache__
+/__pycache__/
 /cogs/test.py
 /.idea/
 /NASA_API_TOKEN.0
@@ -9,3 +9,4 @@
 *NASA_API_KEY.0
 *mongodbclient.0
 *token.0
+*__pycache__
