@@ -8,9 +8,6 @@ key_features = {
     'website':'Website',
     'start': 'Start Time',
     'end': 'End Time',
-    'city': 'City',
-    'state':'State',
-    'country': 'Country',
     'virtual':'Virtual Hack?',
     'mlhAssociated':'MLH Partnered?'
 }
@@ -23,6 +20,9 @@ def parse_data(data):
     del data['countryCode']
     del data['latitude']
     del data['longitude']
+    del data['city']
+    del data['state']
+    del data['country']
     return data
 
 def hack_message(data):

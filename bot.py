@@ -27,11 +27,6 @@ except Exception as e:
 	print("Functionality limited!\n")
 	print(f"exception thrown:\n{e}")
 
-sad_words = ["sad","upset","depressed","depressing","anxiety","anxious","hopeless","failed","fail","failure","lost","unhappy","angry","miserable"]
-funny_videos = ["https://www.youtube.com/watch?v=ByH9LuSILxU", "https://www.youtube.com/watch?v=vLDcCvCJ8bM","https://www.youtube.com/watch?v=pOmu0LtcI6Y"]
-hope_quotes = ["Hope can be a powerful force. Maybe there's no actual magic in it, but when you know what you hope for most and hold it like a light within you, you can make things happen, almost like magic. - Laini Taylor", "When things go wrong, don't go with them. - Elvis Presley", "The bravest thing I ever did was continuing my life when I wanted to die. - Juliette Lewis", "Even in the grave, all is not lost. - Edgar Allan Poe", "One should . . . be able to see things as hopeless and yet be determined to make them otherwise. - F.Scott Fitzgerald", "Don't lose hope. You never know what tomorrow might change. - Laura Chouette", "Sad is not the land with no hero. Sad is the land that needs a hero. - Bertolt Brecht", "Sometimes its hard to see the light at the end of a tunnel. Sometimes you don't even know its there - Campbell Thompson", "When you pray and hope for a change. Don't expect a change to come. Expect the opportunity for a change to come. - Jonathon Anthony Burkett","Never be defined by what has happened to you in the past, it was just a life lesson, not a life sentence. ~ Donald Pillai" , "No matter what happens, as long as you think positively, hopelessness can never touch you! - Mehmet Murat ildan"]
-failure_quotes = ["Success is not final, failure is not fatal: it is the courage to continue that counts. - Winston Churchill", "There is only one thing that makes a dream impossible to achieve: the fear of failure. - Paulo Coelho", "Failure is the condiment that gives success its flavor. - Truman Capote", "It is hard to fail, but it is worse never to have tried to succeed. - Theodore Roosevelt", "All of old. Nothing else ever. Ever tried. Ever failed. No matter. Try again. Fail again. Fail better. - Samuel Beckett", "Do not let arrogance go to your head and despair to your heart; do not let compliments go to your head and criticisms to your heart; do not let success go to your head and failure to your heart. - Roy T. Bennett", "Only those who dare to fail greatly can ever achieve greatly. - Robert F. Kennedy", "You may be disappointed if you fail, but you are doomed if you don’t try. - Beverly Sills", "You make mistakes, mistakes don't make you - Maxwell Maltz", "Sometimes, when we want something so badly, we fear failure more than we fear being without that thing. - Matthew J. Kirby", "When we give ourselves permission to fail..we at the same time, give ourselves permission to excel. - Eloise Ristad","How much you can learn when you fail determines how far you will go into achieving your goals. - Roy Bennett","I have failed many times, and that's why I am a success. - Michael Jordon", "The man who has done his level best…is a success, even though the world write him down a failure. - B. Forbes", "Failure is the sourness that makes success All the more sweeter. - Joshua Wisenbaker", "The moment you believe you will fail, you have already lost the battle. - Bianca Frazier"]
-
 # Basic stuff
 
 @bot.event
@@ -208,23 +203,6 @@ async def on_message_edit(before, after):
 
 				if message_channel.id != before.channel.id:
 					await message_channel.send(embed=embed)
-
-@bot.event
-async def on_message(message):
-	if message.author == bot.user:
-		return
-	if sad_words[2] in message.content or sad_words[3] in message.content:
-		await message.channel.send("You're not alone. This bot has a heart. Type in cyb!calm or cyb!confort I'll be there for you")
-		e = discord.Embed(title="There there")
-		e.set_image(url="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0e44ab3f-a9dc-4693-86b5-cba1ff8a9ef8/d863gzq-71e41b18-1df5-4d2b-b09b-b1d20179f67e.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvMGU0NGFiM2YtYTlkYy00NjkzLTg2YjUtY2JhMWZmOGE5ZWY4XC9kODYzZ3pxLTcxZTQxYjE4LTFkZjUtNGQyYi1iMDliLWIxZDIwMTc5ZjY3ZS5naWYifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.HIyNCC7QhFON8w6dlUl2sg4u87zg6_cenA_xO4jrSkQ")
-		await message.channel.send(embed=e)
-		await message.channel.send("Please allow me to distract you with cute and funny cat videos. Hope it makes you feel better.")
-		await message.channel.send(random.choice(funny_videos))
-	if sad_words[4] in message.content or sad_words[5] in message.content:
-		await message.channel.send(random.choice(hope_quotes))
-	if sad_words[6] in message.content or sad_words[7] in message.content:
-		await message.channel.send(random.choice(failure_quotes))
-	
 
 @bot.command()
 async def search(ctx, *message):
