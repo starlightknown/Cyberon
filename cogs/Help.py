@@ -44,8 +44,6 @@ class HelpCog(commands.Cog):
 							'**wikipedia | wiki | ask | whatis**\nGets you information from the wiki\n**Usage:** `cyb!wiki <query>`\nQuery is necessary\n\n'
 							'**howdoi**\nInformation from stackoverflow\n**Usage:** `cyb!howdoi <query>`\nQuery is necessary\n\n'
 							'**cipher | morse**\nConverts your message to morse code\n**Usage:** `cyb!cypher <message>`\n\n'
-							'**base64**\nEncodes your message to base64\n**Usage:** `cyb!base64 "<message>" <iteration>`\nMessage must be in **quotes**\n\n'
-							'**dbase64**\nDecodes your base64 encoded message\n**Usage:** `cyb!dbase64 "<message>"`\nMessage must be in **quotes**\n\n'
 							'**qrcode**\nConverts a text to qr code\n**Usage:** `cyb!qrcode <message>`\n\n'
 							'**qrdecode**\nDecodes the qr code link provided\n**Usage:** `cyb!qrdecode <url link>`\n\n'
 							'**hack-show**\nGives you a list of websites for hackathons\n**Usage:** `cyb!hack-show`\n\n'
@@ -104,7 +102,8 @@ class HelpCog(commands.Cog):
 				description='**bug | bugs**\nFound any bugs? Use this command to report the bugs\n**Usage:** `cyb!bugs "<message>"`\n\nMessage must be greater than 20 charecters.\nYou can also direct message the bot instead of invoking the command\n\n'
 							'**invite**\nInvite me to your server! 😁\n**Usage:** `cyb!invite`\n\n'
 							'**source | sourcecode**\nWant to know what was I written in? I\'ll send you a github link 😉\n**Usage:** `cyb!source`\nNo argument required\n\n'
-							'**supportserver | ss**\nLink to the support server\n**Usage:** `cyb!ss`\n\n',
+							'**supportserver | ss**\nLink to the support server\n**Usage:** `cyb!ss`\n\n'
+							'**documentation | docs**\nLink to the Documentation of Cyberon\n**Usage:** `cyb!docs`\n\n',
 				colour=0x01a901
 			)
 		support_embed.set_footer(text='Made for hacker community ❤')

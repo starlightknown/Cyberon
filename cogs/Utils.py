@@ -7,7 +7,6 @@ import aiohttp
 import asyncio
 import wikipedia
 from howdoi import howdoi
-import base64
 import random
 import requests
 from cogs.usefullTools.info import *
@@ -178,7 +177,7 @@ class GeneralCog(commands.Cog):
 				        role.mention for role in roles if role.name != '@everyone'),
 				)
 
-			embed.add_field(name='Bot?', value=multiple_member_array[0].bot)
+			embed.add_field(name='Is this my friend beep bop beep?', value=multiple_member_array[0].bot)
 
 			await ctx.send(embed=embed)
 
@@ -273,7 +272,7 @@ class GeneralCog(commands.Cog):
 	async def servercount(self, ctx):
 		
 		member_count = sum(guild.member_count for guild in self.bot.guilds)
-		await ctx.send(f'Present in `{len(self.bot.guilds)}` servers, moderating `{member_count}` members')
+		await ctx.send(f'Cyberon is being loved in `{len(self.bot.guilds)}` servers, helping `{member_count}` members')
 
 	
 	# Servercount: cooldown
@@ -296,7 +295,7 @@ class GeneralCog(commands.Cog):
 			try:
 				r = wikipedia.page(query)
 			except wikipedia.exceptions.DisambiguationError as e:
-				await ctx.send(f"```\n{e}\n```\nPlease be more accurate with your query")
+				await ctx.send(f"```\n{e}\n```\nThis beep bop bot cannot understand it, be more specific")
 				return
 			except wikipedia.exceptions.PageError as e:
 				await ctx.send(e)
@@ -346,7 +345,7 @@ class GeneralCog(commands.Cog):
 				await asyncio.sleep(2)
 			await ctx.channel.send(embed=embed)
 		else:
-			await ctx.send(f'Your query is empty, please ask a question {ctx.author.mention}')
+			await ctx.send(f'What did you wanted to ask? {ctx.author.mention}')
 
 
 	# Howdoi: Error Handling
@@ -385,7 +384,7 @@ class GeneralCog(commands.Cog):
 		cipher = ''.join(MORSE_DICT[letter] + ' ' if letter != ' ' else ' '
 		                 for letter in message.upper())
 
-		await ctx.send(f'Here is your cyphered text:\n```\n{cipher}\n```')
+		await ctx.send(f'Here is your secret text from interstellar in morse code, enjoy!:\n```\n{cipher}\n```')
 
 
 	# Morse code cypher: Error handling
@@ -395,93 +394,10 @@ class GeneralCog(commands.Cog):
 		if isinstance(error, commands.CommandOnCooldown):
 			await ctx.send(error)
 		elif isinstance(error, commands.BadArgument):
-			await ctx.send('What do you want to cypher?')
+			await ctx.send('I can not send an empty message to the space traveller, what do you want to convey?')
 		else:
 			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
 			raise error
-
-
-	# Base64 encoding
-
-	@commands.command(name='base64')
-	@cooldown(1, 2, BucketType.channel)
-	async def base64(self, ctx, message, iterations=1):
-
-		if iterations <= 20:
-			message_bytecode = message.encode('ascii')
-
-			for _ in range(iterations):
-				message_bytecode = base64.b64encode(message_bytecode)
-				base64_message = message_bytecode.decode('ascii')
-
-			await ctx.send(f'Here is the base64 encoded version encoded {iterations} time(s):\n```\n{base64_message}\n```')
-		else:
-			await ctx.send(f"Maximum number of iterations possible are 20, **{iterations}** number of ierations not allowed")
-		
-
-
-	# Base64 encoding: Error handling
-
-	@base64.error
-	async def base64_error(self, ctx, error):
-		if isinstance(error, commands.CommandOnCooldown):
-			await ctx.send(error)
-		elif isinstance(error, commands.MissingRequiredArgument):
-			await ctx.send('What are the arguments')
-		elif isinstance(error, commands.BadArgument):
-			await ctx.send("Please enter your text to be encode in quotes")
-		elif isinstance(error, base64.binascii.Error):
-			await ctx.send("Please enter a valid base64 encoded message to decrypt {ctx.author.display_name}")
-		elif isinstance(error, commands.ExpectedClosingQuoteError):
-			await ctx.send("You didnt close the quotes!")
-		elif isinstance(error, commands.InvalidEndOfQuotedStringError):
-			await ctx.send("Too many quotes!")
-		elif isinstance(error, commands.UnexpectedQuoteError):
-			await ctx.send("Unexpected quote in non-quoted string")
-		else:
-			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
-			raise error
-
-
-	# Base64 decoding
-
-	@commands.command(name='dbase64')
-	@cooldown(1, 2, BucketType.channel)
-	async def base64_decode(self, ctx, message):
-
-		message_bytecode = message.encode('ascii')
-
-		decode_bytecode = base64.b64decode(message_bytecode)
-		base64_message = decode_bytecode.decode('ascii')
-
-		await ctx.send(f'Here is the base64 decoded version:\n```\n{base64_message}\n```')
-		
-
-
-	# Base64 decoding: Error handling
-
-	@base64_decode.error
-	async def base64_decode_error(self, ctx, error):
-		if isinstance(error, commands.CommandOnCooldown):
-			await ctx.send(error)
-		elif isinstance(error, commands.MissingRequiredArgument):
-			await ctx.send('What are the arguments')
-		elif isinstance(error, commands.BadArgument):
-			await ctx.send("Please enter your text to be encode in quotes")
-		elif isinstance(error, (base64.binascii.Error, binascii.Error)):
-			await ctx.send("Please enter a valid base64 encoded message to decrypt {ctx.author.display_name}")
-		elif isinstance(error, UnicodeDecodeError):
-			await ctx.send("Please enter a valid base64 encoded message to decrypt {ctx.author.display_name}")
-		elif isinstance(error, commands.ExpectedClosingQuoteError):
-			await ctx.send("You didnt close the quotes!")
-		elif isinstance(error, commands.InvalidEndOfQuotedStringError):
-			await ctx.send("Too many quotes!")
-		elif isinstance(error, commands.UnexpectedQuoteError):
-			await ctx.send("Unexpected quote in non-quoted string")
-		else:
-			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
-			raise error
-
 
 	# QR Code generator
 
@@ -551,10 +467,10 @@ class GeneralCog(commands.Cog):
 	async def hack_show(self, ctx):
 		await ctx.send("**Cyberon loves hackathons, find good hackathons here!**\nhttps://devpost.com/hackathons\nhttps://www.hackathon.io/events\nhttps://confs.tech/#\nhttps://mlh.io/seasons/2021/events\nhttp://www.hackalist.org/\nhttps://devfolio.co/\nhttps://angelhack.com/\nhttps://gitcoin.co/hackathons\nhttps://hackathons.hackclub.com/\nhttps://www.incubateind.com/\nhttps://skillenza.com/")
 		
-	@commands.command(name="botstats")
+	@commands.command(name="botabout")
 	async def about(self, ctx):
 		embed = discord.Embed(
-			title=":information_source: About cyberon",
+			title=":information_source: About Cyberon",
 			description="I'm a bot with a mission, mission impawssible. Call the halp"
             " command via `cyb!help` to receive a message with a full list of commands.",
 			color=0x008000)

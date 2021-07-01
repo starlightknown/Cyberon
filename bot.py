@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 import discord
 from discord import Intents
 import random
@@ -31,7 +30,7 @@ except Exception as e:
 
 @bot.event
 async def on_ready():
-	await bot.change_presence(status=discord.Status.online, activity=discord.Game('with baby shark do do do'))
+	await bot.change_presence(status=discord.Status.online, activity=discord.Game('cyb!help'))
 	print("+[ONLINE] Cyberon is online")
 
 @bot.event
@@ -54,7 +53,7 @@ async def on_member_join(member):
 		if channel is not None:
 			embed = discord.Embed(
 					title = 'Member joined the server',
-					description=f'Member **{member.name}** joined the server!',
+					description=f'Member **{member.name}** joined the server!\nWelcome! My name is cyberon I will be here to help, just say `cyb!help` whenever needed ',
 					colour=0x008000
 				)
 			members = await member.guild.fetch_members().flatten()
@@ -91,7 +90,7 @@ async def on_member_remove(member):
 		if channel is not None:
 			embed = discord.Embed(
 				title = 'Member left the server',
-				description=f'Member **{member.name}** has left the server!',
+				description=f'Member **{member.name}** has left the server!\n:cry: I will miss you',
 				colour=0xFF0000
 			)
 			try:

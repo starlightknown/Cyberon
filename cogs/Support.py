@@ -128,7 +128,30 @@ class SupportCog(commands.Cog):
 			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to Cyberon')
 			raise error
 
+	# Documentation
+			
+	@commands.command(name='Documentation', aliases=['Docs'])
+	@cooldown(1, 5, BucketType.channel)
+	async def docs(self, ctx):
 
+		embed = discord.Embed(
+				title = f'Wanna know more about me and my commands? here is the documentation!',
+				description = '**[Documentation](https://starlightknown.github.io/Cyberon/#/)**',
+				colour=0x008000
+			)
+		embed.set_thumbnail(url='https://i.pinimg.com/originals/87/bf/7d/87bf7d58bec109889306796c00e05c65.jpg')
+		await ctx.send(embed=embed)
+
+
+	# Documentation: Error handling
+
+	@docs.error
+	async def docs_error(self, ctx, error):
+		if isinstance(error, commands.CommandOnCooldown):
+			await ctx.send(error)
+		else:
+			await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
+			raise error
 
 def setup(bot):
 	bot.add_cog(SupportCog(bot))
