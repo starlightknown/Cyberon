@@ -107,15 +107,14 @@ class GeneralCog(commands.Cog):
 	@commands.command(name='hackclub')
 	@cooldown(1, 2, BucketType.channel)
 	async def hackdclub(self, ctx):
-			url = 'https://hackathons.hackclub.com/api/events/upcoming' 
-			r = requests.get(url)
-			result = r.json()
-			result1 = {}
-			for d in result:
-				result1.update(d)
-				break
+		url = 'https://hackathons.hackclub.com/api/events/upcoming' 
+		r = requests.get(url)
+		result = r.json()
+		result1 = {}
+		for d in result:
+			result1.update(d)
 			data = parse_data(result1)
-			await ctx.send(embed = hack_message(data))
+			await ctx.channel.send(embed = hack_message(data))
 			
 	@hackdclub.error
 	async def hackdclub_error(self, ctx, error):
