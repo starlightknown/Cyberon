@@ -2,13 +2,22 @@
 
 <div align="center">
     
-<a href="https://www.python.org/"><img src="http://ForTheBadge.com/images/badges/made-with-python.svg" alt="made with Python"></a>
-<a href="https://github.com/Rapptz/discord.py/releases/tag/v1.5.0"><img src="https://img.shields.io/badge/discord.py-v1.6.0-7289da.svg?style=flat-square" alt="discord.py version"></a>
-<a href="http://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"></a>
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-![Issues](https://img.shields.io/github/issues/starlightknown/cyberon)
-![Forks](https://img.shields.io/github/forks/starlightknown/cyberon)
-![Stars](https://img.shields.io/github/stars/starlightknown/cyberon)
+<a href="https://www.python.org/"><img src="https://img.shields.io/badge/language-Python-blue.svg?v=103"></a>
+<a href="https://github.com/Rapptz/discord.py/releases/tag/v1.5.0"><img src="https://img.shields.io/badge/discord.py-v1.6.0-7289da.svg?color=brightgreen" alt="discord.py version"></a>
+
+<a href="https://github.com/starlightknown/Cyberon"><img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103"></a>
+<a href="https://github.com/starlightknown/Cyberon"><img src="https://img.shields.io/badge/Built%20by-developers%20%3C%2F%3E-0059b3"></a>
+<a href="https://github.com/starlightknown/Cyberon"><img src="https://img.shields.io/static/v1.svg?label=Contributions&message=Welcome&color=yellow"></a>
+<a href="https://github.com/starlightknown/"><img src="https://img.shields.io/badge/Maintained%3F-yes-brightgreen.svg?v=103"></a>
+<a href="https://github.com/starlightknown/Cyberon/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?v=103"></a>
+
+<a href="https://github.com/starlightknown/Cyberon/graphs/contributors"><img src="https://img.shields.io/github/contributors/starlightknown/Cyberon?color=brightgreen"></a>
+<a href="https://github.com/starlightknown/Cyberon/stargazers"><img src="https://img.shields.io/github/stars/starlightknown/Cyberon?color=0059b3"></a>
+<a href="https://github.com/starlightknown/Cyberon/network/members"><img src="https://img.shields.io/github/forks/starlightknown/Cyberon?color=yellow"></a>
+<a href="https://github.com/starlightknown/Cyberon/issues"><img src="https://img.shields.io/github/issues/starlightknown/Cyberon?color=0059b3"></a>
+<a href="https://github.com/starlightknown/Cyberon/issues?q=is%3Aissue+is%3Aclosed"><img src="https://img.shields.io/github/issues-closed-raw/starlightknown/Cyberon?color=yellow"></a>
+<a href="https://github.com/starlightknown/Cyberon/pulls"><img src="https://img.shields.io/github/issues-pr/starlightknown/Cyberon?color=brightgreen"></a>
+<a href="https://github.com/starlightknown/Cyberon/pulls?q=is%3Apr+is%3Aclosed"><img src="https://img.shields.io/github/issues-pr-closed-raw/starlightknown/Cyberon?color=0059b3"></a> 
 
 </div>
 
