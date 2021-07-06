@@ -76,7 +76,7 @@ You need to configure Cyberon's settings using the cyb!config command. You can s
 
 # Problem
 
-- too many hackathon websites to seacrh for a beginner
+- too many hackathon websites to search for a beginner
 - no alerts when a new hackathon is added
 - low moderation hackathon servers gets spammed
 
