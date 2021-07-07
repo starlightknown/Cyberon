@@ -27,17 +27,21 @@
 Cyberon is a customisable, friendly, fun discord bot which you can add to our servers and customise it according to your needs.
 Cyberon is a bot with mission. This bot is for helping people who are new to hackathons and can't find good ones or are overwhelmed with the number of sites 
 they need to search for hackatons. (still in development)
+
 For Contributing 💜 and setting Up head [here](https://github.com/saaalik/Cyberon/blob/main/CONTRIBUTING.md)
 
 # Contents
-[Features](#features)\n
+[Features](#features)
+
 [Contribute🧏‍♂️](https://github.com/saaalik/Cyberon/blob/main/CONTRIBUTING.md)
 
+[Documentation📝](https://starlightknown.github.io/Cyberon/#/)
+
+[Todo🎯](#todo)
 
 
 
-
-# Features
+## Features
 
 - Moderation features (kick/ban/softban, mod-log, multiban, warn, role assignment)
 - Fun commands 
@@ -45,29 +49,20 @@ For Contributing 💜 and setting Up head [here](https://github.com/saaalik/Cybe
 - Server configs commands and permissions
 - Support commands
 
-# Docs
 
-- [Project board](https://github.com/starlightknown/Cyberon/projects/1) of `to do`, `in progress`, `done`
+## Todo
+[ ] bs4 for getting hackathon info from various websites
+[ ] add reactions with emojis if admin
+[ ] Fix [bugs]()
 
-Full docs deployed to https://starlightknown.github.io/Cyberon/#/ and available in the repo at [docs/index.md](docs/index.md)
+Follow [Project board](https://github.com/starlightknown/Cyberon/projects/1) for status of a task - `to do`, `in progress`, `done`
+
 
 # Configure your Server
 
 You need to configure Cyberon's settings using the cyb!config command. You can see all config commands using `cyb!help config` or `cyb!config` and type out the channels for questions asked by Cyberon.
 
 <img src="https://raw.githubusercontent.com/starlightknown/Cyberon/main/images/ezgif.com-gif-maker.gif">
-
-# Problem
-
-- too many hackathon websites to search for a beginner
-- no alerts when a new hackathon is added
-- low moderation hackathon servers gets spammed
-
-# Solution
-
-- Get all hackathon updates in the server you are in
-- One command for one website you want to search
-- set a warn threshold, after it's crossed the user gets banned
 
 # Requirements
 - discord.py
