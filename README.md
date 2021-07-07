@@ -28,9 +28,17 @@
 Cyberon is a customisable, friendly, fun discord bot which you can add to our servers and customise it according to your needs.
 Cyberon is a bot with mission. This bot is for helping people who are new to hackathons and can't find good ones or are overwhelmed with the number of sites 
 they need to search for hackatons. (still in development)
+For Contributing 💜 and setting Up head [here](https://github.com/saaalik/Cyberon/blob/main/CONTRIBUTING.md)
 
-[Installation](#installation) is easy, and you do **NOT** need to know anything about coding!
-**The default set of modules includes and is not limited to:**
+# Contents
+[Features](#features)
+[Contribute🧏‍♂️](https://github.com/saaalik/Cyberon/blob/main/CONTRIBUTING.md)
+
+
+
+
+
+# Features
 
 - Moderation features (kick/ban/softban, mod-log, multiban, warn, role assignment)
 - Fun commands 
@@ -38,21 +46,6 @@ they need to search for hackatons. (still in development)
 - Server configs commands and permissions
 - Support commands
 
-# Installation
-
-```
-git clone https://github.com/starlightknown/cyberon
-cd cyberon
-sudo pip3 install -r requirements.txt
-```
-or 
-```
-sudo python3 -m pip install -r requirements.txt
-```  
-NOTE: Make a .env file and put them in the the same folder as the `bot.py` file, i.e. in the root directory 
-and add your tokens as `BOT_TOKEN`, `DATABASE_CLIENT_URL` and `NASA_API_KEY` respectively.  
-
-Run `python3 bot.py`
 
 There are a few steps you will need in order to set up a local instance of Cyberon. If you are not comfortable with doing this, you can [join our server](https://discord.gg/sTYguvHP8t) 
 
