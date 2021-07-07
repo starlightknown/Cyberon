@@ -1,17 +1,84 @@
-# Introduction
-**Welcome!** Thank you for contributing to the further development of Cyberon. We're always looking for new ways to improve our project and we appreciate any help you can give us.
+# Contribution guideline
+**Welcome!**
+Thank you for contributing to the further development of Cyberon.
+We're always looking for new ways to improve our project and we appreciate any help you can give us 🤖.
 
+##### What kinds of contributions are we looking for?
+We value contributions, be it
+- *bug fixes*
+- *feature enhancements*
+- *documentation*
+or any ideas you want to put forward, We welcome it all.
 
-# What kinds of contributions are we looking for?
-We love receiving contributions from our community. Any assistance you can provide with regards to bug fixes, feature enhancements, and documentation is more than welcome.
-
-# Contributing
+##### Contributing
 
 Please ensure all pull requests and contributions comply with the [Developer Certificate of Origin](https://developercertificate.org/).
 
-## Setting Up Your Code
+## Setting Up the Project
 
-First, fork this repository to your own account. Then use `git clone <url>` to bring your forked repository down to your local machine (remember to get the URL for *your* repository, not the original). Optionally, use `git remote add upstream <url>` to add the original repository as the upstream (this is helpful for keeping your fork up-to-date).
+- [Fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo#fork-an-example-repository) the Repository
+
+- Clone Your Forked copy -
+  `git clone https://github.com/[YOUR-USERNAME]/Cyberon`
+  
+- *OPTIONAL* - to keep your fork up-to-date - use `git remote add upstream https://github.com/[YOUR-USERNAME]/Cyberon`
+
+- Navigate to the directory of project -
+  `cd Cyberon/`
+
+- Create a new branch -
+  `git checkout -b [branch_name]`
+
+- Install requirements -
+  `pip install -r requirements.txt`
+  
+- In the Cyberon directory, create a .env file add your tokens as `BOT_TOKEN`, `DATABASE_CLIENT_URL` and `NASA_API_KEY` respectively.
+
+- And a **Cyberon** now lives inside your pc
+
+## Test your local instance
+
+- There are a few steps you will need in order to set up a local instance of Cyberon. If you are not comfortable with doing this, you can [join our server](https://discord.gg/sTYguvHP8t) 
+
+- You can use the Discord Developer portal to generate an invitation link, or you can use the Client ID from your Cyberon's application page to create a link yourself. If you wish to manually create the link, the format is:
+
+```https://discord.com/oauth2/authorize?client_id=<CLIENT_ID_HERE>&scope=bot```
+
+- Visit the link and choose the server you would like to add the bot. All done!
+
+#### Optional
+
+- [Creating a discord bot with Python from Scratch](https://youtu.be/SPTfmiYiuok)
+
+### Contributing
+
+- Take up an [Issue](https://github.com/starlightknown/Cyberon/issues) or [Raise](https://github.com/starlightknown/Cyberon/issues/new) one.
+
+- Discuss your proposed changes & Get assigned.
+
+- Get to work
+
+- If your changes are approved, do the changes in branch `[branch_name]`.
+
+- Still in branch `[branch_name].`
+
+- **Stage the changes** `git add .`
+
+- **Commit the changes with a header message explaining what you changed** `git commit -m "FIXED THE XXXX BUG"`
+
+- After the changes in your branch are staged and commited, push the `git push origin [branch_name] -u`
+
+![image](https://user-images.githubusercontent.com/65087495/124753999-4b10db00-df47-11eb-893f-6353f58df2ac.png)
+
+- You should see a quick option to do so appear at the top of your forked repository on GitHub under contribute dropdown. Click the "Open Pull Request" button to have GitHub automatically set up the pull request.
+
+- Congratulations! You've submitted your first pull request!
+
+- Once your PR is assessed and reviewed, It will get merged
+
+- That's it!
+
+**Tip**: To keep your Fork Repo all branches updated with Upstream use [this](https://upriver.github.io/).
 
 ## Claiming an Issue
 
@@ -23,47 +90,3 @@ If an issue is already assigned, please look for another issue to contribute to.
 - `good first issue` - These issues require minimal familiarity with our codebase. Please reserve these for first-time contributors.
 - `help wanted` - These issues are open to any contributors.
 - `staff only` - These issues are locked to project members/collaborators. Pull requests on these issues will not be accepted from outside contributors.
-
-## Working on your issue
-
-Before starting work, we highly recommend ensuring that your forked version is up to date. If you set the `upstream` as mentioned in [Setting Up Your Code](#setting-up-your-code), run these commands in your terminal (with the terminal pointed at the root directory of your local files):
-- `git fetch upstream` - this gets the current state of the original repo, without pulling down the changes to your local machine.
-- `git reset --hard upstream/main` - this resets the state of your local files to match the current state of the original repo.
-- `git push -f` - this forces the changes to your forked repo (thus making it match the original)
-
-> NOTE: You will lose any changes you are currently working on. Do this with care.
-
-Next, use `git checkout -b <branchname>` to create a new branch for your work. It's always a good idea to avoid committing changes directly to your `main` branch - this keeps it clean and avoids errors when updating (above).
-
-Branch names should follow a convention of `scope/issue?/description` where:
-- `scope` is the nature of the changes (eg. `feat` for a new feature, or `docs` for documentation update). This should match the scope of the related issue. 
-- `issue` is the *number* for the related issue you're addressing.
-- `description` is a brief description of your changes, such as `update-contribs` for updating the contributing guidelines.
-
-Now you are free to work on your code! When you are satisfied with your changes, you can commit them with `git commit -s -m "message"`, where:
-- `-s` flag signs the commit, to verify the connection with your GitHub account.
-- `-m` flag sets up the commit message.
-- `message` is the commit message: a brief (50 character max) message describing what the commit changes.
-
-## Submitting a Pull Request
-
-Once you have all of your changes made and committed, you can push them to your forked repository! Use `git push -u origin <branchname>`, where:
-- `-u` tells `git` to set the upstream (see below)
-- `origin` tells `git` to push to your fork
-- `branchname` tells `git` to push to a branch - this MUST match the name of the branch you created locally.
-
-> NOTE: By setting the upstream, any subsequent `push` commands can be done with `git push`, and it will be pushed to the same branch.
-
-Now you can open the pull request! You should see a quick option to do so appear at the top of your repository on GitHub. Click the "Pull Request" button to have GitHub automatically set up the pull request.
-
-First, change the title of the pull request to match your branch name (following the conventions above!). Then, follow the instructions in the preset Pull Request template (make sure to complete any steps listed!). 
-
-Congratulations! You've submitted your first pull request! We will review it as quickly as possible, so keep an eye out for approvals (or requested changes).
-
-## Other Contributions
-
-If you aren't comfortable with the codebase, or would like to contribute in other ways, we have options for that!
-
-- Documentation Updates: You are always welcome to update our documentation (like this file!) if you see any typos or anything that can be clarified.
-- Feature Requests: If you have ideas for new features or improvements, feel free to open an issue!
-- Bug Reports: We rely on our users to help identify bugs - if you see something wrong, please let us know with an issue!
