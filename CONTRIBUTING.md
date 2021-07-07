@@ -1,11 +1,16 @@
-# Introduction
-**Welcome!** Thank you for contributing to the further development of Cyberon. We're always looking for new ways to improve our project and we appreciate any help you can give us.
+# Contribution guideline
+**Welcome!**
+Thank you for contributing to the further development of Cyberon.
+We're always looking for new ways to improve our project and we appreciate any help you can give us 🤖.
 
+##### What kinds of contributions are we looking for?
+We value contributions, be it
+- *bug fixes*
+- *feature enhancements*
+- *documentation*
+or any ideas you want to put forward, We welcome it all.
 
-# What kinds of contributions are we looking for?
-We love receiving contributions from our community. Any assistance you can provide with regards to bug fixes, feature enhancements, and documentation is more than welcome.
-
-# Contributing
+##### Contributing
 
 Please ensure all pull requests and contributions comply with the [Developer Certificate of Origin](https://developercertificate.org/).
 
