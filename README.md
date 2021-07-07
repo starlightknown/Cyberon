@@ -51,9 +51,9 @@ For Contributing 💜 and setting Up head [here](https://github.com/saaalik/Cybe
 
 
 ## Todo
-[ ] bs4 for getting hackathon info from various websites
-[ ] add reactions with emojis if admin
-[ ] Fix [bugs]()
+- [ ] bs4 for getting hackathon info from various websites
+- [ ] add reactions with emojis if admin
+- [ ] Fix [bugs](https://github.com/saaalik/Cyberon/blob/main/BUGRECORD.md)
 
 Follow [Project board](https://github.com/starlightknown/Cyberon/projects/1) for status of a task - `to do`, `in progress`, `done`
 
