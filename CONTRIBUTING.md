@@ -31,6 +31,10 @@ Please ensure all pull requests and contributions comply with the [Developer Cer
 
 - Install requirements -
   `pip install -r requirements.txt`
+  
+- In the Cyberon directory, create a .env file add your tokens as `BOT_TOKEN`, `DATABASE_CLIENT_URL` and `NASA_API_KEY` respectively.
+
+- And a **Cyberon** now lives inside your pc
 
 #### Optional
 
