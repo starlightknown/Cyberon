@@ -36,6 +36,16 @@ Please ensure all pull requests and contributions comply with the [Developer Cer
 
 - And a **Cyberon** now lives inside your pc
 
+## Test your local instance
+
+- There are a few steps you will need in order to set up a local instance of Cyberon. If you are not comfortable with doing this, you can [join our server](https://discord.gg/sTYguvHP8t) 
+
+- You can use the Discord Developer portal to generate an invitation link, or you can use the Client ID from your Cyberon's application page to create a link yourself. If you wish to manually create the link, the format is:
+
+```https://discord.com/oauth2/authorize?client_id=<CLIENT_ID_HERE>&scope=bot```
+
+- Visit the link and choose the server you would like to add the bot. All done!
+
 #### Optional
 
 - [Creating a discord bot with Python from Scratch](https://youtu.be/SPTfmiYiuok)
