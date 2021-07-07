@@ -9,9 +9,30 @@ We love receiving contributions from our community. Any assistance you can provi
 
 Please ensure all pull requests and contributions comply with the [Developer Certificate of Origin](https://developercertificate.org/).
 
-## Setting Up Your Code
+## Setting Up the Project
 
 First, fork this repository to your own account. Then use `git clone <url>` to bring your forked repository down to your local machine (remember to get the URL for *your* repository, not the original). Optionally, use `git remote add upstream <url>` to add the original repository as the upstream (this is helpful for keeping your fork up-to-date).
+
+- [Fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo#fork-an-example-repository) the Repository
+
+- Clone Your Forked copy -
+  `git clone https://github.com/[YOUR-USERNAME]/Cyberon`
+  
+- *OPTIONAL* - to keep your fork up-to-date - use `git remote add upstream https://github.com/[YOUR-USERNAME]/Cyberon`
+
+- Navigate to the directory of project -
+  `cd Cyberon/`
+
+- Create a new branch -
+  `git checkout -b [branch_name]`
+
+- Install requirements -
+  `pip install -r requirements.txt`
+
+#### Optional
+
+- [Creating a discord bot with Python from Scratch](https://youtu.be/SPTfmiYiuok)
+
 
 ## Claiming an Issue
 
