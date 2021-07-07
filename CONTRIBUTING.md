@@ -58,11 +58,9 @@ Please ensure all pull requests and contributions comply with the [Developer Cer
 
 - After the changes in your branch are staged and commited, push the `git push origin [branch_name] -u`
 
-- Browse [here](https://github.com/starlightknown/Cyberon) and create a PR (PULL REQUEST) from your branch with the appropriate required details.
-
 ![image](https://user-images.githubusercontent.com/65087495/124753999-4b10db00-df47-11eb-893f-6353f58df2ac.png)
 
-- You should see a quick option to do so appear at the top of your forked repository on GitHub. Click the "Pull Request" button to have GitHub automatically set up the pull request.
+- You should see a quick option to do so appear at the top of your forked repository on GitHub under contribute dropdown. Click the "Open Pull Request" button to have GitHub automatically set up the pull request.
 
 - Congratulations! You've submitted your first pull request!
 
