@@ -1,5 +1,6 @@
 # Cyberon - a cool discord bot for hackathon servers
 
+<img src="https://raw.githubusercontent.com/starlightknown/Cyberon/main/images/call_me_cyb.gif">
 <div align="center">
     
 <a href="https://www.python.org/"><img src="https://img.shields.io/badge/language-Python-blue.svg?v=103"></a>
@@ -21,8 +22,6 @@
 
 </div>
 
-<img src="https://raw.githubusercontent.com/starlightknown/Cyberon/main/images/call_me_cyb.gif">
-
 # Overview:
 
 Cyberon is a customisable, friendly, fun discord bot which you can add to our servers and customise it according to your needs.
@@ -31,7 +30,7 @@ they need to search for hackatons. (still in development)
 For Contributing 💜 and setting Up head [here](https://github.com/saaalik/Cyberon/blob/main/CONTRIBUTING.md)
 
 # Contents
-[Features](#features)
+[Features](#features)\n
 [Contribute🧏‍♂️](https://github.com/saaalik/Cyberon/blob/main/CONTRIBUTING.md)
 
 
@@ -45,15 +44,6 @@ For Contributing 💜 and setting Up head [here](https://github.com/saaalik/Cybe
 - Utility commands (hackathon alerts, general commands)
 - Server configs commands and permissions
 - Support commands
-
-
-There are a few steps you will need in order to set up a local instance of Cyberon. If you are not comfortable with doing this, you can [join our server](https://discord.gg/sTYguvHP8t) 
-
-You can use the Discord Developer portal to generate an invitation link, or you can use the Client ID from your Cyberon's application page to create a link yourself. If you wish to manually create the link, the format is:
-
-`https://discord.com/oauth2/authorize?client_id=<CLIENT_ID_HERE>&scope=bot`
-
-Visit the link and choose the server you would like to add the bot. All done!
 
 # Docs
 
