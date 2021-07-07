@@ -36,6 +36,35 @@ Please ensure all pull requests and contributions comply with the [Developer Cer
 
 - [Creating a discord bot with Python from Scratch](https://youtu.be/SPTfmiYiuok)
 
+### Contributing
+
+- Take up an [Issue](https://github.com/starlightknown/Cyberon/issues) or [Raise](https://github.com/starlightknown/Cyberon/issues/new) one.
+
+- Discuss your proposed changes & Get assigned.
+
+- Get to work
+
+- If your changes are approved, do the changes in branch `[branch_name]`.
+
+- Still in branch `[branch_name].`
+
+- **Stage the changes** `git add .`
+
+- **Commit the changes with a header message explaining what you changed** `git commit -m "FIXED THE XXXX BUG"`
+
+- After the changes in your branch are staged and commited, push the `git push origin [branch_name] -u`
+
+- Browse [here](https://github.com/starlightknown/Cyberon) and create a PR (PULL REQUEST) from your branch with the appropriate required details.
+
+- You should see a quick option to do so appear at the top of your forked repository on GitHub. Click the "Pull Request" button to have GitHub automatically set up the pull request.
+
+- Congratulations! You've submitted your first pull request!
+
+- Once your PR is assessed and reviewed, It will get merged
+
+- That's it!
+
+**Tip**: To keep your Fork Repo all branches updated with Upstream use [this](https://upriver.github.io/).
 
 ## Claiming an Issue
 
@@ -47,13 +76,6 @@ If an issue is already assigned, please look for another issue to contribute to.
 - `good first issue` - These issues require minimal familiarity with our codebase. Please reserve these for first-time contributors.
 - `help wanted` - These issues are open to any contributors.
 - `staff only` - These issues are locked to project members/collaborators. Pull requests on these issues will not be accepted from outside contributors.
-
-Now you can open the pull request! You should see a quick option to do so appear at the top of your repository on GitHub. Click the "Pull Request" button to have GitHub automatically set up the pull request.
-
-First, change the title of the pull request to match your branch name (following the conventions above!). Then, follow the instructions in the preset Pull Request template (make sure to complete any steps listed!). 
-
-Congratulations! You've submitted your first pull request! We will review it as quickly as possible, so keep an eye out for approvals (or requested changes).
-
 
 ## Other Contributions
 
