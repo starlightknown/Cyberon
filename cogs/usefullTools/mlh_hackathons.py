@@ -11,9 +11,8 @@ def parse_mlh_resp(html):
     # print(hackathons)
     result = []
     for hackathon in hackathons:
-        d = {}
-        d["type"] = hackathon.find(
-            "div", class_="ribbon-wrapper").find("div", class_="ribbon").text.strip()
+        d = {"type": hackathon.find(
+            "div", class_="ribbon-wrapper").find("div", class_="ribbon").text.strip()}
         d["logo"] = hackathon.find(
             "div", class_="event-logo").find("img")['src'].strip()
         d["name"] = hackathon.find("h3", class_="event-name").text.strip()
