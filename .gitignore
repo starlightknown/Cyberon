@@ -10,3 +10,5 @@
 *mongodbclient.0
 *token.0
 *__pycache__
+.env
+.env.local
