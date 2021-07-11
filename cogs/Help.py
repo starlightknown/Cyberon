@@ -51,6 +51,7 @@ class HelpCog(commands.Cog):
 							'**hug**\ngives a hug with intensity 0,6,9,10\n**Usage:** `cyb!hug <member> <intensity>`\n\n'
 							'**botstats**\nShows the bot\'s statistics\n**Usage:** `cyb!botstats`\n\n'
 							'**hackclub**\nShows the hack club\'s upcoming hackathons\n**Usage:** `cyb!hackclub`\n\n'
+							'**mlh**\nShows the MLH\'s upcoming hackathons\n**Usage:** `cyb!mlh`\n\n'
 							'**search**\nSearch anythong on google\n**Usage:** `cyb!search <query>`\n\n'
 							'**advsearch**\nDo an advance search\n**Usage:** `cyb!advsearch <query>`\n\n'
 							'**calm**\nHelps you calm down, Take a deep breath\n**Usage:** `cyb!calm`\n\n'

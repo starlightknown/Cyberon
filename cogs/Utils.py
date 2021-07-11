@@ -124,7 +124,7 @@ class GeneralCog(commands.Cog):
             await ctx.send(f'An error occured \n```\n{error}\n```\nPlease check console for traceback, or raise an issue to cyberon')
             raise error
 
-    @commands.command()
+    @commands.command(name="mlh")
     @cooldown(1, 2, BucketType.channel)
     async def mlh(self, ctx):
         url = 'https://mlh.io/seasons/2022/events'
